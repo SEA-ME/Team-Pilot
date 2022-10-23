@@ -11,9 +11,20 @@
 - [Step 8: Setup Virtual Env](#step-8-setup-virtual-env)  
 - [Step 9: Install Donkeycar Python Code](#step-9-install-donkeycar-python-code)  
 - [Step 10: Install OpenCV](#step-10-install-opencv)
+- [APPENDIX: Add GUI to Raspberry Pi OS Lite](#appendix-add-gui-to-raspberry-pi-os-lite)
 
 ---
+
 <br/>
+
+## Reference
+- [Donkey Car Wiki](https://docs.donkeycar.com/guide/robot_sbc/setup_raspberry_pi/)
+- [Add GUI to Raspberry Pi OS Lite](https://www.paulligocki.com/add-gui-to-raspberry-pi-os-lite/)
+
+---
+
+<br/>
+
 
 ## Step 1: Flash Operating System
 
@@ -186,3 +197,19 @@ source ~/.bashrc
     python -c "import cv2"
     # if no errors, you have OpenCV installed
     ```
+
+<br/>
+
+## APPENDIX: Add GUI to Raspberry Pi OS Lite
+If you download Raspberry Pi OS Lite, you can’t display RPi on LCD. If you want to show qt application or something graphics in RPi, you should add GUI.
+
+```bash
+sudo apt install xserver-xorg -y
+sudo apt install raspberrypi-ui-mods -y
+sudo apt install mate-desktop-environment-core
+sudo apt install kde-plasma-desktop -y
+sudo apt install lxde-core lxappearance -y
+sudo apt install xfce4 xfce4-terminal -y
+sudo apt install lightdm -y
+sudo reboot
+```
