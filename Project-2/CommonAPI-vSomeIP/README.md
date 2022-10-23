@@ -14,9 +14,10 @@
 
 ## Reference
 - [CommonAPI SomeIP in 10-minutes](https://github.com/COVESA/capicxx-someip-tools/wiki/CommonAPI-C---SomeIP-in-10-minutes)
-- [https://github.com/endland/build-common-api-cpp-native/blob/master/build-commonapi.sh](https://github.com/endland/build-common-api-cpp-native/blob/master/build-commonapi.sh)
-- [https://phoenixnap.com/kb/install-java-raspberry-pi#ftoc-heading-4](https://phoenixnap.com/kb/install-java-raspberry-pi#ftoc-heading-4)
-- http://osdevlab.blogspot.com/2016/02/how-to-install-latest-boost-library-on.html
+- [How to Install Java on Raspberry Pi](https://phoenixnap.com/kb/install-java-raspberry-pi#ftoc-heading-4)
+- [How to install latest Boost library on Raspberry Pi](http://osdevlab.blogspot.com/2016/02/how-to-install-latest-boost-library-on.html)
+
+---
 
 <br/>
 
@@ -181,60 +182,4 @@ make
 
 ## Step 6: Write the Franca file and generate code
 
-Create commonapi project directory and open Franca IDL
-
-```bash
-cd ~
-mkdir commonapi-project
-cd commonapi-project
-mkdir fidl
-cd fidl
-nano HelloWorld.fidl
-```
-
-A service which instantiates the interface `HelloWorld` provides the function `sayHello` which can be called
-
-```bash
-package commonapi
-
-interface HelloWorld {
-  version {major 1 minor 0}
-  method sayHello {
-    in {
-      String name
-    }
-    out {
-      String message
-    }
-  }
-}
-```
-
-The next step is to generate code. For that we need the code generators. The source code of the code generators is available in the tools repositories. You could now clone the repository and build the generators yourself. This is not particularly difficult, but requires the installation of `Maven`
-, which is not familiar to everyone. Therefore it is the fastest way to download the built code generator as binary from github. There are four versions (Linux, Windows and 64bit variants).
-
-```bash
-uname -m
-# In our case, Raspberry Pi is 32bit. So we can see the below
->> armv7l
-```
-
-So we can’t use binary file. To use git repository git clone and unzip cgen folder
-
-```bash
-cd ~/commonapi-project
-git clone https://github.com/COVESA/capicxx-core-tools.git
-cd capicxx-core-tools/
-git checkout 3.1.12.3
-```
-
-You can build all code generators by calling `maven` from the command-line. Open a console and download maven. Next, change in the directory org.genivi.commonapi.core.releng of your CommonAPI-Tools directory
-
-```bash
-sudo apt-get install maven
-```
-
-```bash
-cd org.genivi.commonapi.core.releng/
-mvn -Dtarget.id=org.genivi.commonapi.core.target clean verify
-```
+Unfortunately, code generator [doesn’t support arm architecture.]((https://github.com/COVESA/capicxx-core-tools/issues/19)) So if you want to use this generator, I recommend that you use the code generator on your laptop and then download the generated code via Git.
