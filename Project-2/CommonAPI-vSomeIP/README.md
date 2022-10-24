@@ -200,57 +200,11 @@ mkdir fidl
 cd fidl
 ```
 
-A service which instantiates the interface `HelloWorld` provides the function `sayHello` which can be called
+A service which instantiates the interface `HelloWorld` provides the function `sayHello` which can be called. Write fidl and fdepl file in fidl directory.
 
-```bash
-nano HelloWorld.fidl
-```
+- ### [HelloWorld.fidl](project/fidl/HelloWorld.fidl)
 
-- HelloWorld.fidl
-    
-    ```bash
-    package commonapi
-    
-    interface HelloWorld {
-      version {major 1 minor 0}
-      method sayHello {
-        in {
-          String name
-        }
-        out {
-          String message
-        }
-      }
-    }
-    ```
-    
-
-```bash
-nano HelloWorld.fdepl
-```
-
-- HelloWorld.fdepl
-    
-    ```bash
-    import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-SOMEIP_deployment_spec.fdepl"
-    import "HelloWorld.fidl"
-    
-    define org.genivi.commonapi.someip.deployment for interface commonapi.HelloWorld {
-            SomeIpServiceID = 4660
-    
-            method sayHello {
-                    SomeIpMethodID = 123
-            }
-    }
-    
-    define org.genivi.commonapi.someip.deployment for provider MyService {
-            instance commonapi.HelloWorld {
-                    InstanceId = "test"
-                    SomeIpInstanceID = 22136
-            }
-    }
-    ```
-    
+- ### [HelloWorld.fdepl](project/fidl/HelloWorld.fdepl)
 
 Download code generator 3.1.12.4
 
@@ -309,118 +263,14 @@ mkdir src && cd src
 
 Make 4 files in src directory
 
-```bash
-nano HelloWorldClient.cpp
-```
+- ### [HelloWorldClient.cpp](project/src/HelloWorldClient.cpp)
 
-- HelloWorldClient.cpp
-    
-    ```bash
-    // HelloWorldClient.cpp
-    #include <iostream>
-    #include <string>
-    #include <unistd.h>
-    #include <CommonAPI/CommonAPI.hpp>
-    #include <v1/commonapi/HelloWorldProxy.hpp>
-    
-    using namespace v1_0::commonapi;
-    
-    int main() {
-        std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-        std::shared_ptr<HelloWorldProxy<>> myProxy =
-        	runtime->buildProxy<HelloWorldProxy>("local", "test");
-    
-        std::cout << "Checking availability!" << std::endl;
-        while (!myProxy->isAvailable())
-            usleep(10);
-        std::cout << "Available..." << std::endl;
-    
-        CommonAPI::CallStatus callStatus;
-        std::string returnMessage;
-        myProxy->sayHello("Bob", callStatus, returnMessage);
-        std::cout << "Got message: '" << returnMessage << "'\n";
-        return 0;
-    }
-    ```
-    
+- ### [HelloWorldService.cpp](project/src/HelloWorldService.cpp)
 
-```bash
-nano HelloWorldService.cpp
-```
+- ### [HelloWorldStubImpl.hpp](project/src/HelloWorldStubImpl.hpp)
+    
+- ### [HelloWorldStubImpl.cpp](project/src/HelloWorldStubImpl.cpp)
 
-- HelloWorldService.cpp
-    
-    ```bash
-    // HelloWorldService.cpp
-    #include <iostream>
-    #include <thread>
-    #include <CommonAPI/CommonAPI.hpp>
-    #include "HelloWorldStubImpl.hpp"
-    
-    using namespace std;
-    
-    int main() {
-        std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
-        std::shared_ptr<HelloWorldStubImpl> myService =
-        	std::make_shared<HelloWorldStubImpl>();
-        runtime->registerService("local", "test", myService);
-        std::cout << "Successfully Registered Service!" << std::endl;
-    
-        while (true) {
-            std::cout << "Waiting for calls... (Abort with CTRL+C)" << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(30));
-        }
-        return 0;
-     }
-    ```
-    
-
-```bash
-nano HelloWorldStubImpl.hpp
-```
-
-- HelloWorldStubImpl.hpp
-    
-    ```bash
-    // HelloWorldStubImpl.hpp
-    #ifndef HELLOWORLDSTUBIMPL_H_
-    #define HELLOWORLDSTUBIMPL_H_
-    #include <CommonAPI/CommonAPI.hpp>
-    #include <v1/commonapi/HelloWorldStubDefault.hpp>
-    
-    class HelloWorldStubImpl: public v1_0::commonapi::HelloWorldStubDefault {
-    public:
-        HelloWorldStubImpl();
-        virtual ~HelloWorldStubImpl();
-        virtual void sayHello(const std::shared_ptr<CommonAPI::ClientId> _client,
-        	std::string _name, sayHelloReply_t _return);
-    };
-    #endif /* HELLOWORLDSTUBIMPL_H_ */
-    ```
-    
-
-```bash
-nano HelloWorldStubImpl.cpp
-```
-
-- HelloWorldStubImpl.cpp
-    
-    ```bash
-    // HelloWorldStubImpl.cpp
-    #include "HelloWorldStubImpl.hpp"
-    
-    HelloWorldStubImpl::HelloWorldStubImpl() { }
-    HelloWorldStubImpl::~HelloWorldStubImpl() { }
-    
-    void HelloWorldStubImpl::sayHello(const std::shared_ptr<CommonAPI::ClientId> _client,
-    	std::string _name, sayHelloReply_t _reply) {
-    	    std::stringstream messageStream;
-    	    messageStream << "Hello " << _name << "!";
-    	    std::cout << "sayHello('" << _name << "'): '" << messageStream.str() << "'\n";
-    
-        _reply(messageStream.str());
-    };
-    ```
     
 <br/>
 
@@ -428,42 +278,12 @@ nano HelloWorldStubImpl.cpp
 
 ```bash
 cd ~/build-commonapi/project
-nano CMakeLists.txt
 ```
+Write CMakeLists.txt on proejct directory
 
-- CMakeLists.txt
-    
-    ```bash
-    cmake_minimum_required(VERSION 2.8)
-    
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -std=c++0x")
-    include_directories(
-        src-gen
-        ~/build-commonapi/capicxx-core-runtime/include
-        ~/build-commonapi/capicxx-someip-runtime/include
-        ~/build-commonapi/vsomeip/interface
-    )
-    link_directories(
-        ~/build-commonapi/capicxx-core-runtime/build
-        ~/build-commonapi/capicxx-someip-runtime/build
-        ~/build-commonapi/vsomeip/build
-    )
-    add_executable(HelloWorldClient
-            src/HelloWorldClient.cpp
-            src-gen/v1/commonapi/HelloWorldSomeIPProxy.cpp
-            src-gen/v1/commonapi/HelloWorldSomeIPDeployment.cpp
-    )
-    target_link_libraries(HelloWorldClient CommonAPI CommonAPI-SomeIP vsomeip)
-    add_executable(HelloWorldService
-            src/HelloWorldService.cpp
-            src/HelloWorldStubImpl.cpp
-            src-gen/v1/commonapi/HelloWorldSomeIPStubAdapter.cpp
-            src-gen/v1/commonapi/HelloWorldStubDefault.cpp
-            src-gen/v1/commonapi/HelloWorldSomeIPDeployment.cpp
-    )
-    target_link_libraries(HelloWorldService CommonAPI CommonAPI-SomeIP vsomeip)
-    ```
-    
+ - ### [CMakeLists.txt](project/CMakeLists.txt)
+ 
+Build and run
 
 ```bash
 mkdir build
