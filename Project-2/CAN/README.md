@@ -53,47 +53,41 @@ Add arduino file to Uno
 
 ## DHT11 Sensor ( Temperature and Humidity )
 
-- Circuit
-
-    <img src="https://user-images.githubusercontent.com/111988634/190004955-ea62c788-894f-4662-ad9f-57140d833e26.png"  width="500" height="300"/>  
+<img src="https://user-images.githubusercontent.com/111988634/190004955-ea62c788-894f-4662-ad9f-57140d833e26.png"  width="500" height="300"/>  
     
-    <img src="https://user-images.githubusercontent.com/111988634/190005137-51d631fb-e49a-4db0-86e8-eb0733afeda0.jpg"  width="600" height="300"/>  
+<img src="https://user-images.githubusercontent.com/111988634/190005137-51d631fb-e49a-4db0-86e8-eb0733afeda0.jpg"  width="600" height="300"/>  
 
+| Arduino Uno | CAN Module MCP2515 |
+| --- | --- |
+| VCC | 5V |
+| GND | GND |
+| CS | 9 |
+| SO | 11 |
+| SI | 10 |
+| SCK | 13 |
 
-    | Arduino Uno | CAN Module MCP2515 |
-    | --- | --- |
-    | VCC | 5V |
-    | GND | GND |
-    | CS | 9 |
-    | SO | 11 |
-    | SI | 10 |
-    | SCK | 13 |
+| CAN Module MCP2515 | CAN Module MCP2515 |
+| --- | --- |
+| CAN H | CAN H |
+| CAN L | CAN L |
 
+| Arduino Nano | CAN Module MCP2515 |
+| --- | --- |
+| VCC | 5V |
+| GND | GND |
+| CS | 9 |
+| SO | 11 |
+| SI | 10 |
+| SCK | 13 |
 
-    | CAN Module MCP2515 | CAN Module MCP2515 |
-    | --- | --- |
-    | CAN H | CAN H |
-    | CAN L | CAN L |
+| DHT11 | Arduino Nano  |
+| --- | --- |
+| GND | GND |
+| DATA | A0 |
+| VCC | 5V |
 
-
-    | Arduino Nano | CAN Module MCP2515 |
-    | --- | --- |
-    | VCC | 5V |
-    | GND | GND |
-    | CS | 9 |
-    | SO | 11 |
-    | SI | 10 |
-    | SCK | 13 |
-
-
-    | DHT11 | Arduino Nano  |
-    | --- | --- |
-    | GND | GND |
-    | DATA | A0 |
-    | VCC | 5V |
-
-- ### [uno_receiver.ino ( Uno )](src/uno_receiver.ino)
-- ### [nano_transmitter.ino ( Nano )](src/nano_transmitter.ino)
+- ## [uno_receiver.ino ( Uno )](src/uno_receiver.ino)
+- ## [nano_transmitter.ino ( Nano )](src/nano_transmitter.ino)
     
 ---
 
@@ -115,24 +109,32 @@ Add arduino file to Uno
 
 1. **Soldering 3V3 to Raspberry PI CAN Shield**
 
+<br/>
+
 1. Open config.txt file
     
     ```bash
     sudo nano /boot/config.txt
     ```
     
+<br/>
+
 2. Add the following line at the end of the file
     
     ```bash
     dtoverlay=seeed-can-fd-hat-v2
     ```
     
+<br/>
+
 3. Reboot RPI
     
     ```bash
     sudo reboot
     ```
     
+<br/>
+
 4. Check the kernel log to see if CAN-BUS HAT was initialized successfully. You will also see can0
 and can1 appear in the list of ifconfig results
     
@@ -186,6 +188,8 @@ and can1 appear in the list of ifconfig results
             TX packets 476  bytes 70356 (68.7 KiB)
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
     ```
+
+<br/>
     
 5. Raspberry pi setting and you can use can-util to receive
     
@@ -212,6 +216,8 @@ and can1 appear in the list of ifconfig results
       can1  000   [8]  00 00 00 00 00 00 09 24
     ```
     
+<br/>
+
 6. You can use python code to get the CAN data
     
     Install python-can
@@ -239,7 +245,9 @@ and can1 appear in the list of ifconfig results
     Timestamp: 1663683669.983672        ID: 0000    S Rx                DL:  8    00 00 00 00 00 00 23 4e     Channel: can1
     ```
 
-8. You can use C++ code to get CAN data
+<br/>
+
+7. You can use C++ code to get CAN data
     ```bash
     nano can_recv.cpp
     ```

@@ -1,4 +1,4 @@
-# Cross compiling Qt 5.15 for RPi 4B
+# Crosscompiling Qt 5.15 for RPi 4B
 
 ## Contents    
 - [Step 1: Enable Development Sources](#step-1-enable-development-sources)
