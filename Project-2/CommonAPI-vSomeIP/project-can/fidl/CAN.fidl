@@ -1,0 +1,27 @@
+package commonapi
+  
+interface CAN {
+  version {major 1 minor 0}
+ 
+  struct canStruct {
+      Int32 code1      
+      String id1
+      Int32 code2      
+      String id2
+      Int32 code3      
+      String id3
+      Int32 code4      
+      String id4
+      Int32 code5      
+      String id5
+  }
+ 
+ method structInMethod{
+    in {
+      canStruct structParameter
+    }
+    out {
+      Int32 output
+    }
+  }
+}

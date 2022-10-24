@@ -7,6 +7,8 @@
 - [Step 4: Build the vsomeip Library](#step-4-build-the-vsomeip-library)
 - [Step 5: Build the CommonAPI SOME/IP Runtime Library](#step-5-build-the-commonapi-someip-runtime-library)
 - [Step 6: Write the Franca file and generate code](#step-6-write-the-franca-file-and-generate-code)
+- [Step 7: Write the client and the service application](#step-7-write-the-client-and-the-service-application)
+- [Step 8: Build and run](#step-8-build-and-run)
 
 ---
 
@@ -16,7 +18,7 @@
 - [CommonAPI SomeIP in 10-minutes](https://github.com/COVESA/capicxx-someip-tools/wiki/CommonAPI-C---SomeIP-in-10-minutes)
 - [How to Install Java on Raspberry Pi](https://phoenixnap.com/kb/install-java-raspberry-pi#ftoc-heading-4)
 - [How to install latest Boost library on Raspberry Pi](http://osdevlab.blogspot.com/2016/02/how-to-install-latest-boost-library-on.html)
-
+- [CommonAPI C++ User Guide](https://usermanual.wiki/Document/CommonAPICppUserGuide.113855339.pdf)
 ---
 
 <br/>
@@ -183,3 +185,114 @@ make
 ## Step 6: Write the Franca file and generate code
 
 Unfortunately, code generator [doesn’t support arm architecture.]((https://github.com/COVESA/capicxx-core-tools/issues/19)) So if you want to use this generator, I recommend that you use the code generator on your laptop and then download the generated code via Git.
+
+<br/>
+
+`PC`
+
+Create commonapi project directory and open Franca IDL
+
+```bash
+cd ~
+mkdir project
+cd project
+mkdir fidl
+cd fidl
+```
+
+A service which instantiates the interface `HelloWorld` provides the function `sayHello` which can be called. Write fidl and fdepl file in fidl directory.
+
+- ### [HelloWorld.fidl](project/fidl/HelloWorld.fidl)
+
+- ### [HelloWorld.fdepl](project/fidl/HelloWorld.fdepl)
+
+Download code generator 3.1.12.4
+
+```bash
+cd ~/project
+mkdir cgen && cd cgen
+wget https://github.com/COVESA/capicxx-core-tools/releases/download/3.1.12.4/commonapi-generator.zip
+unzip commonapi-generator.zip -d commonapi-generator
+cd commonapi-generator
+chmod +x commonapi-generator-linux-x86_64
+```
+
+Download someip code generator 3.1.12.2
+
+```bash
+cd ~/project/cgen
+wget https://github.com/COVESA/capicxx-someip-tools/releases/download/3.1.12.2/commonapi_someip_generator.zip
+unzip commonapi_someip_generator.zip -d commonapi_someip_generator
+cd commonapi-someip-generator/
+chmod +x commonapi-someip-generator-linux-x86_64
+```
+
+Run generator
+
+```bash
+cd ~/project
+./cgen/commonapi-generator/commonapi-generator-linux-x86_64 -sk ./fidl/HelloWorld.fidl
+./cgen/commonapi_someip_generator/commonapi-someip-generator-linux-x86_64 ./fidl/HelloWorld.fdepl
+```
+
+Now, send the generated code to Raspberry pi using rsync command line
+
+```bash
+cd ~/project
+rsync -avz src-gen <user-name>@<IP-address>:<project-directory>
+```
+
+In my case
+
+```bash
+rsync -avz src-gen moon@192.168.0.105:/home/build-commonapi/project
+```
+
+<br/>
+
+## Step 7: Write the client and the service application
+
+<br/>
+
+`Raspberry Pi`
+
+```bash
+cd ~/build-commonapi/project
+mkdir src && cd src
+```
+
+Make 4 files in src directory
+
+- ### [HelloWorldClient.cpp](project/src/HelloWorldClient.cpp)
+
+- ### [HelloWorldService.cpp](project/src/HelloWorldService.cpp)
+
+- ### [HelloWorldStubImpl.hpp](project/src/HelloWorldStubImpl.hpp)
+    
+- ### [HelloWorldStubImpl.cpp](project/src/HelloWorldStubImpl.cpp)
+
+    
+<br/>
+
+## Step 8: Build and run
+
+```bash
+cd ~/build-commonapi/project
+```
+Write CMakeLists.txt on proejct directory
+
+ - ### [CMakeLists.txt](project/CMakeLists.txt)
+ 
+Build and run
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+```bash
+./HelloWorldService
+./HelloWorldClient
+```
