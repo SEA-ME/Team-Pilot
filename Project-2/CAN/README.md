@@ -57,7 +57,7 @@ Add arduino file to Uno
     
 <img src="https://user-images.githubusercontent.com/111988634/190005137-51d631fb-e49a-4db0-86e8-eb0733afeda0.jpg"  width="600" height="300"/>  
 
-| Arduino Uno | CAN Module MCP2515 |
+| CAN Module MCP2515 | Arduino Uno |
 | --- | --- |
 | VCC | 5V |
 | GND | GND |
@@ -71,7 +71,7 @@ Add arduino file to Uno
 | CAN H | CAN H |
 | CAN L | CAN L |
 
-| Arduino Nano | CAN Module MCP2515 |
+| CAN Module MCP2515 | Arduino Nano |
 | --- | --- |
 | VCC | 5V |
 | GND | GND |
