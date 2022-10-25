@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/CANProxy.hpp>
+#include <v1/commonapi/CANProxyBase.hpp>
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #include <net/if.h>
@@ -109,8 +110,13 @@ int main(){
 	usleep(1000);
 
     CommonAPI::CallStatus callStatus;
-    std::int32_t outputData;
-	CAN::canStruct canStruct;
+
+	CAN::HUM hum;
+    CAN::TMP tmp;
+	CAN::RPM rpm;
+	CAN::SPD spd;
+	CAN::BAT bat;
+	uint16_t rpm_combine;
 
 	// CAN
     int can_fd = InitSocket("can1");
@@ -136,22 +142,16 @@ int main(){
 			printf("%02X ",frame.data[i]);
 		printf("\n");
 
-		int battery_level = getBattery();
-		std::cout << battery_level << "%" << std::endl;
-		
-    	canStruct.setId1("HUM");
-    	canStruct.setCode1(frame.data[0]);
-		canStruct.setId2("TMP");
-    	canStruct.setCode2(frame.data[1]);
-		canStruct.setId3("RPM");
-    	canStruct.setCode3(frame.data[2]);
-		canStruct.setId4("SPD");
-    	canStruct.setCode4(frame.data[3]);
-		canStruct.setId5("BAT");
-    	canStruct.setCode5(battery_level);
+		std::cout << getBattery() << "%" << std::endl;
 
-    	myProxy->structInMethod(canStruct,callStatus,outputData);
-    	std::cout << "Client Log!!  outputData:" << outputData << std::endl;
+		rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
+
+		myProxy->GetHUM(frame.data[0], callStatus, hum);
+		myProxy->GetTMP(frame.data[1], callStatus, tmp);
+		myProxy->GetRPM(rpm_combine, callStatus, rpm);
+		myProxy->GetSPD(frame.data[4], callStatus, spd);
+		myProxy->GetBAT(frame.data[5], callStatus, bat);
+
     	usleep(1000);
 	}
 

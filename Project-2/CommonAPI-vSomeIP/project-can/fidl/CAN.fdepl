@@ -3,9 +3,21 @@ import "CAN.fidl"
 
 define org.genivi.commonapi.someip.deployment for interface commonapi.CAN {
 	SomeIpServiceID = 4660
-	
-	method structInMethod {
+
+	method GetHUM{
 		SomeIpMethodID = 123
+	}
+	method GetTMP{
+		SomeIpMethodID = 124
+	}
+	method GetRPM{
+		SomeIpMethodID = 125
+	}
+	method GetSPD{
+		SomeIpMethodID = 126
+	}
+	method GetBAT{
+		SomeIpMethodID = 127
 	}
 }
 
@@ -15,3 +27,4 @@ define org.genivi.commonapi.someip.deployment for provider MyService {
 		SomeIpInstanceID = 22136
 	}
 }
+
