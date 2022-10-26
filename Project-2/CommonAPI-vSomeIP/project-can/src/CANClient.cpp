@@ -18,8 +18,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
-
-
 #include "defs.h" 
 #include "ina219.h" 
 
@@ -63,45 +61,11 @@ int InitSocket(const char *ifname){
 	return sock_fd;
 }
 
-int getBattery(){
-	INA219 *ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
-                     BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
-                     BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
-	
-	char *error = NULL;
-	if (ina219_init (ina219, &error)){
-		INA219ChargeStatus charge_status;
-		int mV;
-		int percent_charged;
-		int battery_current_mA;
-		int minutes;
-		if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
-			switch (charge_status){
-				case INA219_FULLY_CHARGED:
-					printf("Fully charged\n");
-					break;
-				case INA219_CHARGING:
-					printf("Charging, %d minutes until fully charged\n", minutes);
-					break;
-				case INA219_DISCHARGING:
-					printf("Discharging, %d minutes left\n", minutes);
-					break;
-			}
-			printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
-      		printf ("Battery current: %d mA\n", battery_current_mA); 
-      		printf ("Battery charge: %.d %%\n", percent_charged); 
-			return percent_charged;
-		}
-	}
-	return 0;
-}
-
 int main(){
 
 	// CommonAPI vSomeIP
 	std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<CANProxy<>> myProxy =
-    runtime->buildProxy<CANProxy>("local", "can");
+    std::shared_ptr<CANProxy<>> myProxy = runtime->buildProxy<CANProxy>("local", "can");
 
     std::cout << "Checking availability!" << std::endl;
     while (!myProxy->isAvailable())
@@ -111,11 +75,13 @@ int main(){
 
     CommonAPI::CallStatus callStatus;
 
+	// Compare with Franca IDL(.fidl) 
 	CAN::HUM hum;
     CAN::TMP tmp;
 	CAN::RPM rpm;
 	CAN::SPD spd;
 	CAN::BAT bat;
+
 	uint16_t rpm_combine;
 
 	// CAN
@@ -124,6 +90,18 @@ int main(){
 		return can_fd;
 	
 	struct can_frame frame;
+
+	// Battery
+	INA219 *ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
+                     BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
+                     BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
+
+	INA219ChargeStatus charge_status;
+	int mV;
+	int percent_charged;
+	int battery_current_mA;
+	int minutes;		
+	char *error = NULL;
 
 	while (1)
 	{
@@ -142,8 +120,28 @@ int main(){
 			printf("%02X ",frame.data[i]);
 		printf("\n");
 
-		std::cout << getBattery() << "%" << std::endl;
-
+		// Battery
+		if (ina219_init (ina219, &error)){
+			if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
+				switch (charge_status){
+					case INA219_FULLY_CHARGED:
+						printf("Fully charged\n");
+						break;
+					case INA219_CHARGING:
+						printf("Charging, %d minutes until fully charged\n", minutes);
+						break;
+					case INA219_DISCHARGING:
+						printf("Discharging, %d minutes left\n", minutes);
+						break;
+				}
+				printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
+    	  		printf ("Battery current: %d mA\n", battery_current_mA); 
+    	  		printf ("Battery charge: %.d %%\n", percent_charged);
+				frame.data[5] = percent_charged;
+			}
+		}
+		
+		// unsigned char -> uint16_t
 		rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
 
 		myProxy->GetHUM(frame.data[0], callStatus, hum);
