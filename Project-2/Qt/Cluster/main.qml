@@ -3,19 +3,14 @@ import QtQuick.Window 2.2
 
 Window {
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Hello World")
+    width: 1024
+    height: 600
+    title: qsTr("Project-2 IC")
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            Qt.quit();
-        }
+    Background {
+
     }
+    Instrument_Cluster{
 
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
     }
 }
