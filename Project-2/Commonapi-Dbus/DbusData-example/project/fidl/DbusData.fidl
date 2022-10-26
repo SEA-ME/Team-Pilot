@@ -1,0 +1,24 @@
+package commonapi
+  
+interface DbusData {
+  version {major 1 minor 0}
+ 
+  struct dataStruct {
+      Int32 TMP     
+      Int32 HUM      
+      Int32 RPM      
+      Int32 SPD      
+      Int32 BAT      
+
+  }
+
+ method structInMethod{
+    in {
+      dataStruct structParameter
+    }
+    out {
+      Int32 output
+    }
+  }
+
+}
