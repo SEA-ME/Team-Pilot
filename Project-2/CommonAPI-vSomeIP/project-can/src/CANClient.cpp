@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/CANProxy.hpp>
+#include <v1/commonapi/CANProxyBase.hpp>
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #include <net/if.h>
@@ -17,8 +18,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
-
-
 #include "defs.h" 
 #include "ina219.h" 
 
@@ -62,55 +61,28 @@ int InitSocket(const char *ifname){
 	return sock_fd;
 }
 
-int getBattery(){
-	INA219 *ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
-                     BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
-                     BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
-	
-	char *error = NULL;
-	if (ina219_init (ina219, &error)){
-		INA219ChargeStatus charge_status;
-		int mV;
-		int percent_charged;
-		int battery_current_mA;
-		int minutes;
-		if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
-			switch (charge_status){
-				case INA219_FULLY_CHARGED:
-					printf("Fully charged\n");
-					break;
-				case INA219_CHARGING:
-					printf("Charging, %d minutes until fully charged\n", minutes);
-					break;
-				case INA219_DISCHARGING:
-					printf("Discharging, %d minutes left\n", minutes);
-					break;
-			}
-			printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
-      		printf ("Battery current: %d mA\n", battery_current_mA); 
-      		printf ("Battery charge: %.d %%\n", percent_charged); 
-			return percent_charged;
-		}
-	}
-	return 0;
-}
-
 int main(){
 
 	// CommonAPI vSomeIP
 	std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<CANProxy<>> myProxy =
-    runtime->buildProxy<CANProxy>("local", "can");
+    std::shared_ptr<CANProxy<>> moonProxy = runtime->buildProxy<CANProxy>("local", "can");
 
     std::cout << "Checking availability!" << std::endl;
-    while (!myProxy->isAvailable())
+    while (!moonProxy->isAvailable())
         usleep(10);
     std::cout << "Available..." << std::endl;
 	usleep(1000);
 
     CommonAPI::CallStatus callStatus;
-    std::int32_t outputData;
-	CAN::canStruct canStruct;
+
+	// Compare with Franca IDL(.fidl) 
+	CAN::HUM hum;
+    CAN::TMP tmp;
+	CAN::RPM rpm;
+	CAN::SPD spd;
+	CAN::BAT bat;
+
+	uint16_t rpm_combine;
 
 	// CAN
     int can_fd = InitSocket("can1");
@@ -118,6 +90,18 @@ int main(){
 		return can_fd;
 	
 	struct can_frame frame;
+
+	// Battery
+	INA219 *ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
+                     BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
+                     BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
+
+	INA219ChargeStatus charge_status;
+	int mV;
+	int percent_charged;
+	int battery_current_mA;
+	int minutes;		
+	char *error = NULL;
 
 	while (1)
 	{
@@ -136,22 +120,36 @@ int main(){
 			printf("%02X ",frame.data[i]);
 		printf("\n");
 
-		int battery_level = getBattery();
-		std::cout << battery_level << "%" << std::endl;
+		// Battery
+		if (ina219_init (ina219, &error)){
+			if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
+				switch (charge_status){
+					case INA219_FULLY_CHARGED:
+						printf("Fully charged\n");
+						break;
+					case INA219_CHARGING:
+						printf("Charging, %d minutes until fully charged\n", minutes);
+						break;
+					case INA219_DISCHARGING:
+						printf("Discharging, %d minutes left\n", minutes);
+						break;
+				}
+				printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
+    	  		printf ("Battery current: %d mA\n", battery_current_mA); 
+    	  		printf ("Battery charge: %.d %%\n", percent_charged);
+				frame.data[5] = percent_charged;
+			}
+		}
 		
-    	canStruct.setId1("HUM");
-    	canStruct.setCode1(frame.data[0]);
-		canStruct.setId2("TMP");
-    	canStruct.setCode2(frame.data[1]);
-		canStruct.setId3("RPM");
-    	canStruct.setCode3(frame.data[2]);
-		canStruct.setId4("SPD");
-    	canStruct.setCode4(frame.data[3]);
-		canStruct.setId5("BAT");
-    	canStruct.setCode5(battery_level);
+		// unsigned char -> uint16_t
+		rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
 
-    	myProxy->structInMethod(canStruct,callStatus,outputData);
-    	std::cout << "Client Log!!  outputData:" << outputData << std::endl;
+		moonProxy->GetHUM(frame.data[0], callStatus, hum);
+		moonProxy->GetTMP(frame.data[1], callStatus, tmp);
+		moonProxy->GetRPM(rpm_combine, callStatus, rpm);
+		moonProxy->GetSPD(frame.data[4], callStatus, spd);
+		moonProxy->GetBAT(frame.data[5], callStatus, bat);
+
     	usleep(1000);
 	}
 

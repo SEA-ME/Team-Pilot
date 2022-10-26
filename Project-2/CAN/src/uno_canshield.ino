@@ -4,13 +4,21 @@
 #include <mcp_can.h>
 #include <SPI.h>
 #include <DHT.h> //Library for using DHT sensor
+
 #define DHTPIN A0
 #define DHTTYPE DHT11
+#define CANBUS_LEN 6
 
 const int HOLE = 2; // digital input
 unsigned long millisBefore;
 volatile int cnt; // count holes
-float rpm = 0;
+uint16_t rpm = 12345;
+uint8_t spd = 123;
+unsigned char hi;
+unsigned char lo;
+uint8_t h;
+int8_t t;
+unsigned char stmp[CANBUS_LEN] = {0, 0, 0, 0, 0, 0};
 
 // the cs pin of the version after v1.1 is default to D9
 // v0.9b and v1.0 is default D10
@@ -35,26 +43,29 @@ void setup()
     }
     Serial.println("CAN BUS Shield init ok!");
 }
- 
-unsigned char stmp[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 void loop()
 {
-    int h = dht.readHumidity(); //Gets Humidity value
-    int t = dht.readTemperature(); //Gets Temperature value
+    h = dht.readHumidity(); //Gets Humidity value
+    t = dht.readTemperature(); //Gets Temperature value
 
     // Caculate RPM
+    /*
     if (millis() - millisBefore > 1000){
       rpm = (cnt/12.0) * 60;
       cnt = 0;
       millisBefore = millis();
-    }
+    }*/
+    lo = rpm & 0xFF;
+    hi = rpm >> 8;
    
     stmp[0] = h;  // Humidity
     stmp[1] = t;  // Temperature
-    stmp[2] = rpm; // RPM
+    stmp[2] = lo; // RPM1
+    stmp[3] = hi; // RPM2
+    stmp[4] = spd;
 
-    CAN.sendMsgBuf(0x00, 0, 8, stmp);
+    CAN.sendMsgBuf(0x00, 0, CANBUS_LEN, stmp);
     delay(100);                       // send data per 100ms
 }
 

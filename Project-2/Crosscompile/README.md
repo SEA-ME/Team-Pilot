@@ -319,7 +319,7 @@ scp qopenglwidget moon@<IP-address>:/home/moon
 
 <br/>
 
-`RPi`
+`Raspberry Pi`
 
 ```bash
 cd ~
