@@ -21,7 +21,7 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.CAN {
 	}
 }
 
-define org.genivi.commonapi.someip.deployment for provider MyService {
+define org.genivi.commonapi.someip.deployment for provider MoonService {
 	instance commonapi.CAN {
 		InstanceId = "can"
 		SomeIpInstanceID = 22136
