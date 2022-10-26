@@ -65,10 +65,10 @@ int main(){
 
 	// CommonAPI vSomeIP
 	std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<CANProxy<>> myProxy = runtime->buildProxy<CANProxy>("local", "can");
+    std::shared_ptr<CANProxy<>> moonProxy = runtime->buildProxy<CANProxy>("local", "can");
 
     std::cout << "Checking availability!" << std::endl;
-    while (!myProxy->isAvailable())
+    while (!moonProxy->isAvailable())
         usleep(10);
     std::cout << "Available..." << std::endl;
 	usleep(1000);
@@ -144,11 +144,11 @@ int main(){
 		// unsigned char -> uint16_t
 		rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
 
-		myProxy->GetHUM(frame.data[0], callStatus, hum);
-		myProxy->GetTMP(frame.data[1], callStatus, tmp);
-		myProxy->GetRPM(rpm_combine, callStatus, rpm);
-		myProxy->GetSPD(frame.data[4], callStatus, spd);
-		myProxy->GetBAT(frame.data[5], callStatus, bat);
+		moonProxy->GetHUM(frame.data[0], callStatus, hum);
+		moonProxy->GetTMP(frame.data[1], callStatus, tmp);
+		moonProxy->GetRPM(rpm_combine, callStatus, rpm);
+		moonProxy->GetSPD(frame.data[4], callStatus, spd);
+		moonProxy->GetBAT(frame.data[5], callStatus, bat);
 
     	usleep(1000);
 	}

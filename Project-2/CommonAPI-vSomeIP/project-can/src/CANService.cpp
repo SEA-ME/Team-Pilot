@@ -8,9 +8,9 @@ using namespace std;
 
 int main() {
     std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<CANStubImpl> myService =
+    std::shared_ptr<CANStubImpl> moonService =
     	std::make_shared<CANStubImpl>();
-    runtime->registerService("local", "can", myService);
+    runtime->registerService("local", "can", moonService);
     std::cout << "Successfully Registered Service!" << std::endl;
 
     while (true) {
