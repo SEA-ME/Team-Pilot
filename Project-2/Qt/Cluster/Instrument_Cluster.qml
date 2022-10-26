@@ -18,24 +18,19 @@ Item {
         height: parent.height*0.5
         x: (parent.x + parent.width)/8
         anchors.verticalCenter: parent.verticalCenter
-
         value:vsomeipdata.spd
         minimumValue: 0
         maximumValue: 180
-
+        
         style: CircularGaugeStyle{
             labelStepSize: 20
-
-
         }
-
         Behavior on value{
             NumberAnimation{
                 duration: 1000
                 easing: Easing.InOutSine
             }
         }
-
 
     }
     Text {
@@ -75,14 +70,10 @@ Item {
             width: parent.width/2
             height: parent.height
             y: (parent.y + parent.height)/4
-            text:"Battery   "+vsomeipdata.bat + "%"
+            text:"BATTERY   "+vsomeipdata.bat + "%"
             color: "#FFFFFF"
         }
-
-
     }
-
-
 }
 
 
