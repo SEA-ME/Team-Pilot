@@ -56,21 +56,15 @@ java -version
 <br/>
 
 ## Step 2: Install Boost.Asio library
-
+Install Boost-dev
 ```bash
 sudo apt-get install libboost-all-dev
 ```
-
-Check version of boost (1.55 - 1.65)
-
 ```bash
-dpkg -s libboost-dev | grep 'Version'
+sudo apt-get update
+sudo apt-get install build-essential g++ python3-dev autotools-dev libicu-dev libbz2-dev
+sudo apt-get install cmake libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev
 ```
-
-If your boost version is bigger than 1.65, you should downgrade version
-
-![Untitled](https://user-images.githubusercontent.com/111988634/197358975-657a5dbb-ce06-459a-ac90-bd04078a9642.png)
-
 
 Download and Extract file
 
@@ -81,10 +75,6 @@ tar xzvf boost_1_55_0.tar.gz
 cd boost_1_55_0/
 ```
 
-```bash
-sudo apt-get update
-sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev
-```
 
 If you want to use Boost.Asio only, add requirements by `--with` to reduce build time
 
@@ -93,7 +83,7 @@ If you want to use Boost.Asio only, add requirements by `--with` to reduce build
 ```
 
 ```bash
-sudo ./b2 install
+sudo ./b2 -j$(nproc) install
 ```
 
 Check your boost version
@@ -156,7 +146,7 @@ cd vsomeip
 git checkout 2.14.16
 mkdir build
 cd build
-cmake -DGTEST_ROOT=/usr/src/gtest -DENABLE_SIGNAL_HANDLING=1 -DDIAGNOSIS_ADDRESS=0x10 ..
+cmake -DENABLE_SIGNAL_HANDLING=1 -DDIAGNOSIS_ADDRESS=0x10 ..
 make
 ```
 

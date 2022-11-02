@@ -85,7 +85,7 @@ int main(){
 	uint16_t rpm_combine;
 
 	// CAN
-    int can_fd = InitSocket("can1");
+    int can_fd = InitSocket("can0");
 	if (can_fd < 0)
 		return can_fd;
 	

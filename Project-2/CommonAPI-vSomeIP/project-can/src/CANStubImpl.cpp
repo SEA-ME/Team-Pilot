@@ -25,7 +25,7 @@ void CANStubImpl::GetSPD(const std::shared_ptr<CommonAPI::ClientId> _client, v1:
     _reply(returnData);   
 };
 void CANStubImpl::GetBAT(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::BAT _bat, v1::commonapi::CANStub::GetBATReply_t _reply){
-    std::cout << "BAT: " << _bat << " " << std::endl;
+    std::cout << "BAT: " << int(_bat) << " " << std::endl;
     v1::commonapi::CAN::BAT returnData = _bat;
     _reply(returnData);   
 };
