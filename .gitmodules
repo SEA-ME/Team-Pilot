@@ -1,3 +1,4 @@
 [submodule "SEA-ME-Project-1"]
 	path = SEA-ME-Project-1
 	url = git@github.com:skamo3/SEA-ME-Project-1.git
+	branch = main
