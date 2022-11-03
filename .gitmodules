@@ -2,3 +2,7 @@
 	path = SEA-ME-Project-1
 	url = git@github.com:skamo3/SEA-ME-Project-1.git
 	branch = main
+[submodule "SEA-ME-Project-2"]
+	path = SEA-ME-Project-2
+	url = git@github.com:skamo3/SEA-ME-Project-2.git
+	branch = main
