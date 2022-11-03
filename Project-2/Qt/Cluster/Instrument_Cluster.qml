@@ -18,10 +18,10 @@ Item {
         height: parent.height*0.5
         x: (parent.x + parent.width)/8
         anchors.verticalCenter: parent.verticalCenter
-        value:vsomeipdata.spd
+        value:vsomeipdata.qtspd
         minimumValue: 0
         maximumValue: 180
-        
+
         style: CircularGaugeStyle{
             labelStepSize: 20
         }
@@ -44,33 +44,46 @@ Item {
     }
     Rectangle {
         id: tempBox
-        width: height * 2
-        height: parent.height*0.5
-        x: (parent.x + parent.width) / 1.7
+        width: parent.width/4
+        height: parent.height/2
+        x: (parent.x + parent.width)/2
         y: (parent.y + parent.height)/4
-        color : "#171717"
+        color: "#171717"
 
         Text {
-            id :tempTextBox
-            width: parent.width/2
-            height: parent.height
-            text:"TEMP   "+vsomeipdata.tmp + "℃"
+            id :humTextBox
+            width: parent.width
+            height: parent.height/4
+            text:"HUM    " + vsomeipdata.qthum + "%"
+            anchors.top: parent.top
+            anchors.topMargin: 0
             color: "#FFFFFF"
         }
         Text {
-            id :humTextBox
-            width: parent.width/2
-            height: parent.height
-            y: (parent.y + parent.height)/8
-            text:"HUM    "+vsomeipdata.hum
+            id :tempTextBox
+            width: parent.width
+            height: parent.height/4
+            text:"TMP   " + vsomeipdata.qttmp + "℃"
+            anchors.top: humTextBox.bottom
+            anchors.topMargin: 0
+            color: "#FFFFFF"
+        }
+        Text {
+            id :rpmTextBox
+            width: parent.width
+            height: parent.height/4
+            text:"RPM   " + vsomeipdata.qtrpm
+            anchors.top: tempTextBox.bottom
+            anchors.topMargin: 0
             color: "#FFFFFF"
         }
         Text {
             id :batteryTextBox
-            width: parent.width/2
-            height: parent.height
-            y: (parent.y + parent.height)/4
-            text:"BATTERY   "+vsomeipdata.bat + "%"
+            width: parent.width
+            height: parent.height/4
+            text:"BAT   " + vsomeipdata.qtbat + "%"
+            anchors.top: rpmTextBox.bottom
+            anchors.topMargin: 0
             color: "#FFFFFF"
         }
     }

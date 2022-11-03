@@ -14,11 +14,11 @@ public:
     virtual void GetSPD(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::SPD _spd, GetSPDReply_t _reply);
     virtual void GetBAT(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::BAT _bat, GetBATReply_t _reply);
 public:
-    std::uint8_t  qt_HUM();
-    std::int8_t   qt_TMP();
+    std::uint8_t qt_HUM();
+    std::int8_t qt_TMP();
     std::uint16_t qt_RPM();
-    std::uint8_t  qt_SPD();
-    std::uint8_t  qt_BAT();
+    std::uint8_t qt_SPD();
+    std::uint8_t qt_BAT();
 private:
     v1::commonapi::CAN::HUM canHum;
     v1::commonapi::CAN::TMP canTmp;
