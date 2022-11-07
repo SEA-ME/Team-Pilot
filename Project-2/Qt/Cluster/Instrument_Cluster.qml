@@ -86,6 +86,17 @@ Item {
             anchors.topMargin: 0
             color: "#FFFFFF"
         }
+        Text {
+            id :prndTextBox
+            width: parent.width
+            height: parent.height/5
+            text:"P R N D"
+            font.bold: true
+            font.pointSize: 28
+            anchors.top: batteryTextBox.bottom
+            anchors.topMargin: 0
+            color: "#FFFFFF"
+        }
     }
 }
 
