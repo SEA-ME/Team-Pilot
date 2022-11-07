@@ -45,6 +45,7 @@ sudo reboot
 
 Add arduino file to Uno
 - ### [spd_example.ino](src/spd_example.ino)
+If you want to calculate PiRacer speed and RPM, please see [Calculate PiRacer RPM](../RPM/)
 
 ---
 

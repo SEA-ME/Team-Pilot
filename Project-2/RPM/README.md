@@ -1,9 +1,9 @@
 # Calculate PiRacer RPM
 
 ## Contents
-- [Calculate Vehicle Speed $V_v$](#calculate-vehicle-speed)
-- [Calculate Motor Speed $N_e$](#calculate-motor-speed)
-- [Calculate Crankshaft RPM $N_k$](#calculate-crankshaft-rpm)
+- [Calculate Vehicle Speed](#calculate-vehicle-speed)
+- [Calculate Motor Speed](#calculate-motor-speed)
+- [Calculate Crankshaft RPM](#calculate-crankshaft-rpm)
 
 ---
 
