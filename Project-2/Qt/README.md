@@ -1,9 +1,9 @@
 # Instrument Cluster using Qt
 
 ## Contents
-- [Step 1: Qt Creator in RPi](#qt-creator-in-rpi)
-- [Step 2: Import CommonAPI vsomeip libraries](#import-commonapi-vsomeip-libraries)
-- [Step 3: Connect CommonAPI Generator code](#connect-commonapi-generator-code)
+- [Step 1: Qt Creator in RPi](#step-1-qt-creator-in-rpi)
+- [Step 2: Import CommonAPI vsomeip libraries](#step-2-import-commonapi-vsomeip-libraries)
+- [Step 3: Connect CommonAPI Generator code](#step-3-connect-commonapi-generator-code)
 
 ---
 

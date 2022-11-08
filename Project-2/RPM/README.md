@@ -1,10 +1,9 @@
 # Calculate PiRacer RPM
 
 ## Contents
-- [Calculate Vehicle Speed](#calculate-vehicle-speed)
-- [Calculate Motor Speed](#calculate-motor-speed)
-- [Calculate Crankshaft RPM](#calculate-crankshaft-rpm)
-
+- [Step 1: Calculate Vehicle Speed](#step-1-calculate-vehicle-speed)
+- [Step 2: Calculate Motor Speed](#step-2-calculate-motor-speed)
+- [Step 3: Calculate Crankshaft RPM](#step-3-calculate-crankshaft-rpm)
 ---
 
 <br/>
@@ -16,7 +15,7 @@
 
 <br/>
 
-## Calculate Vehicle Speed $V_v$
+## Step 1: Calculate Vehicle Speed
 <img src="https://user-images.githubusercontent.com/111988634/200394017-5774316a-c24f-415b-8256-f2616bb5220f.png"  width="700" height="300"/>  
 
 $ω_e$ *[rad/s]* – rotational speed of the engine
@@ -109,7 +108,7 @@ $$
 
 <br/>
 
-## Calculate Motor Speed $N_e$
+## Step 2: Calculate Motor Speed
 
 Due to the speed sensor’s structure, I could only find the rpm of the crankshaft.
 
@@ -146,4 +145,37 @@ $$
 
 <br/>
 
-## Calculate Crankshaft RPM $N_k$
+## Step 3: Calculate Crankshaft RPM
+To get vehicle speed, we need below variables:
+- $N_k$ *[rpm]* - rpm of crankshaft
+- $i_o$ *[-]* – gear ratio of the differential
+- $r_w$ *[m]* - radius of wheel
+
+First, install pulse at the crankshaft to get the rpm.
+For rpm of crankshaft, the formula is done as:
+$$
+N_k = \frac{60 \times pulse}{T_c \times PPR}
+$$
+
+Where $PPR$ is a Pulse per revolution. As you can see below, it is 4.
+
+<img src="https://user-images.githubusercontent.com/111988634/200579087-736b044d-4d81-45f9-be5f-87ec76041ef3.jpg"  width="550" height="300"/> 
+
+Where $T_c$ is a Time. In my case, I set in 1 second.
+
+Second, count number of gear teeth to get gear ratio.
+I counted number of differential gear teeth.
+$$i_o = \frac {39}{11} \simeq 3.55$$
+<img src="https://user-images.githubusercontent.com/111988634/200571585-28fb8837-ebbe-45d8-9db6-60468d070a11.jpg"  width="550" height="300"/>  
+<img src="https://user-images.githubusercontent.com/111988634/200571589-b70595c8-6dd5-471c-9f3b-e688afd933f4.jpg"  width="550" height="300"/>  
+
+Last, wheel radius is 2.3 cm, but it must be converted to meters:
+$$r_w = 2.3 cm = 0.023 m$$
+
+Now, I have all the variables I need for the equation:
+$$N_k = \frac{60 \times pulse}{T_c \times PPR}$$
+$$i_o = \frac {39}{11} \simeq 3.55 $$
+$$r_w = 2.3 cm = 0.023 m$$
+
+This is an arduino code to calculate the vehicle speed and rpm.
+- ### [uno_rpm.ino](uno_rpm.ino)
