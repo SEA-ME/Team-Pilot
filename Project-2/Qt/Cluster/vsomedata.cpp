@@ -1,13 +1,16 @@
 #include "vsomedata.h"
 #include <CommonAPI/CommonAPI.hpp>
 #include <QtQuick>
-#include "canstubimpl.h"
 
 VsomeData::VsomeData(QObject *parent) :
-    QObject(parent), spd(0), rpm(0), tmp(0), hum(0), bat(0),
+    QObject(parent), qtspd(0), qtrpm(0), qttmp(0), qthum(0), qtbat(0),
     timer(std::make_shared<QTimer>())
 {
-    std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get<();
+    qRegisterMetaType<uint8_t>("uint8_t");
+    qRegisterMetaType<int8_t>("int8_t");
+    qRegisterMetaType<uint16_t>("uint16_t");
+
+    std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
     moonService = std::make_shared<CANStubImpl>();
     runtime->registerService("local", "can", moonService);
     std::cout << "Successfully Registered Service!" << std::endl;
@@ -16,77 +19,77 @@ VsomeData::VsomeData(QObject *parent) :
     timer->start();
 }
 
-uint8_t VsomeData::getHum() const
+uint8_t VsomeData::getqthum() const
 {
-    return hum;
+    return qthum;
 }
 
-int8_t VsomeData::getTmp() const
+int VsomeData::getqttmp() const
 {
-    return tmp;
+    return qttmp;
 }
 
-uint16_t VsomeData::getRpm() const
+uint16_t VsomeData::getqtrpm() const
 {
-    return rpm;
+    return qtrpm;
 }
 
-uint8_t VsomeData::getSpd() const
+uint8_t VsomeData::getqtspd() const
 {
-    return spd;
+    return qtspd;
 }
 
-uint8_t VsomeData::getBat() const
+uint8_t VsomeData::getqtbat() const
 {
-    return bat;
+    return qtbat;
 }
 
-void VsomeData::setHum(uint8_t value)
+void VsomeData::setQthum(uint8_t value)
 {
-    if (hum == value)
+    if (qthum == value)
         return;
-    spd = value;
-    emit spdChanged();
+    qthum = value;
+    emit qthumChanged();
 }
 
-void VsomeData::setTmp(int8_t value)
+void VsomeData::setQttmp(int value)
 {
-    if (tmp == value)
+    if (qttmp == value)
         return;
-    tmp = value;
-    emit tmpChanged();
+    qttmp = value;
+    emit qttmpChanged();
 }
 
-void VsomeData::setRpm(uint16_t value)
+void VsomeData::setQtrpm(uint16_t value)
 {
-    if (rpm == value)
+    if (qtrpm == value)
         return;
-    rpm = value;
-    emit rpmchanged();
+    qtrpm = value;
+    emit qtrpmChanged();
 }
 
-void VsomeData::setSpd(uint8_t value)
+void VsomeData::setQtspd(uint8_t value)
 {
-    if (spd == value)
+    if (qtspd == value)
         return;
-    spd = value;
-    emit spdChanged();
+    qtspd = value;
+    emit qtspdChanged();
 }
 
-void VsomeData::setBat(uint8_t value)
+void VsomeData::setQtbat(uint8_t value)
 {
-    if (bat == value)
+    if (qtbat == value)
         return;
-    bat = value;
-    emit batChanged();
+    qtbat = value;
+    emit qtbatChanged();
 }
 
 void VsomeData::updateFunc()
 {
-    setHum(moonService.get()->GetHUM());
-    setTmp(moonService.get()->GetTMP());
-    setRpm(moonService.get()->GetRPM());
-    setSpd(moonService.get()->GetSPD());
-    setBat(moonService.get()->GetBAT());
+    setQthum(moonService.get()->qt_HUM());
+    setQttmp(moonService.get()->qt_TMP());
+    setQtrpm(moonService.get()->qt_RPM());
+    setQtspd(moonService.get()->qt_SPD());
+    setQtbat(moonService.get()->qt_BAT());
 }
 

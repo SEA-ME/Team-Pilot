@@ -14,13 +14,11 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdio.h>
-
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
 #include "defs.h" 
 #include "ina219.h" 
-
 
 // Ina219 definition
 #define I2C_ADDR 0x42
@@ -66,13 +64,11 @@ int main(){
 	// CommonAPI vSomeIP
 	std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
     std::shared_ptr<CANProxy<>> moonProxy = runtime->buildProxy<CANProxy>("local", "can");
-
     std::cout << "Checking availability!" << std::endl;
     while (!moonProxy->isAvailable())
         usleep(10);
     std::cout << "Available..." << std::endl;
 	usleep(1000);
-
     CommonAPI::CallStatus callStatus;
 
 	// Compare with Franca IDL(.fidl) 
@@ -81,32 +77,33 @@ int main(){
 	CAN::RPM rpm;
 	CAN::SPD spd;
 	CAN::BAT bat;
-
 	uint16_t rpm_combine;
 
 	// CAN
-    int can_fd = InitSocket("can1");
+    int can_fd = InitSocket("can0");
 	if (can_fd < 0)
-		return can_fd;
-	
+		return can_fd;	
 	struct can_frame frame;
+	int rd_byte;
 
 	// Battery
 	INA219 *ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
                      BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
                      BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
-
 	INA219ChargeStatus charge_status;
 	int mV;
 	int percent_charged;
 	int battery_current_mA;
 	int minutes;		
 	char *error = NULL;
+	bool ina_status = false;
+	if (ina219_init (ina219, &error))
+		ina_status = true;
 
-	while (1)
+	while (true)
 	{
 		// CAN
-		int rd_byte = read(can_fd, &frame, sizeof(frame));
+		rd_byte = read(can_fd, &frame, sizeof(frame));
 		if (rd_byte < 0)
 			printf("Failed to recieve CAN frame\n", rd_byte);
 		else if (rd_byte < (int)sizeof(struct can_frame))
@@ -116,12 +113,8 @@ int main(){
 
 		printf("0x%03X [%d] ",frame.can_id, frame.can_dlc);
 
-		for (int i = 0; i < frame.can_dlc; i++)
-			printf("%02X ",frame.data[i]);
-		printf("\n");
-
 		// Battery
-		if (ina219_init (ina219, &error)){
+		if (ina_status){
 			if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
 				switch (charge_status){
 					case INA219_FULLY_CHARGED:
@@ -141,9 +134,15 @@ int main(){
 			}
 		}
 		
+		// print frame data
+		for (int i = 0; i < frame.can_dlc; i++)
+			printf("%02X ",frame.data[i]);
+		printf("\n");
+
 		// unsigned char -> uint16_t
 		rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
 
+		// send data to server
 		moonProxy->GetHUM(frame.data[0], callStatus, hum);
 		moonProxy->GetTMP(frame.data[1], callStatus, tmp);
 		moonProxy->GetRPM(rpm_combine, callStatus, rpm);

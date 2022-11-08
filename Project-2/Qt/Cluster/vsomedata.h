@@ -10,42 +10,42 @@ class VsomeData : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(uint8_t  hum READ getHum WRITE setHum NOTIFY humChanged)
-    Q_PROPERTY(int8_t   tmp READ getTmp WRITE setTmp NOTIFY tmpChanged)
-    Q_PROPERTY(uint16_t rpm READ getRpm WRITE setRpm NOTIFY rpmChanged)
-    Q_PROPERTY(uint8_t  spd READ getSpd WRITE setSpd NOTIFY spdChanged)
-    Q_PROPERTY(uint8_t  bat READ getBat WRITE setBat NOTIFY batChanged)
+    Q_PROPERTY(uint8_t  qthum READ getqthum WRITE setQthum NOTIFY qthumChanged)
+    Q_PROPERTY(int      qttmp READ getqttmp WRITE setQttmp NOTIFY qttmpChanged)
+    Q_PROPERTY(uint16_t qtrpm READ getqtrpm WRITE setQtrpm NOTIFY qtrpmChanged)
+    Q_PROPERTY(uint8_t  qtspd READ getqtspd WRITE setQtspd NOTIFY qtspdChanged)
+    Q_PROPERTY(uint8_t  qtbat READ getqtbat WRITE setQtbat NOTIFY qtbatChanged)
 
 public:
     explicit VsomeData(QObject *parent = 0);
-    uint8_t  getHum() const;
-    int8_t   getTmp() const;
-    uint16_t getRpm() const;
-    uint8_t  getSpd() const;
-    uint8_t  getBat() const;
+    uint8_t  getqthum() const;
+    int      getqttmp() const;
+    uint16_t getqtrpm() const;
+    uint8_t  getqtspd() const;
+    uint8_t  getqtbat() const;
 
-    void setHum(uint8_t  value);
-    void setTmp(int8_t   value);
-    void setRpm(uint16_t value);
-    void setSpd(uint8_t  value);
-    void setBat(uint8_t  value);
+    void setQthum(uint8_t  value);
+    void setQttmp(int   value);
+    void setQtrpm(uint16_t value);
+    void setQtspd(uint8_t  value);
+    void setQtbat(uint8_t  value);
 
 private:
-    uint8_t  spd;
-    int8_t   tmp;
-    uint16_t rpm;
-    uint8_t  spd;
-    uint8_t  bat;
+    uint8_t  qthum;
+    int      qttmp;
+    uint16_t qtrpm;
+    uint8_t  qtspd;
+    uint8_t  qtbat;
 
     std::shared_ptr<class QTimer> timer;
-    std::shared_ptr<CANStubImpl> myService;
+    std::shared_ptr<CANStubImpl> moonService;
 
 signals:
-    void humChanged();
-    void tmpChanged();
-    void rpmChanged();
-    void spdChanged();
-    void batChanged();
+    void qthumChanged();
+    void qttmpChanged();
+    void qtrpmChanged();
+    void qtspdChanged();
+    void qtbatChanged();
 
 public slots:
     void updateFunc();
