@@ -180,7 +180,8 @@ $$r_w = 2.3 cm = 0.023 m$$
 This is an arduino code to calculate the vehicle speed and rpm.
 - ### [uno_rpm.ino](uno_rpm.ino)
 <img src="https://user-images.githubusercontent.com/111988634/200611472-6d10c12e-b690-412f-a20f-c8b52aeb10ca.jpg"  width="550" height="300"/>  
-<img src="https://user-images.githubusercontent.com/111988634/200611487-b496ad0b-4fba-4f3f-ac05-aeff1020b988.jpg"  width="550" height="300"/>  
+<img src="https://user-images.githubusercontent.com/111988634/200611487-b496ad0b-4fba-4f3f-ac05-aeff1020b988.jpg"  width="550" height="300"/> 
+ 
 If you want to get max RPM of motor, you should know $i_x$:
 
 $$
