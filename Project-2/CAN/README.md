@@ -195,17 +195,17 @@ and can1 appear in the list of ifconfig results
 5. Raspberry pi setting and you can use can-util to receive
     
     ```bash
-    sudo ip link set can1 up type can bitrate 500000
+    sudo ip link set can0 up type can bitrate 500000
     ```
     
     add bashrc
     ```bash
-    alias cl='sudo ip link set can1 up type can bitrate 500000'
+    alias cl='sudo ip link set can0 up type can bitrate 500000'
     ```
     
     receive
     ```bash
-    (env) moon@moon:~ $ candump can1
+    (env) moon@moon:~ $ candump can0
       can1  000   [8]  00 00 00 00 00 00 09 1C
       can1  000   [8]  00 00 00 00 00 00 09 1D
       can1  000   [8]  00 00 00 00 00 00 09 1E
@@ -231,7 +231,7 @@ and can1 appear in the list of ifconfig results
     ```
 
 - ### [uno_canshield.ino](src/uno_canshield.ino)
-- ### [can_recv.py](src/rpi_canshield.py)
+- ### [can_recv.py](src/can_recv.py)
         
     
     ```bash
