@@ -153,6 +153,7 @@ To get vehicle speed, we need below variables:
 
 First, install pulse at the crankshaft to get the rpm.
 For rpm of crankshaft, the formula is done as:
+
 $$
 N_k = \frac{60 \times pulse}{T_c \times PPR}
 $$
