@@ -6,6 +6,7 @@ Window {
     width: 1024
     height: 600
     title: qsTr("Project-2 IC")
+    visibility: "FullScreen"
 
     Background {
 

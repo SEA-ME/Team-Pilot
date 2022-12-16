@@ -153,6 +153,7 @@ To get vehicle speed, we need below variables:
 
 First, install pulse at the crankshaft to get the rpm.
 For rpm of crankshaft, the formula is done as:
+
 $$
 N_k = \frac{60 \times pulse}{T_c \times PPR}
 $$
@@ -179,3 +180,19 @@ $$r_w = 2.3 cm = 0.023 m$$
 
 This is an arduino code to calculate the vehicle speed and rpm.
 - ### [uno_rpm.ino](uno_rpm.ino)
+<img src="https://user-images.githubusercontent.com/111988634/200611472-6d10c12e-b690-412f-a20f-c8b52aeb10ca.jpg"  width="550" height="300"/>  
+<img src="https://user-images.githubusercontent.com/111988634/200611487-b496ad0b-4fba-4f3f-ac05-aeff1020b988.jpg"  width="550" height="300"/> 
+ 
+If you want to get max RPM of motor, you should know $i_x$:
+
+$$
+i_x = \frac{50}{20} = 2.5
+$$
+
+Combining equations, gives the formula of engine RPM:
+
+$$
+\therefore N_e = N_k \times i_x = 2.5N_k
+$$
+
+So if you get max $N_k$, you can get $N_e$ by multiplying 2.5 at $N_k$.

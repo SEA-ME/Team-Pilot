@@ -71,25 +71,25 @@ Add Existing Files - Select your generated codes
 In my pro file, you can see that generated codes are included in sources and headers.
 
 ```bash
-SOURCES += main.cpp \
-    vsomedata.cpp \
+SOURCES += \
+        main.cpp \
     canstubimpl.cpp \
-    ../ic/src-gen/v1/commonapi/CANSomeIPDeployment.cpp \
-    ../ic/src-gen/v1/commonapi/CANSomeIPProxy.cpp \
-    ../ic/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp \
-    ../ic/src-gen/v1/commonapi/CANStubDefault.cpp
+    vsomedata.cpp \
+    ../src-gen/v1/commonapi/CANSomeIPDeployment.cpp \
+    ../src-gen/v1/commonapi/CANSomeIPProxy.cpp \
+    ../src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp
 
 HEADERS += \
-    vsomedata.h \
     canstubimpl.h \
-    ../ic/src-gen/v1/commonapi/CAN.hpp \
-    ../ic/src-gen/v1/commonapi/CANProxy.hpp \
-    ../ic/src-gen/v1/commonapi/CANProxyBase.hpp \
-    ../ic/src-gen/v1/commonapi/CANSomeIPDeployment.hpp \
-    ../ic/src-gen/v1/commonapi/CANSomeIPProxy.hpp \
-    ../ic/src-gen/v1/commonapi/CANSomeIPStubAdapter.hpp \
-    ../ic/src-gen/v1/commonapi/CANStub.hpp \
-    ../ic/src-gen/v1/commonapi/CANStubDefault.hpp
+    vsomedata.h \
+    ../src-gen/v1/commonapi/CAN.hpp \
+    ../src-gen/v1/commonapi/CANProxy.hpp \
+    ../src-gen/v1/commonapi/CANProxyBase.hpp \
+    ../src-gen/v1/commonapi/CANSomeIPDeployment.hpp \
+    ../src-gen/v1/commonapi/CANSomeIPProxy.hpp \
+    ../src-gen/v1/commonapi/CANSomeIPStubAdapter.hpp \
+    ../src-gen/v1/commonapi/CANStub.hpp \
+    ../src-gen/v1/commonapi/CANStubDefault.hpp
 ```
 
 This is my prototype instrument cluster project. As you see, I didn’t caculate my RPM and speed yet.

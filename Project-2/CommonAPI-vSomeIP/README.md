@@ -60,39 +60,6 @@ Install Boost-dev
 ```bash
 sudo apt-get install libboost-all-dev
 ```
-```bash
-sudo apt-get update
-sudo apt-get install build-essential g++ python3-dev autotools-dev libicu-dev libbz2-dev
-sudo apt-get install cmake libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev
-```
-
-Download and Extract file
-
-```bash
-cd ~ && mkdir boost && cd boost
-wget -O boost_1_55_0.tar.gz https://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
-tar xzvf boost_1_55_0.tar.gz
-cd boost_1_55_0/
-```
-
-
-If you want to use Boost.Asio only, add requirements by `--with` to reduce build time
-
-```bash
-./bootstrap.sh --prefix=/usr/local --with-libraries=date_time,filesystem,iostreams,math,regex,serialization,signals,system,thread,timer
-```
-
-```bash
-sudo ./b2 -j$(nproc) install
-```
-
-Check your boost version
-
-```cpp
-cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
-```
-
-![Untitled (1)](https://user-images.githubusercontent.com/111988634/197358974-475d6053-438b-476c-8435-dacb2e98bd18.png)
 
 <br/>
 
@@ -110,11 +77,11 @@ Start with fetching the source code of CommonAPI:
 ```bash
 git clone https://github.com/GENIVI/capicxx-core-runtime.git
 cd capicxx-core-runtime/
-git checkout 3.1.12.4
+git checkout 3.2.0
 mkdir build
 cd build
 cmake ..
-make
+make -j8
 ```
 
 Result:
@@ -143,12 +110,11 @@ Before download SOME/IP Runtime library, you should download vsomeip. Because Co
 ```bash
 git clone https://github.com/COVESA/vsomeip.git
 cd vsomeip
-git checkout 2.14.16
+git checkout 3.1.20.1
 mkdir build
 cd build
 cmake -DENABLE_SIGNAL_HANDLING=1 -DDIAGNOSIS_ADDRESS=0x10 ..
-make
-sudo make install
+make -j8
 ```
 
 ![Untitled (2)](https://user-images.githubusercontent.com/111988634/197358973-be132356-d7e0-4d26-b97d-a6d14c48c0a6.png)
@@ -162,11 +128,11 @@ Download CommonAPI SOME/IP Runtime Library and change version
 ```bash
 git clone https://github.com/GENIVI/capicxx-someip-runtime.git
 cd capicxx-someip-runtime/
-git checkout 3.1.12.12
+git checkout 3.2.0
 mkdir build
 cd build
 cmake -DUSE_INSTALLED_COMMONAPI=OFF ..
-make
+make -j8
 ```
 
 ![Untitled (3)](https://user-images.githubusercontent.com/111988634/197358972-14c36a99-5dc8-42a3-ba13-25f5f7f1e685.png)
@@ -197,24 +163,27 @@ A service which instantiates the interface `HelloWorld` provides the function�
 
 - ### [HelloWorld.fdepl](project/fidl/HelloWorld.fdepl)
 
-Download code generator 3.1.12.4
+Download code generator 3.2.0.1
 
 ```bash
 cd ~/project
 mkdir cgen && cd cgen
-wget https://github.com/COVESA/capicxx-core-tools/releases/download/3.1.12.4/commonapi-generator.zip
-unzip commonapi-generator.zip -d commonapi-generator
-cd commonapi-generator
+```
+
+```bash
+wget https://github.com/COVESA/capicxx-core-tools/releases/download/3.2.0.1/commonapi_core_generator.zip
+unzip commonapi_core_generator.zip -d core-generator
+cd core-generator
 chmod +x commonapi-generator-linux-x86_64
 ```
 
-Download someip code generator 3.1.12.2
+Download someip code generator 3.2.0.1
 
 ```bash
 cd ~/project/cgen
-wget https://github.com/COVESA/capicxx-someip-tools/releases/download/3.1.12.2/commonapi_someip_generator.zip
-unzip commonapi_someip_generator.zip -d commonapi_someip_generator
-cd commonapi-someip-generator/
+wget https://github.com/COVESA/capicxx-someip-tools/releases/download/3.2.0.1/commonapi_someip_generator.zip
+unzip commonapi_someip_generator.zip -d someip-generator
+cd someip-generator
 chmod +x commonapi-someip-generator-linux-x86_64
 ```
 
@@ -222,8 +191,8 @@ Run generator
 
 ```bash
 cd ~/project
-./cgen/commonapi-generator/commonapi-generator-linux-x86_64 -sk ./fidl/HelloWorld.fidl
-./cgen/commonapi_someip_generator/commonapi-someip-generator-linux-x86_64 ./fidl/HelloWorld.fdepl
+./cgen/core-generator/commonapi-generator-linux-x86_64 -sk ./fidl/HelloWorld.fidl
+./cgen/someip-generator/commonapi-someip-generator-linux-x86_64 ./fidl/HelloWorld.fdepl
 ```
 
 Now, send the generated code to Raspberry pi using rsync command line
