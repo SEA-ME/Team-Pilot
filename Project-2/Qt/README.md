@@ -62,7 +62,7 @@ DEPENDPATH += $$PWD/../build-commonapi/vsomeip/interface
 ## Step 3: Connect CommonAPI Generator code
 
 
-As I mentioned on [CommonAPI vSomeIP Setup (RPi) Step 6](https://www.notion.so/CommonAPI-vSomeIP-Setup-RPi-ce8b69ad6b4f40fc9734cf0e744a58e1), I couldn’t execute generator in raspberry pi. So you should generate code in your labtop, and send your src-gen folder using ‘rsync’ command.
+As I mentioned on [CommonAPI vSomeIP Setup (RPi) Step 6](../CommonAPI-vSomeIP/), I couldn’t execute generator in raspberry pi. So you should generate code in your labtop, and send your src-gen folder using ‘rsync’ command.
 
 <img src="https://user-images.githubusercontent.com/111988634/200329541-f38979ec-eae4-4bac-8dec-33953a3fa68c.png"  width="300" height="300"/> 
 
@@ -91,10 +91,6 @@ HEADERS += \
     ../src-gen/v1/commonapi/CANStub.hpp \
     ../src-gen/v1/commonapi/CANStubDefault.hpp
 ```
-
-This is my prototype instrument cluster project. As you see, I didn’t caculate my RPM and speed yet.
-
-[Digital Instrument Cluster Video](https://user-images.githubusercontent.com/111988634/200329556-4ca457d4-42d5-4613-865d-af7b0b90e7c4.webm)
 
 - ### [main.cpp](Cluster/main.cpp)
 - ### [vsomedata.cpp](Cluster/vsomedata.cpp)
