@@ -1,0 +1,33 @@
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-SOMEIP_deployment_spec.fdepl"
+import "HeadUnit.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface commonapi.HeadUnit {
+	SomeIpServiceID = 4660
+
+	method GetHUM{
+		SomeIpMethodID = 123
+	}
+	method GetTMP{
+		SomeIpMethodID = 124
+	}
+	method GetRPM{
+		SomeIpMethodID = 125
+	}
+	method GetSPD{
+		SomeIpMethodID = 126
+	}
+	method GetBAT{
+		SomeIpMethodID = 127
+	}
+    method GetPRND{
+        SomeIpMethodID = 128
+    }
+}
+
+define org.genivi.commonapi.someip.deployment for provider as MoonService {
+	instance commonapi.HeadUnit {
+		InstanceId = "headunit"
+		SomeIpInstanceID = 22136
+	}
+}
+
