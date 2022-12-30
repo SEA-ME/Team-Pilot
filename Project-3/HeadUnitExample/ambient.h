@@ -8,11 +8,11 @@ class Ambient : public QObject
     Q_OBJECT
 public:
     explicit Ambient(QObject *parent = 0);
-    ~Ambient();
+
 signals:
 
 public slots:
-    void ambientSlot(const int &msg);
+    void ambientSlot(const QString &msg);
 };
 
 #endif // AMBIENT_H

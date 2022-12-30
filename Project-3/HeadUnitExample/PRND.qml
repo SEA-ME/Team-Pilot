@@ -20,7 +20,7 @@ Item {
                     text: control.text
                 }
             }
-            onClicked: prndSignal(0)
+            onClicked: prndSignal(text)
         }
         Button {
             id: btnR
@@ -34,7 +34,7 @@ Item {
                     text: control.text
                 }
             }
-            onClicked: prndSignal(1)
+            onClicked: prndSignal(text)
         }
         Button {
             id: btnN
@@ -48,7 +48,7 @@ Item {
                     text: control.text
                 }
             }
-            onClicked: prndSignal(2)
+            onClicked: prndSignal(text)
         }
         Button {
             id: btnD
@@ -62,7 +62,7 @@ Item {
                     text: control.text
                 }
             }
-            onClicked: prndSignal(3)
+            onClicked: prndSignal(text)
         }
     }
 }

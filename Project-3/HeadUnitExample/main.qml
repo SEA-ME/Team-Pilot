@@ -6,12 +6,13 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Feel Free to Click Button!")
+    title: qsTr("Project 3 - Head Unit")
 
-    signal prndSignal(int msg)
+    signal prndSignal(string msg)
 
     PRND{
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+
     }
 }
