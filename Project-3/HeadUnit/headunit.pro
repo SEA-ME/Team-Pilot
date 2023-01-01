@@ -19,7 +19,7 @@ SOURCES += \
     ../src-gen-headunit/v1/commonapi/HeadUnitSomeIPDeployment.cpp \
     ../src-gen-headunit/v1/commonapi/HeadUnitSomeIPProxy.cpp \
     ../src-gen-headunit/v1/commonapi/HeadUnitSomeIPStubAdapter.cpp \
-    canreciever.cpp
+    cantransceiver.cpp
 
 RESOURCES += qml.qrc
 INCLUDEPATH += ../src-gen-headunit/
@@ -38,7 +38,7 @@ HEADERS += \
     ambient.h \
     ina219.h \
     defs.h \
-    canreciever.h
+    cantransceiver.h
 
 LIBS += -lpigpio
 
