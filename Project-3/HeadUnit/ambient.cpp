@@ -1,9 +1,8 @@
 #include "ambient.h"
-#include <QDebug>
-#include <pigpio.h>
 
 Ambient::Ambient(QObject *parent) : QObject(parent){
     if (gpioInitialise() < 0){
+        qDebug() << "Failed GPIO Initiaialise";
         return;
     }
 
@@ -16,7 +15,6 @@ Ambient::Ambient(QObject *parent) : QObject(parent){
 }
 
 void Ambient::ambientSlot(const int &msg){
-
     qDebug() << "hello" << msg;
     if(msg == 0){
         gpioWrite(26, PI_HIGH);

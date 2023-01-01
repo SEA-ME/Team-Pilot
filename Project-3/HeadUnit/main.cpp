@@ -1,7 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "ambient.h"
-#include <QTimer>
 #include "cantransceiver.h"
 
 int main(int argc, char *argv[])
@@ -13,12 +12,15 @@ int main(int argc, char *argv[])
 
     QObject *item = engine.rootObjects().first();
     Ambient ambient;
-    QObject::connect(item, SIGNAL(prndSignal(int)),
-                     &ambient, SLOT(ambientSlot(int)));
-
     CanTransceiver canTransceiver;
     canTransceiver.initSocket("can0");
     canTransceiver.initVsomeipClient();
+
+    QObject::connect(item, SIGNAL(prndSignal(int)),
+                     &ambient, SLOT(ambientSlot(int)));
+    QObject::connect(item, SIGNAL(prndSiginal(int)),
+                     &canTransceiver, SLOT(canSlot(int)));
+
     canTransceiver.startCommunicate();
 
     return app.exec();

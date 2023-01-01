@@ -1,19 +1,31 @@
 #include "cantransceiver.h"
 
-CanTransceiver::CanTransceiver()
-{
+struct Data {
+    int hum;
+    int tmp;
+    int rpm;
+    int spd;
+    int bat;
+    int prnd;
+};
 
+CanTransceiver::CanTransceiver(QObject *parent)
+    : QObject(parent), ina219(NULL), ipcData(new struct Data),
+      canTimer(std::make_shared<QTimer>()),
+      batteryTimer(std::make_shared<QTimer>()) {
+    connect(canTimer.get(), SIGNAL(timeout()), this, SLOT(readSocket()));
+    connect(batteryTimer.get(), SIGNAL(timeout()), this, SLOT(readBattery()));
 }
 
-CanTransceiver::initSocket(const char *ifname) {
-    int sock_fd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
-    if (sock_fd < 0)
-        printf("Failed to socket create\n", sock_fd);
+void CanTransceiver::initSocket(const char *ifname) {
+    can_fd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
+    if (can_fd < 0)
+        printf("Failed to socket create\n", can_fd);
     printf("Success to socket create\n");
 
     struct ifreq ifr;
     strcpy(ifr.ifr_name, ifname);
-    int ret = ioctl(sock_fd, SIOCGIFINDEX, &ifr);
+    int ret = ioctl(can_fd, SIOCGIFINDEX, &ifr);
     if (ret < 0)
         printf("Failed to get CAN interface index\n", ret);
     printf("%sSuccess to get CAN interface index : %d%s\n", ret);
@@ -21,15 +33,13 @@ CanTransceiver::initSocket(const char *ifname) {
     struct sockaddr_can addr;
     addr.can_family = AF_CAN;
     addr.can_ifindex = ifr.ifr_ifindex;
-    ret = bind(sock_fd, (struct sockaddr *)&addr, sizeof(addr));
+    ret = bind(can_fd, (struct sockaddr *)&addr, sizeof(addr));
     if (ret < 0)
         printf("Failed to socket bind\n", ret);
     printf("Success to socket bind\n");
-
-    return sock_fd;
 }
 
-CanTransceiver::readSocket() {
+void CanTransceiver::readSocket() {
     rd_byte = read(can_fd, &frame, sizeof(frame));
     if (rd_byte < 0)
         printf("Failed to recieve CAN frame\n", rd_byte);
@@ -42,9 +52,23 @@ CanTransceiver::readSocket() {
 
     // unsigned char -> uint16_t
     rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
+
+    if (ipcData->hum != frame.data[0] || ipcData->tmp != frame.data[1]) {
+        ipcData->hum = frame.data[0];
+        ipcData->tmp = frame.data[1];
+        moonProxy->GetHUM(frame.data[0], callStatus, hum);
+        moonProxy->GetTMP(frame.data[1], callStatus, tmp);
+    }
+
+    if (ipcData->rpm != rpm_combine || ipcData->spd != frame.data[4]) {
+        ipcData->rpm = rpm_combine;
+        ipcData->spd = frame.data[4];
+        moonProxy->GetRPM(rpm_combine, callStatus, rpm);
+        moonProxy->GetSPD(frame.data[4], callStatus, spd);
+    }
 }
 
-CanTransceiver::initBattery() {
+void CanTransceiver::initBattery() {
     ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
                          BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
                          BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
@@ -55,7 +79,7 @@ CanTransceiver::initBattery() {
         ina_status = true;
 }
 
-CanTransceiver::readBattery() {
+void CanTransceiver::readBattery() {
     if (ina_status){
         if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
             /*
@@ -74,12 +98,15 @@ CanTransceiver::readBattery() {
             printf ("Battery current: %d mA\n", battery_current_mA);
             printf ("Battery charge: %.d %%\n", percent_charged);
             */
-            frame.data[5] = percent_charged;
+            if (ipcData->bat != percent_charged) {
+                ipcData->bat = percent_charged;
+                moonProxy->GetBAT(ipcData->bat, callStatus, bat);
+            }
         }
     }
 }
 
-CanTransceiver::initVsomeipClient() {
+void CanTransceiver::initVsomeipClient() {
     runtime = CommonAPI::Runtime::get();
     moonProxy = runtime->buildProxy<HeadUnitProxy>("local", "headunit");
     std::cout << "Checking availability!" << std::endl;
@@ -89,16 +116,19 @@ CanTransceiver::initVsomeipClient() {
     usleep(1000);
 }
 
-CanTransceiver::sendToVsomeipService() {
-    moonProxy->GetHUM(frame.data[0], callStatus, hum);
-    moonProxy->GetTMP(frame.data[1], callStatus, tmp);
-    moonProxy->GetRPM(rpm_combine, callStatus, rpm);
-    moonProxy->GetSPD(frame.data[4], callStatus, spd);
-    moonProxy->GetBAT(frame.data[5], callStatus, bat);
-    moonProxy->GetPRND(1, callStatus, prnd);
+void CanTransceiver::startCommunicate() {
+    initBattery();
+    canTimer->start(10);
+    batteryTimer->start(5000);
 }
 
-CanTransceiver::startCommunicate() {
-    initBattery();
+void CanTransceiver::canSlot(const int &msg) {
+    if (ipcData->prnd != msg){
+        ipcData->prnd = msg;
+        moonProxy->GetPRND(msg, callStatus, prnd);
+    }
+}
 
+CanTransceiver::~CanTransceiver() {
+    close(can_fd);
 }

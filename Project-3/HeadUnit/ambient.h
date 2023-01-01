@@ -2,6 +2,8 @@
 #define AMBIENT_H
 
 #include <QObject>
+#include <QDebug>
+#include <pigpio.h>
 
 class Ambient : public QObject
 {

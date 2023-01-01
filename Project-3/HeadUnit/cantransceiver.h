@@ -2,6 +2,7 @@
 #define CANTRANSCEIVER_H
 
 #include <QObject>
+#include <QTimer>
 #include <iostream>
 #include <string>
 #include <unistd.h>
@@ -43,22 +44,27 @@ class CanTransceiver : public QObject
     Q_OBJECT
 public:
     explicit CanTransceiver(QObject *parent = 0);
-    CanTransceiver();
+    ~CanTransceiver();
 
     // CAN func()
     int initSocket(const char *ifname);
-    void readSocket();
 
     // Battery func()
     void initBattery();
-    void readBattery();
-
     // CommonAPI vSomeIP func()
     void initVsomeipClient();
-    void sendToVsomeipService();
     void startCommunicate();
 
+public slots:
+    void readSocket();
+    void readBattery();
+    void canSlot(const int &msg);
+
 private:
+    // Timer var
+    std::shared_ptr<class QTimer> canTimer;
+    std::shared_ptr<class QTimer> batteryTimer;
+
     // CAN var
     int can_fd;
     struct can_frame frame;
@@ -86,6 +92,7 @@ private:
     HeadUnit::SPD spd;
     HeadUnit::BAT bat;
     HeadUnit::PRND prnd;
+    struct Data *ipcData;
 };
 
 #endif // CANTRANSCEIVER_H
