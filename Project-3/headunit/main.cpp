@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
     QObject::connect(item, SIGNAL(prndSignal(int)),
                      &ambient, SLOT(ambientSlot(int)));
-    QObject::connect(item, SIGNAL(prndSiginal(int)),
+    QObject::connect(item, SIGNAL(prndSignal(int)),
                      &canTransceiver, SLOT(canSlot(int)));
 
     canTransceiver.startCommunicate();

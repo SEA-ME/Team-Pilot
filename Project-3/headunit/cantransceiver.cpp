@@ -1,4 +1,22 @@
 #include "cantransceiver.h"
+#include <QTimer>
+#include <iostream>
+#include <string>
+#include <unistd.h>
+
+#include <linux/can/raw.h>
+#include <net/if.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <errno.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+#include "defs.h"
+#include "ina219.h"
 
 struct Data {
     int hum;
@@ -48,8 +66,6 @@ void CanTransceiver::readSocket() {
     else if (frame.can_dlc > CAN_MAX_DLEN)
         printf("Invalid dlc\n", -1, frame.can_dlc);
 
-    printf("0x%03X [%d] ", frame.can_id, frame.can_dlc);
-
     // unsigned char -> uint16_t
     rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
 
@@ -80,6 +96,8 @@ void CanTransceiver::initBattery() {
 }
 
 void CanTransceiver::readBattery() {
+    INA219ChargeStatus charge_status;
+    char *error = NULL;
     if (ina_status){
         if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
             /*
@@ -118,8 +136,8 @@ void CanTransceiver::initVsomeipClient() {
 
 void CanTransceiver::startCommunicate() {
     initBattery();
-    canTimer->start(10);
-    batteryTimer->start(5000);
+    canTimer->start(1);
+    batteryTimer->start(50);
 }
 
 void CanTransceiver::canSlot(const int &msg) {

@@ -23,7 +23,7 @@
 #include <sys/time.h>
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
-#include "defs.h" 
+#include "defs.h"
 #include "ina219.h" 
 
 // INA219 registers that are used by this implementation.

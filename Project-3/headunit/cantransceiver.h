@@ -2,27 +2,11 @@
 #define CANTRANSCEIVER_H
 
 #include <QObject>
-#include <QTimer>
-#include <iostream>
-#include <string>
-#include <unistd.h>
 #include <linux/can.h>
-#include <linux/can/raw.h>
-#include <net/if.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <errno.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <sys/time.h>
-#include "defs.h"
-#include "ina219.h"
-#include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/HeadUnitProxy.hpp>
 #include <v1/commonapi/HeadUnitProxyBase.hpp>
+#include <CommonAPI/CommonAPI.hpp>
+
 
 // Ina219 definition
 #define I2C_ADDR 0x42
@@ -32,7 +16,7 @@
 #define BATTERY_CAPACITY 2400
 #define MIN_CHARGING_CURRENT 10
 #define SHUNT_MILLIOHMS 100
-
+typedef struct _INA219 INA219;
 // CAN definition
 # define CAN_FRAME_MAX_LEN 8
 
@@ -47,7 +31,7 @@ public:
     ~CanTransceiver();
 
     // CAN func()
-    int initSocket(const char *ifname);
+    void initSocket(const char *ifname);
 
     // Battery func()
     void initBattery();
@@ -73,7 +57,6 @@ private:
     // Battery var
     bool ina_status;
     INA219 *ina219;
-    INA219ChargeStatus charge_status;
     int mV;
     int percent_charged;
     int battery_current_mA;
