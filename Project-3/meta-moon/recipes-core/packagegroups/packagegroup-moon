@@ -1,0 +1,8 @@
+SUMMARY = "My package group"
+
+inherit packagegroup
+
+RDPENDS_${PN} = "\
+    kernel-modules \
+    i2c-tools \
+    "
