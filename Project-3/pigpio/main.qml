@@ -2,20 +2,16 @@ import QtQuick 2.7
 import QtQuick.Window 2.2
 
 Window {
+    id: window1
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Feel Free to Click Button!")
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            Qt.quit();
-        }
-    }
+    signal prndSignal(int msg)
 
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    PRND{
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
 }

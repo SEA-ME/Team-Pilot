@@ -2,11 +2,19 @@
 #define AMBIENT_H
 
 #include <QObject>
+#include <QDebug>
+#include <pigpio.h>
 
-class Ambient
+class Ambient : public QObject
 {
+    Q_OBJECT
 public:
-    Ambient();
+    explicit Ambient(QObject *parent = 0);
+    ~Ambient();
+signals:
+
+public slots:
+    void ambientSlot(const int &msg);
 };
 
 #endif // AMBIENT_H
