@@ -1,156 +1,94 @@
 // CANClient.cpp
-#include <iostream>
-#include <string>
-#include <unistd.h>
-#include <CommonAPI/CommonAPI.hpp>
-#include <v1/commonapi/CANProxy.hpp>
-#include <v1/commonapi/CANProxyBase.hpp>
-#include <linux/can.h>
-#include <linux/can/raw.h>
-#include <net/if.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <errno.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <sys/time.h>
-#include "defs.h" 
-#include "ina219.h" 
+#include "CANClient.hpp"
 
-// Ina219 definition
-#define I2C_ADDR 0x42
-#define I2C_DEV "/dev/i2c-1"
-#define BATTERY_VOLTAGE_100_PERCENT 8260
-#define BATTERY_VOLTAGE_0_PERCENT 6000 
-#define BATTERY_CAPACITY 2400
-#define MIN_CHARGING_CURRENT 10
-#define SHUNT_MILLIOHMS 100
-
-// CAN definition
-# define CAN_FRAME_MAX_LEN 8
-
-// CommonAPI definition
-using namespace v1::commonapi;
-
-int InitSocket(const char *ifname){
-	int sock_fd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
-	if (sock_fd < 0)
-		printf("Failed to socket create\n", sock_fd);
-	printf("Success to socket create\n");
-
-	struct ifreq ifr;
-	strcpy(ifr.ifr_name, ifname);
-	int ret = ioctl(sock_fd, SIOCGIFINDEX, &ifr);
-	if (ret < 0)
-		printf("Failed to get CAN interface index\n", ret);
-	printf("%sSuccess to get CAN interface index : %d%s\n", ret);
-
-	struct sockaddr_can addr;
-	addr.can_family = AF_CAN;
-	addr.can_ifindex = ifr.ifr_ifindex;
-	ret = bind(sock_fd, (struct sockaddr *)&addr, sizeof(addr));
-	if (ret < 0)
-		printf("Failed to socket bind\n", ret);
-	printf("Success to socket bind\n");
-	
-	return sock_fd;
+CANClient::CANClient() {
+	_humValue = 0;
+	_tmpValue = 0;
+	_rpmValue = 0;
+	_spdValue = 0;
+	_batValue = 0;
 }
 
-int main(){
+CANClient::~CANClient() {}
 
-	// CommonAPI vSomeIP
-	std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<CANProxy<>> moonProxy = runtime->buildProxy<CANProxy>("local", "can");
-    std::cout << "Checking availability!" << std::endl;
-    while (!moonProxy->isAvailable())
-        usleep(10);
-    std::cout << "Available..." << std::endl;
-	usleep(1000);
-    CommonAPI::CallStatus callStatus;
+void CANClient::initVsomeipClient() {
+	runtime = CommonAPI::Runtime::get();
+  moonProxy = runtime->buildProxy<CANProxy>("local", "can");
+  std::cout << "Checking availability!" << std::endl;
+  while (!moonProxy->isAvailable())
+    std::this_thread::sleep_for(std::chrono::microseconds(10));
+}
 
-	// Compare with Franca IDL(.fidl) 
-	CAN::HUM hum;
-    CAN::TMP tmp;
-	CAN::RPM rpm;
-	CAN::SPD spd;
-	CAN::BAT bat;
-	uint16_t rpm_combine;
+void CANClient::startSubscribeHumidity() {
+	moonProxy->getHumAttribute().getValue(callStatus, _humValue);
+	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+  } else {
+		std::cout << "Got attribute humidity value: " << _humValue << std::endl;
 
-	// CAN
-    int can_fd = InitSocket("can0");
-	if (can_fd < 0)
-		return can_fd;	
-	struct can_frame frame;
-	int rd_byte;
-
-	// Battery
-	INA219 *ina219 = ina219_create (I2C_DEV, I2C_ADDR, SHUNT_MILLIOHMS,
-                     BATTERY_VOLTAGE_0_PERCENT, BATTERY_VOLTAGE_100_PERCENT,
-                     BATTERY_CAPACITY, MIN_CHARGING_CURRENT);
-	INA219ChargeStatus charge_status;
-	int mV;
-	int percent_charged;
-	int battery_current_mA;
-	int minutes;		
-	char *error = NULL;
-	bool ina_status = false;
-	if (ina219_init (ina219, &error))
-		ina_status = true;
-
-	while (true)
-	{
-		// CAN
-		rd_byte = read(can_fd, &frame, sizeof(frame));
-		if (rd_byte < 0)
-			printf("Failed to recieve CAN frame\n", rd_byte);
-		else if (rd_byte < (int)sizeof(struct can_frame))
-			printf("Incomplete CAN frame is received\n", rd_byte, rd_byte);
-		else if (frame.can_dlc > CAN_MAX_DLEN)
-			printf("Invalid dlc\n", -1, frame.can_dlc);
-
-		printf("0x%03X [%d] ",frame.can_id, frame.can_dlc);
-
-		// Battery
-		if (ina_status){
-			if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
-				switch (charge_status){
-					case INA219_FULLY_CHARGED:
-						printf("Fully charged\n");
-						break;
-					case INA219_CHARGING:
-						printf("Charging, %d minutes until fully charged\n", minutes);
-						break;
-					case INA219_DISCHARGING:
-						printf("Discharging, %d minutes left\n", minutes);
-						break;
-				}
-				printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
-    	  		printf ("Battery current: %d mA\n", battery_current_mA); 
-    	  		printf ("Battery charge: %.d %%\n", percent_charged);
-				frame.data[5] = percent_charged;
-			}
-		}
-		
-		// print frame data
-		for (int i = 0; i < frame.can_dlc; i++)
-			printf("%02X ",frame.data[i]);
-		printf("\n");
-
-		// unsigned char -> uint16_t
-		rpm_combine = frame.data[2] | uint16_t(frame.data[3]) << 8;
-
-		// send data to server
-		moonProxy->GetHUM(frame.data[0], callStatus, hum);
-		moonProxy->GetTMP(frame.data[1], callStatus, tmp);
-		moonProxy->GetRPM(rpm_combine, callStatus, rpm);
-		moonProxy->GetSPD(frame.data[4], callStatus, spd);
-		moonProxy->GetBAT(frame.data[5], callStatus, bat);
-
-    	usleep(1000);
+		moonProxy->getHumAttribute().getChangedEvent().subscribe([&](const uint8_t& humVal) {
+			std::cout << "Received change humidity message: " << humVal << std::endl;
+		});
 	}
+}
 
-    return 0;
+void CANClient::startSubscribeTemperature() {
+	moonProxy->getTmpAttribute().getValue(callStatus, _tmpValue);
+	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+  } else {
+		std::cout << "Got attribute temperature value: " << _tmpValue << std::endl;
+
+		moonProxy->getTmpAttribute().getChangedEvent().subscribe([&](const uint8_t& tmpVal) {
+			std::cout << "Received change temperature message: " << tmpVal << std::endl;
+		});
+	}
+}
+
+void CANClient::startSubscribeRPM() {
+	moonProxy->getRpmAttribute().getValue(callStatus, _rpmValue);
+	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+  } else {
+		std::cout << "Got attribute RPM value: " << _rpmValue << std::endl;
+
+		moonProxy->getRpmAttribute().getChangedEvent().subscribe([&](const uint8_t& rpmVal) {
+			std::cout << "Received change RPM message: " << rpmVal << std::endl;
+		});
+	}
+}
+
+void CANClient::startSubscribeSpeed() {
+	moonProxy->getSpdAttribute().getValue(callStatus, _spdValue);
+	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+  } else {
+		std::cout << "Got attribute speed value: " << _spdValue << std::endl;
+
+		moonProxy->getHumAttribute().getChangedEvent().subscribe([&](const uint8_t& spdVal) {
+			std::cout << "Received change speed message: " << spdVal << std::endl;
+		});
+	}
+}
+
+void CANClient::startSubscribeBattery() {
+	moonProxy->getBatAttribute().getValue(callStatus, _batValue);
+	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+    std::cout << "Remote call A failed!" << std::endl;
+  } else {
+		std::cout << "Got attribute battery value: " << _batValue << std::endl;
+
+		moonProxy->getBatAttribute().getChangedEvent().subscribe([&](const uint8_t& batVal) {
+			std::cout << "Received change battery message: " << batVal << std::endl;
+		});
+	}
+}
+
+int main() {
+	CANClient canClient;
+	canClient.initVsomeipClient();
+
+	canClient.startSubscribeHumidity();
+	canClient.startSubscribeTemperature();
+	canClient.startSubscribeRPM();
+	canClient.startSubscribeSpeed();
+	canClient.startSubscribeBattery();
+	
+	return 0;
 }

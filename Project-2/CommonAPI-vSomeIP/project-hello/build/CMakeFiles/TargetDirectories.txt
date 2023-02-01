@@ -1,0 +1,4 @@
+/root/project-can/build/CMakeFiles/HelloWorldClient.dir
+/root/project-can/build/CMakeFiles/HelloWorldService.dir
+/root/project-can/build/CMakeFiles/edit_cache.dir
+/root/project-can/build/CMakeFiles/rebuild_cache.dir
