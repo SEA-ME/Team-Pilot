@@ -12,7 +12,7 @@ VsomeData::VsomeData(QObject *parent) :
 
     std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
     moonService = std::make_shared<CANStubImpl>();
-    runtime->registerService("local", "can", moonService);
+    runtime->registerService("local", "service-sample", moonService);
     std::cout << "Successfully Registered Service!" << std::endl;
     connect(timer.get(), SIGNAL(timeout()), this, SLOT(updateFunc()));
     timer->setInterval(1000);
