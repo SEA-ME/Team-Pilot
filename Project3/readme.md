@@ -49,15 +49,10 @@ But, we use Raspberrypi. So we will use Raspberrypi extension.
 @[https://github.com/agherzan/meta-raspberrypi/tree/kirkstone](https://github.com/agherzan/meta-raspberrypi/tree/kirkstone)
 <br><br>
     
-### BitBake
-    
-### AGL
-    
+
 ### BSP
     
 board support package
-    
-maybe 
     
 ```jsx
      /home/**username**/yocto/kirkstone/poky/meta \
