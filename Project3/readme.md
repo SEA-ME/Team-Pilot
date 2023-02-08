@@ -14,49 +14,52 @@ Sensor checker / CAN / D-Bus / Dashboard.
 
 We are gonna make an Operating System to operate these whole programs.
 
-So.. we need to install CAN / D-Bus / QT in our custom recipes.\
+So.. we need to install CAN / D-Bus / QT in our custom recipes.
+<br><br><br>
 
-# 참고한 사이트들
-
-[https://github.com/jynik/ready-set-yocto](https://github.com/jynik/ready-set-yocto)
 
 # About Yocto
+<details>
+  <summary>About Yocto</summary>
+  <div markdown="1">
 
-- About Yocto
     
-    ### OS
+## OS
     
-    In Project 1
+In Project 1
     
-    We installed [2021-12-02-raspios-buster.zip](https://downloads.raspberrypi.org/raspios_oldstable_lite_armhf/images/raspios_oldstable_lite_armhf-2021-12-02/2021-12-02-raspios-buster-armhf-lite.zip) using Rasbian Imager. 
+We installed [2021-12-02-raspios-buster.zip](https://downloads.raspberrypi.org/raspios_oldstable_lite_armhf/images/raspios_oldstable_lite_armhf-2021-12-02/2021-12-02-raspios-buster-armhf-lite.zip) using Rasbian Imager. 
     
-    But in this Project. We have to install OS In sd card without using Rasbian Imager.
+But in this Project. We have to install OS In sd card without using Rasbian Imager.
+<br><br>
     
-    ### Yocto
+## Yocto
     
-    @[https://selfish-developer.com/entry/Yocto란-무엇인가](https://selfish-developer.com/entry/Yocto%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
+@[https://selfish-developer.com/entry/Yocto란-무엇인가](https://selfish-developer.com/entry/Yocto%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
     
-    To use Yocto, you must use git skillfully. Yocto automatically patches source code to new version through git.
+To use Yocto, you must use git skillfully. Yocto automatically patches source code to new version through git.
+<br><br>
     
-    ### Poky
+## Poky
     
-    also there’s lots of  extension
+also there’s lots of  extension
     
-    But, we use Raspberrypi. So we will use Raspberrypi extension.
+But, we use Raspberrypi. So we will use Raspberrypi extension.
     
-    @[https://github.com/agherzan/meta-raspberrypi/tree/kirkstone](https://github.com/agherzan/meta-raspberrypi/tree/kirkstone)
+@[https://github.com/agherzan/meta-raspberrypi/tree/kirkstone](https://github.com/agherzan/meta-raspberrypi/tree/kirkstone)
+<br><br>
     
-    ### BitBake
+### BitBake
     
-    ### AGL
+### AGL
     
-    ### BSP
+### BSP
     
-    board support package
+board support package
     
-    maybe 
+maybe 
     
-    ```jsx
+```jsx
      /home/**username**/yocto/kirkstone/poky/meta \
       /home/**username**/yocto/kirkstone/poky/meta-poky \
       /home/**username**/yocto/kirkstone/poky/meta-yocto-bsp \
@@ -65,17 +68,19 @@ So.. we need to install CAN / D-Bus / QT in our custom recipes.\
       /home/**username**/yocto/kirkstone/meta-openembedded/meta-networking \
       /home/**username**/yocto/kirkstone/meta-openembedded/meta-python \
       /home/**username**/yocto/kirkstone/meta-raspberrypi \
-    ```
+```
     
-    this will be BSP
-    
+this will be BSP
+</details>
+<br><br><br>
 
 # Make Basic OS
 
-
-    
+<details>
+  <summary>Make Basic OS</summary>
+  <div markdown="1">   
  
-    
+ <br><br><br>   
 ## 1. Install dependencies
 
 ```jsx
@@ -99,6 +104,8 @@ mkdir downloads
 ```jsx
 git clone -b kirkstone git://git.yoctoproject.org/poky.git
 ```
+
+<br>
 
 ## 4. Clone poky raspberry pi extension / dependencies of raspberry pi extension
 
@@ -507,101 +514,94 @@ I don’t know the accurate time to build, but I’m sure it will takes more tha
 So take a meal / rest / play game/ or do something.
 
 
-## 10. Write your OS in SD card.
-
-```jsx
-sudo fdisk -l
-```W
-
-```jsx
-umount /dev/sda1
-```
-
-go to the directory where os is builded, unzip the os
-
-```jsx
-sudo bzip2 -dk core-image-minimal-raspberrypi4-20221025172232.rootfs.wic.bz2
-```
-
-```jsx
-sudo dd if=core-image-minimal-raspberrypi4.wic.bz2 of=/dev/sda1
-sync
-```
-<br><br><br>
+</details>
+<br><br><br><br>
     
 
 # Write on SD card
 
-- Write on SD card
+<details>
+  <summary>Write on SD card</summary>
+  <div markdown="1">
+<br><br>  
+
+## After build, you can check your image on
+
+```jsx
+~build diercotry/tmp/deploy/images/raspberrypi4/core-image-minimal-raspberrypi4-20221221163429.rootfs.wic.bz2
+```
+<br>
+1. Move wic.bz2 file to somewhere, In my case I move it to home directory.
+
+then, unzip it
+
+```jsx
+sudo bzip2 -dk core-image-minimal-raspberrypi4-20221025172232.rootfs.wic.bz2
+```
+<br>
+2. Write on SD card
     
-    ### After build, you can check your image on
+insert sd card in USB port. Type this
+
+```jsx
+sudo fdisk -l
+```
+
+```jsx
+umount /dev/sda
+```
+
+go to the directory where you moved wic.bz2 file.
+
+Type this.
+
+```jsx
+sudo dd if=core-image-minimal-raspberrypi4-20221128122747.rootfs.wic of=/dev/sda
+sync
+```
+<br>
+3. Efect and reinsert SD card, 
     
-    ~build diercotry/tmp/deploy/images/raspberrypi4/core-image-minimal-raspberrypi4-20221221163429.rootfs.wic.bz2
-    
-    1. Move wic.bz2 file to somewhere, In my case I move it to home directory.
-    
-    then, unzip it
-    
-    ```jsx
-    sudo bzip2 -dk core-image-minimal-raspberrypi4-20221025172232.rootfs.wic.bz2
-    ```
-    
-    1. Write on SD card
-    
-    insert sd card in USB port. Type this
-    
-    ```jsx
-    sudo fdisk -l
-    ```
-    
-    ```jsx
-    umount /dev/sda
-    ```
-    
-    go to the directory where you moved wic.bz2 file.
-    
-    Type this.
-    
-    ```jsx
-    sudo dd if=core-image-minimal-raspberrypi4-20221128122747.rootfs.wic of=/dev/sda
-    sync
-    ```
-    
-    1. Efect and reinsert SD card, 
-    
-    Go to boot directory in your SDcard, and change config.txt
-    
-    ```jsx
-    #dtoverlay vc4 kms어쩌구 저쩌구 이거 주석처리하셈
-    
-    located at 
-    boot/config.txt
-    ```
-    
-    ```jsx
-    ## dtoverlay=vc4-kms-v3d
-    to
-    dtoverlay=vc4-fkms-v3d-pi4
-    ```
+Go to boot directory in your SDcard, and change config.txt
+<br>
+comment this line like this<br>
+/boot/config.txt
+```jsx
+#dtoverlay=vc4-kms-v3d
+```
+or
+
+```jsx
+## dtoverlay=vc4-kms-v3d
+to
+dtoverlay=vc4-fkms-v3d-pi4
+```
+</details>
+<br><br><br><br>
     
 
 # Add python
 
-- Add python
-    
-    If you done previous step, It would not takes more than 10minutes to build.
-    
-    1. Add [image.bb](http://image.bb) file
-    
-    ```jsx
-    cd ~/yocto/kirkstone/poky/meta/recipes-core/images
-    ```
-    
-    1. Make new [image.bb](http://image.bb) file
-    
-    ```jsx
-    core-image-python.bb
-    ```
+<details>
+  <summary>Add python</summary>
+  <div markdown="1">
+  <br><br><br>
+
+If you done previous step, It would not takes more than 10minutes to build.
+
+<br>
+1. Add [image.bb](http://image.bb) file
+
+```jsx
+cd ~/yocto/kirkstone/poky/meta/recipes-core/images
+```
+
+<br>
+2. Make new [image.bb](http://image.bb) file
+
+```jsx
+core-image-python.bb
+```
     
     - [core-image-python.bb](http://core-image-python.bb)
         
@@ -623,439 +623,500 @@ sync
         
         IMAGE_ROOTFS_SIZE ?= "8192"
         IMAGE_ROOTFS_EXTRA_SPACE:append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "", d)}"
-        ```
         
-    1. Build
+
+<br>
+3. Build
     
-    ```jsx
+    
     cd ~/yocto/kirkstone/poky
     source oe-init-build-env ../raspberrypi4
-    ```
     
-    1. Add new layer at sd card
-    
-    Same with previous step
-    
+<br>
+4. Add new layer at sd card
+ 
+Same with previous step
+<br><br><br>
+</details>
+<br><br><br>
 
-# Build QT exe (Only for example code)
+## Build QT exe (Only for example file version)
+<details>
+  <summary>Build QT exe (Only for example file version)</summary>
+  <div markdown="1">
 
-- Build QT
-    1. Download met-QT5
-    
-    ```jsx
-    cd ~/yocto/kirkstone
-    git clone -b kirkstone https://github.com/meta-qt5/meta-qt5
-    ```
-    
-    1. Add new layer at local.conf , bblayers.conf
-    
-    ```jsx
-    cd ~/yocto/kirkstone/**Projectname**/conf
-    vim local.conf
-    ```
-    
-    Add this line
-    
-    ```jsx
-    CORE_IMAGE_EXTRA_INSTALL:append = "qtbase-examples"
-    ```
-    
-    ```jsx
-    vim bblayers.conf
-    ```
-    
-    Add this line
-    
-    ```jsx
-    /home/seame-fablab/yocto/kirkstone/meta-qt5 \
-    ```
-    
-    1. Make .bbappend file
-    
-    ```jsx
-    cd ~yocto/kirkstone/poky/meta-poky
-    mkdir -p recipes-qt/qt5
-    cd recipes-qt/qt5
-    vim qtbase_%.bbappend
-    ```
-    
-    Add this line
-    
-    ```jsx
-    PACKAGECONFIG:append = " examples gles2 eglfs"
-    PACKAGECONFIG:remove = "tslib"
-    ```
-    
-    1. Build
-    
-    ```jsx
-    cd ~/yocto/kirkstone/poky
-    source oe-init-build-env ../raspberrypi4
-    bitbake core-image-minimal
-    ```
-    
-    1. Check example code
-    
-    ```jsx
-    cd /usr/share/qt5/examples/opengl/hellowindow
-    
-    ./hellowindow -platform eglfs
-    ```
-    
+1. Download met-QT5
 
-# Build Custom QT file
+```jsx
+cd ~/yocto/kirkstone
+git clone -b kirkstone https://github.com/meta-qt5/meta-qt5
+```
 
-- Build Custom Qt file
-    1. Create custom layer
-    
-    ```jsx
-    cd ~
-    ```
-    
+2. Add new layer at local.conf , bblayers.conf
 
-# QT in Rpi (add exist layer)
+```jsx
+cd ~/yocto/kirkstone/**Projectname**/conf
+vim local.conf
+```
 
-- QT in Rpi
-    
-    ```jsx
-    goto root
-    usr/share/examples/opengl/hellowindow
-    there are so many qt examples
-    
-    In my case, I use hellowindow
-    
-    ./hellowindow -platform eglfs
-    ```
-    
-    ![Screenshot from 2022-11-28 15-40-10.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c5ffc27-6a7e-48c5-892a-e9ca23cb750a/Screenshot_from_2022-11-28_15-40-10.png)
-    
-    this is original window
-    
-    ![Screenshot from 2022-11-28 15-40-18.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9e5d21a8-00cf-4c6c-ad92-70ca0de0d89c/Screenshot_from_2022-11-28_15-40-18.png)
-    
-    this is in root directory (which is in sd card)
-    
-    So, the difference is only for listnames.pro.user / listnames.exe
-    
-    location of ‘listname’ before bitbake.
-    
-    ![Screenshot from 2022-11-28 15-50-01.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7859f8af-c63a-40ee-a84c-2343cfebfc1f/Screenshot_from_2022-11-28_15-50-01.png)
-    
+Add this line
 
-# command
+local.conf
 
-- where can i get bb file?
-    
-    ```jsx
-    /yocto/kirkstone/poky/meta/recipes-core/images
-    ```
-    
-    ```jsx
-    # type this in terminal
-    
-    yocto/kirkstone/builds/raspberrypi4/tmp/work/raspberrypi4-poky-linux-gnueabi/core-image-minimal/1.0-r0/rootfs$ find . -name python3
-    ```
-    
-- how can i add bbfile?
-    
-    ```jsx
-    unsharp below
-    
-    SUMMARY = "A small image just capable of allowing a device to boot."
-    
-    IMAGE_INSTALL = "packagegroup-core-boot ${CORE_IMAGE_EXTRA_INSTALL}"
-    
-    IMAGE_LINGUAS = " "
-    
-    LICENSE = "MIT"
-    
-    inherit core-image
-    
-    IMAGE_ROOTFS_SIZE ?= "8192"
-    IMAGE_ROOTFS_EXTRA_SPACE:append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "", d)}"
-    
-    # ybelow like this 
-    # RDEPENDS_${PN}: = "python3 c++ QT "
-    # use  init script file to autoexcute something file
-    ```
-    
-- where is core-iamge.bbclass
-    
-    ```jsx
-    ~yocto/kirkstone/poky/meta/classes/core-image.bbclass
-    ```
-    
-- why the core-image-minimal doesnt work?
-    
-    ```jsx
-    excute config.txt.sb-c2dfd18a-9XwQq6
-    uncomment
-    # Enable VC4 Graphics
-    ```
-    
+```jsx
+CORE_IMAGE_EXTRA_INSTALL:append = "qtbase-examples"
+DISTRO_FEATURES:remove = "x11 wayland vulkan"
+```
 
-# Make Custom Layer
+```jsx
+vim bblayers.conf
+```
 
-- make custom layer
-    1. Activate environment, what you are planning to add. 
-    
-    In my case, I want to add my custom layer at ‘raspberrypi4’ folder
-    
-    ```jsx
-    source ~/yocto/kirkstone/poky/oe-init-build-env ~/yocto/kirkstone/builds/raspberrypi4
-    ```
-    
-    1. go to directory address where you want to make custom layer
-    
-    In my case, I want to make directory at home/yocto/kirkstone
-    
-    `bitbake-layers create-layer meta-<layer_name>`
-    
-    ```jsx
-    cd ~/yocto/kirkstone
-    bitbake-layers create-layer meta-mylayer
-    ```
-    
-    1. Add new layer
-    
-    ```jsx
-    cd ~/yocto/kirkstone/builds/raspberrypi4/conf/bblayers.conf
-    vim bbalyers.conf
-    ```
-    
-    add this line
-    
-    ```jsx
-    /home/seame-fablab/yocto/kirkstone/meta-mylayer \
-    ```
-    
-    1. Write a new image recipe
-    
-    ```jsx
-    cd ~/yocto/kirkstone//meta-mylayer
-    mkdir -p recipes-core/images
-    cd recipes-core/images
-    ```
-    
-    ```jsx
-    vim basic-qt5-image.bb
-    ```
-    
-    ```jsx
-    SUMMARY = "A basic Qt5 dev image"
-    
-    require recipes-core/images/core-image-minimal.bb 
-    
-    QT_BASE = " \
-        qtbase \
-        qtbase-dev \
-        qtbase-mkspecs \
-        qtbase-plugins \
-        qtbase-tools \
-    "
-     
-    QT_PKGS = " \
-        qt3d \
-        qt3d-dev \
-        qt3d-mkspecs \
-        qtcharts \
-        qtcharts-dev \
-        qtcharts-mkspecs \
-        qtconnectivity-dev \
-        qtconnectivity-mkspecs \
-        qtquickcontrols2 \
-        qtquickcontrols2-dev \
-        qtquickcontrols2-mkspecs \
-        qtdeclarative \
-        qtdeclarative-dev \
-        qtdeclarative-mkspecs \
-        qtgraphicaleffects \
-        qtgraphicaleffects-dev \
-    "
-     
-    IMAGE_INSTALL += " \
-        ${QT_BASE} \
-        ${QT_PKGS} \
-    "
-     
-    export IMAGE_BASENAME = "basic-qt5-image"
-    ```
-    
-    1. Write additional package recipe
-    
-    ```jsx
-    cd ~/yocto/kirkstone/meta-mylayer/recipes-example/example
-    mv example_0.1.bb qtbase_git.bbappend #change name from example_0.1 to qtbase
-    vim qtbase_git.bbappend
-    ```
-    
-    Edit bbappend to this:
-    
-    ```jsx
-    SUMMARY = "bitbake-layers recipe"
-    DESCRIPTION = "Recipe created by bitbake-layers"
-    LICENSE = "MIT"
-     
-    PACKAGECONFIG_append = " eglfs fontconfig gles2"
-    DEPENDS += "userland"
-    ```
-    
-    1. Build
-    
-    ```jsx
-    cd ~/yocto/kirkstone/builds/raspberrypi4
-    source oe-init-build-env
-    bitbake basic-qt5-image
-    ```
-    
-    # Build SDK
-    
-    1. Edit basic-qt5-image.bb
-    
-    ```jsx
-    cd ~/yocto/kirkstone/meta-mylayer/recipes-core/image
-    vim basic-qt5-image.bb
-    ```
-    
-    Add this line top of file:
-    
-    ```jsx
-    inherit populate_sdk populate_sdk_qt5
-    ```
-    
-    1. Edit local.config
-    
-    ```jsx
-    cd ~/yocto/kirkstone/builds/raspberrypi4/conf
-    vim local.conf
-    ```
-    
-    Add this line:
-    
-    ```jsx
-    DISTRO_FEATURES:remove = "x11 wayland vulkan"
-    ```
-    
-    1. Build
-    
-    ```jsx
-    cd ~/yocto/kirkstone/builds/raspberrypi4
-    source oe-init-build-env
-    bitbake basic-qt5-image
-    bitbake basic-qt5-image -c populate_sdk
-    ```
-    
+Add this line
 
-# Encountered Error
+bblayers.conf
 
-- Errors
-    - Error message - `No space left on device ENOSPC`
-        
-        ```jsx
-        seame-fablab@seamefablab-Precision-7550:~/yocto/kirkstone/builds/rpi$ bitbake core-image-minimal
-        Traceback (most recent call last):
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/bin/bitbake", line 37, in <module>
-            sys.exit(bitbake_main(BitBakeConfigParameters(sys.argv),
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/main.py", line 378, in bitbake_main
-            return ui_module.main(server_connection.connection, server_connection.events,
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/ui/knotty.py", line 415, in main
-            params.updateToServer(server, os.environ.copy())
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/cookerdata.py", line 75, in updateToServer
-            raise Exception("Unable to update the server configuration with local parameters: %s" % error)
-        Exception: Unable to update the server configuration with local parameters: Traceback (most recent call last):
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/command.py", line 90, in runCommand
-            result = command_method(self, commandline)
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/command.py", line 286, in updateConfig
-            command.cooker.updateConfigOpts(options, environment, cmdline)
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/cooker.py", line 535, in updateConfigOpts
-            self.reset()
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/cooker.py", line 1774, in reset
-            self.initConfigurationData()
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/cooker.py", line 404, in initConfigurationData
-            self.add_filewatch(mc.getVar("__base_depends", False), self.configwatcher)
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/bb/cooker.py", line 313, in add_filewatch
-            watcher.add_watch(f, self.watchmask, quiet=False)
-          File "/home/seame-fablab/yocto/kirkstone/poky/bitbake/lib/pyinotify.py", line 1888, in add_watch
-            raise WatchManagerError(err, ret_)
-        pyinotify.WatchManagerError: add_watch: cannot watch /home/seame-fablab/yocto/kirkstone/builds/rpi/conf WD=-1, Errno=No space left on device (ENOSPC)
-        ```
-        
-        there was planty of spaces in laptop.
-        
-        so error was caused from `max_user_watches`
-        
-        It means the number of max directories that can laptop checks about the changes.
-        
-        you can check the number of max_user_watches using this command
-        
-        ```jsx
-        ysctl -n fs.inotify.max_user_watches
-        ```
-        
-        - solution
-            
-            This is because you need more max_user_watches. Type below to enhace your max_user_watches
-            
-            ```jsx
-            sudo sysctl fs.inotify.max_user_watches=654622
-            ```
-            
-    - Error message - `Set a MACHINE`
-        
-        ```jsx
-        ERROR:  OE-core's config sanity checker detected a potential misconfiguration.
-            Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
-            Following is the list of potential problems / advisories:
-        
-            Please set a MACHINE in your local.conf or environment
-        
-        or
-        
-        ERROR: ParseError at /home/seame-fablab/yocto/kirkstone/builds/rpi/conf/local.conf:39: unparsed line: 'MACHINE = raspberrypi4'
-        ```
-        
-        - solution
-            
-            ```jsx
-            #add MACHINE local.conf
-            MACHINE = "raspberrypi4"
-            
-            ```
-            
-- Building OS in Poky
-    
-    input
-    
-    ```jsx
-    bitbake-layers -h
-    ```
-    
-    output
-    
-    ```jsx
-    NOTE: Starting bitbake server...
-    ERROR: No space left on device or exceeds fs.inotify.max_user_watches?
-    ERROR: To check max_user_watches: sysctl -n fs.inotify.max_user_watches.
-    ERROR: To modify max_user_watches: sysctl -n -w fs.inotify.max_user_watches=<value>.
-    ERROR: Root privilege is required to modify max_user_watches.
-    ```
-    
-- OE-Core Error
-    
-    ```jsx
-    ERROR:  OE-core's config sanity checker detected a potential misconfiguration.
-        Either fix the cause of this error or at your own risk disable the checker (see sanity.conf).
-        Following is the list of potential problems / advisories:
-    
-        DL_DIR uses ~ but Bitbake will not expand this, use an absolute path or variables.
-    ```
-    
-    go to build directory
-    
-    In my case, I set machine for rpi so I moved to  `~/yocto/kirkstone/builds/rpi`
-    
-    open terminal in that directory and type this
-    
-    ```jsx
-    touch conf/sanity.conf
-    ```
+```jsx
+/home/seame-fablab/yocto/kirkstone/meta-qt5 \
+```
+<br>
+3. Make .bbappend file
+
+```jsx
+cd ~yocto/kirkstone/poky/meta-poky
+mkdir -p recipes-qt/qt5
+cd recipes-qt/qt5
+vim qtbase_%.bbappend
+```
+
+Add this line
+
+```jsx
+PACKAGECONFIG:append = " examples gles2 eglfs"
+PACKAGECONFIG:remove = "tslib"
+```
+<br>
+4. Build
+
+```jsx
+cd ~/yocto/kirkstone/poky
+source oe-init-build-env ../raspberrypi4
+bitbake -c cleanall core-image-minimal
+bitbake core-image-minimal
+```
+<br>
+5. Check setting, Check example code
+
+5-1
+
+Make sure chage below line located in boot/config.txt in your custom sdcard
+
+```jsx
+## dtoverlay=vc4-kms-v3d
+to
+dtoverlay=vc4-fkms-v3d-pi4
+```
+
+5-2
+
+Simply you can find example code in root folder
+
+Go to root, and search where hellowindow direcotry is. In my case ‘usr/share/examples/opengl/hellowindow’
+<br>
+<br><br>
+6.
+Boot Raspberrypi4, Operate sample code
+
+`Raspberryp4` 
+
+```jsx
+cd /usr/share/examples/opengl/hellowindow
+
+./hellowindow -platform eglfs
+```
+
+</details>
+<br><br><br>
+
+## Build QT exe (Add  custom QT file version)
+<details>
+  <summary>Build QT exe (Add custom QT file version)</summary>
+  <div markdown="1">
+<br>
+1. Create custom layer
+
+```jsx
+cd ~/yocto/kirkstone/poky
+source oe-init-build-env ../raspberrypi4
+cd ..
+bitbake-layers create-layer meta-myqt
+```
+<br>
+2. Add new layer
+
+```jsx
+cd ~/yocto/kirkstone/poky/projectname/conf
+vim bblayers.conf
+```
+
+Add following line:
+
+```jsx
+/home/seame-fablab/yocto/kirkstone/meta-myqt \
+```
+<br>
+3. Write a new image recipe
+
+```jsx
+cd ~/yocto/poky/build/meta-myqt
+mkdir -p recipes-core/images
+cd recipes-core/images
+vim basic-qt5-image.bb
+```
+
+add following line
+
+```jsx
+SUMMARY = "A basic Qt5 dev image"
+
+require recipes-core/images/core-image-minimal.bb 
+
+QT_BASE = " \
+    qtbase \
+    qtbase-dev \
+    qtbase-mkspecs \
+    qtbase-plugins \
+    qtbase-tools \
+"
+ 
+QT_PKGS = " \
+    qt3d \
+    qt3d-dev \
+    qt3d-mkspecs \
+    qtcharts \
+    qtcharts-dev \
+    qtcharts-mkspecs \
+    qtconnectivity-dev \
+    qtconnectivity-mkspecs \
+    qtquickcontrols2 \
+    qtquickcontrols2-dev \
+    qtquickcontrols2-mkspecs \
+    qtdeclarative \
+    qtdeclarative-dev \
+    qtdeclarative-mkspecs \
+    qtgraphicaleffects \
+    qtgraphicaleffects-dev \
+"
+ 
+IMAGE_INSTALL += " \
+    ${QT_BASE} \
+    ${QT_PKGS} \
+"
+ 
+export IMAGE_BASENAME = "basic-qt5-image"
+```
+<br>
+4. Write additional package recipe
+
+```jsx
+cd ~/yocto/kirkstone/meta-myqt/recipes-example/example
+mv example_0.1.bb qtbase_git.bbappend
+vim qtbase_git.bbappend
+```
+
+Edit file to following line:
+
+```jsx
+SUMMARY = "bitbake-layers recipe"
+DESCRIPTION = "Recipe created by bitbake-layers"
+LICENSE = "MIT"
+ 
+PACKAGECONFIG:append = " eglfs fontconfig gles2"
+DEPENDS += "userland"
+```
+<br>
+5. Build
+
+```jsx
+cd ~/yocto/kirkstone/poky
+source oe-init-build-env ../raspberrypi4
+bitbake -c cleanall core-image-minimal
+bitbake core-image-minimal
+bitbake basic-qt5-image
+bitbake basic-qt5-image -c populate_sdk
+```
+<br>
+6. Install SDK
+
+Check SDK directory at
+
+```jsx
+yocto/kirkstone/projectname/tmp/deploy/sdk
+```
+<br>
+7. Setup QT
+
+[Adding Kits](https://doc.qt.io/qtcreator/creator-targets.html)
+
+refer this to add kit.
+
+tools → Options
+
+(If there’s no Options, Tools → external →configure)
+
+compilers: 
+
+/opt/poky/4.0.6/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux/arm-poky-linux-g++
+
+debuggers:
+
+/opt/poky/4.0.6/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux/arm-poky-linux-gdb
+
+CMake:64-pokysdk-linux/usr/bin/cmake
+
+QtVersion:
+
+/opt/poky/4.0.6/sysroots/x86_64-pokysdk-linux/usr/bin/qmake
+<br><br><br>
+8. Move it to SD card
+
+```jsx
+sudo cp untitled /media/seame-fablab/root/usr
+```
+
+</details>
+<br><br><br>
+
+## Auto Login
+<br>
+<details>
+  <summary>Auto Login</summary>
+  <div markdown="1">
+local.conf
+
+```
+IMAGE_FSTYPES = "rpi-sdimg"
+
+DISTRO_FEATURES:append = " systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_initscripts = ""
+```
+
+recipe_what_you_gonna_build.bb
+
+```jsx
+**Type_var_name** ?= " \
+    ${IMAGE_ROOTFS}${systemd_system_unitdir}/serial-getty@.service \
+    ${IMAGE_ROOTFS}${systemd_system_unitdir}/getty@.service \
+"
+
+local_autologin () {
+    sed -i -e 's/^\(ExecStart *=.*getty \)/\1--autologin root /' ${**Type_var_name**}
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "local_autologin; "
+```
+
+</details>
+
+<br><br><br>
+
+## Auto start program after loading
+<br>
+<details>
+  <summary>Auto start program after loading</summary>
+  <div markdown="1">
+<br><br>
+recipe_what_you_gonna_build.bb
+
+```jsx
+IMAGE_INSTALL:append = " \
+    qt5-env \
+```
+
+add this two bbfile to somewhere
+
+qt5-env.bb
+
+```jsx
+SUMMARY = "Add Qt5 bin dir to PATH"
+
+LICENSE = "CLOSED"
+
+SRC_URI = "file://qt5-env.sh"
+
+PR = "r1"
+
+S = "${WORKDIR}"
+
+do_install() {
+    install -d ${D}${sysconfdir}/profile.d
+    install -m 0755 qt5-env.sh ${D}${sysconfdir}/profile.d
+}
+
+FILES_${PN} = "${sysconfdir}"
+```
+
+qt5-env.sh
+
+```jsx
+#!/bin/sh
+
+# export QT_LOGGING_RULES=qt.qpa.*=true # Optional for logging
+#export QT_QPA_EGLFS_KMS_CONFIG=/etc/kms.conf
+export QT_QPA_EGLFS_INTEGRATION=kms
+# export QT_QPA_EGLFS_INTEGRATION=eglfs_kms # kms doesn't work on boot2qt but eglfs_kms
+export QT_QPA_PLATFORM=eglfs
+export QT_QPA_EGLFS_KMS_ATOMIC=1
+export XDG_RUNTIME_DIR=/run/user/0
+
+#ip link set can0 up type an birtare 5000
+#cd usr/bin
+#simple
+# or 
+/usr/bin/colidingmice
+**# this can be a name of auto start program**
+```
+
+</details>
+<br><br><br>
+
+## Change boot logo
+
+<details>
+  <summary>Change boot logo</summary>
+  <div markdown="1">
+  refer this <br>
+https://github.com/hamzamac/meta-splash](https://github.com/hamzamac/meta-splash
+</details>
+
+<br><br><br>
+### It is final!
+## Dash board on Yocto!
+
+<details>
+  <summary>Dashboard on Yocto!</summary>
+  <div markdown="1">
+In the second project, I designed Dasboard using QT.<br>
+Now we installed all the requirements.<br>
+We can add Dashboard to our own OS!<br>
+Download this QT file,
+<a href="https://github.com/jun-yub-kim/SEA-ME/tree/master/Project2">Dashbaord_QT_file</a>
+<br>and make custom .bb file to append this.
+<br><br>
+<img src="image/dashboard_file.png" width="600" height="300">
+<br>add dashboard like this.<br>
+<img src="image/dashboard_bb.png" width="600" height="300">
+
+
+make dashboard.bbfile
+
+`dashboard.bb`
+
+```jsx
+DESCRIPTION = "QT application"
+
+LICENSE = "CLOSED"
+inherit qmake5
+DEPENDS = " qtbase qtquickcontrols2"
+
+  
+SRC_URI += "file://dashboard.pro.user \
+            file://qrc_dashboard.cpp \
+            file://dashboard.pro \
+            file://dashboard.qrc \
+            file://images/fuel-icon.png \
+            file://images/temperature-icon.png \
+            file://qml/dashboard.qml \
+            file://qml/DashboardGaugeStyle.qml \
+            file://qml/IconGaugeStyle.qml \
+            file://qml/TachometerStyle.qml \
+            file://qml/TurnIndicator.qml \
+            file://qml/ValueSource.qml \
+            file://fonts/DejaVuSans.ttf \              
+            file://main.cpp"
+S = "${WORKDIR}"
+
+do_configure() {
+    qmake ${S}/dashboard.pro
+}
+
+do_install(){
+    install -d ${D}${bindir}
+    install -m 0755 dashboard ${D}${bindir}
+}
+```
+
+append it to your bitbake file
+
+In my case, I add it to my custom bb, basic-qt5-image.bb
+
+`basic.bb`
+
+```jsx
+SUMMARY = "A basic Qt5 dev image"
+
+require recipes-core/images/core-image-minimal.bb 
+
+IMAGE_FEATURES += "splash"
+
+IMAGE_INSTALL:append = " \
+    dashboard \
+    qt5-env \
+    psplash \
+"
+
+QT_BASE = " \
+    qtbase \
+    qtbase-dev \
+    qtbase-mkspecs \
+    qtbase-plugins \
+    qtbase-tools \
+"
+
+ 
+QT_PKGS = " \
+    qt3d \
+    qt3d-dev \
+    qt3d-mkspecs \
+    qtcharts \
+    qtcharts-dev \
+    qtcharts-mkspecs \
+    qtconnectivity-dev \
+    qtconnectivity-mkspecs \
+    qtquickcontrols \
+    qtquickcontrols2 \
+    qtquickcontrols2-dev \
+    qtquickcontrols2-mkspecs \
+    qtdeclarative \
+    qtdeclarative-dev \
+    qtdeclarative-mkspecs \
+    qtgraphicaleffects \
+    qtgraphicaleffects-dev \
+    qtx11extras \
+    qtquickcontrols \
+"
+ 
+IMAGE_INSTALL += " \
+    ${QT_BASE} \
+    ${QT_PKGS} \
+"
+
+Auto_start ?= " \
+    ${IMAGE_ROOTFS}${systemd_system_unitdir}/serial-getty@.service \
+    ${IMAGE_ROOTFS}${systemd_system_unitdir}/getty@.service \
+"
+
+local_autologin () {
+    sed -i -e 's/^\(ExecStart *=.*getty \)/\1--autologin root /' ${Auto_start}
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "local_autologin; "
+ 
+export IMAGE_BASENAME = "basic-qt5-image"
+```
+<br>
+Finally we are done.<br>
+Build it!<br>Eject it!<br>Run it!
+</details>
