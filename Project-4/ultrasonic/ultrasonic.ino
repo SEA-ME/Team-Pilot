@@ -136,7 +136,8 @@ void loop () {
       Serial.print(" ");
     }
     Serial.println();
-  } else {
+  }
+  else {
     Serial.println("Fail send data");
   }
   delay(100); // send data per 100ms
