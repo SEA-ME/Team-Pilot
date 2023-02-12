@@ -1,8 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-//#include "canclient.h"
 #include "beep.h"
 #include "ambient.h"
+#include "canclient.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QObject *item = engine.rootObjects().first();
     QObject *childObj = item->findChild<QObject *>("headunitObj");
 
-//    CANClient canClient;
+    CANClient canClient;
 //    canClient.initVsomeipClient();
     Beep beep;
     Ambient ambient;

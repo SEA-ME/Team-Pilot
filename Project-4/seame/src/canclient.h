@@ -2,6 +2,8 @@
 #define CANCLIENT_H
 
 #include <QObject>
+#include <iostream>
+#include <string>
 #include <thread>
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/SEAMEProxy.hpp>
@@ -17,17 +19,23 @@ public:
     ~CANClient();
 
     void initVsomeipClient();
+    void initGetValue();
+    void subscribeValue();
+    void startCommunication();
+
     void getHumidity();
     void getTemperature();
     void getRPM();
     void getSpeed();
-    void getBatter();
+    void getBattery();
+    void getUltraSonic();
 
     void setHumidity();
     void setTemperature();
     void setRPM();
     void setSpeed();
-    void setBatter();
+    void setBattery();
+    void setUltraSonic();
 
 private:
     std::shared_ptr<CommonAPI::Runtime> _runtime;
@@ -39,6 +47,7 @@ private:
     uint16_t _rpmValue;
     uint8_t  _spdValue;
     uint8_t  _batValue;
+    uint8_t  _ultrasonicValue;
 };
 
 #endif // CANCLIENT_H
