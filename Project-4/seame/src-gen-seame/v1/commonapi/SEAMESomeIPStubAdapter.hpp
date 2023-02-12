@@ -248,42 +248,42 @@ public:
         // Provided events/fields
         if (_stub->hasElement(0)) {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(UNDEFINED_EVENTGROUP_ID));
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(0));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x80f2), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_FIELD, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
             fireHumAttributeChanged(std::dynamic_pointer_cast< ::v1::commonapi::SEAMEStub>(_stub)->getHumAttribute(itsClient));
         }
 
         if (_stub->hasElement(1)) {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(UNDEFINED_EVENTGROUP_ID));
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(1));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x80f3), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_FIELD, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
             fireTmpAttributeChanged(std::dynamic_pointer_cast< ::v1::commonapi::SEAMEStub>(_stub)->getTmpAttribute(itsClient));
         }
 
         if (_stub->hasElement(2)) {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(UNDEFINED_EVENTGROUP_ID));
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(2));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x80f4), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_FIELD, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
             fireRpmAttributeChanged(std::dynamic_pointer_cast< ::v1::commonapi::SEAMEStub>(_stub)->getRpmAttribute(itsClient));
         }
 
         if (_stub->hasElement(3)) {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(UNDEFINED_EVENTGROUP_ID));
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(3));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x80f5), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_FIELD, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
             fireSpdAttributeChanged(std::dynamic_pointer_cast< ::v1::commonapi::SEAMEStub>(_stub)->getSpdAttribute(itsClient));
         }
 
         if (_stub->hasElement(4)) {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(UNDEFINED_EVENTGROUP_ID));
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(4));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x80f6), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_FIELD, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
             fireBatAttributeChanged(std::dynamic_pointer_cast< ::v1::commonapi::SEAMEStub>(_stub)->getBatAttribute(itsClient));
         }
 
         if (_stub->hasElement(5)) {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(UNDEFINED_EVENTGROUP_ID));
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(5));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x80f7), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_FIELD, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
             fireUltrasonicAttributeChanged(std::dynamic_pointer_cast< ::v1::commonapi::SEAMEStub>(_stub)->getUltrasonicAttribute(itsClient));
         }
