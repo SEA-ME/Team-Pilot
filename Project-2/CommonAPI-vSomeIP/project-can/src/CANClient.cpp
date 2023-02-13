@@ -7,9 +7,12 @@ CANClient::CANClient() {
 	_rpmValue = 0;
 	_spdValue = 0;
 	_batValue = 0;
+	std::cout << "success init can client" << std::endl;
 }
 
-CANClient::~CANClient() {}
+CANClient::~CANClient() {
+	std::cout << "close can client" << std::endl;
+}
 
 void CANClient::initVsomeipClient() {
 	runtime = CommonAPI::Runtime::get();
@@ -89,6 +92,11 @@ int main() {
 	canClient.startSubscribeRPM();
 	canClient.startSubscribeSpeed();
 	canClient.startSubscribeBattery();
+
+	while (true) {
+		std::cout << "Waiting data ... " << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(10));
+	}
 	
 	return 0;
 }

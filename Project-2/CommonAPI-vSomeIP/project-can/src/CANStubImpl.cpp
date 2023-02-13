@@ -44,9 +44,11 @@ void CANStubImpl::spdPublisher(uint8_t  canSpd) {
 }
 
 void CANStubImpl::batPublisher(uint8_t  canBat) {
-  if (_bat != canBat) {
-    _bat = canBat;
-    setBatAttribute(_bat);
-    std::cout <<  "New CAN Battery Data  = " << _bat << "!" << std::endl;
-  }
+  // if (_bat != canBat) {
+  //   _bat = canBat;
+  //   setBatAttribute(_bat);
+  //   std::cout <<  "New CAN Battery Data  = " << _bat << "!" << std::endl;
+  // }
+  _bat = canBat;
+  setBatAttribute(canBat);
 }
