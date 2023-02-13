@@ -101,10 +101,10 @@ public:
         return delegate_->getBatAttribute();
     }
     /**
-     * Returns the wrapper class that provides access to the attribute ultrasonic.
+     * Returns the wrapper class that provides access to the attribute dis.
      */
-    virtual UltrasonicAttribute& getUltrasonicAttribute() {
-        return delegate_->getUltrasonicAttribute();
+    virtual DisAttribute& getDisAttribute() {
+        return delegate_->getDisAttribute();
     }
 
 
@@ -212,17 +212,17 @@ namespace SEAMEExtensions {
     };
 
     template <template <typename > class _ExtensionType>
-    class UltrasonicAttributeExtension {
+    class DisAttributeExtension {
      public:
-        typedef _ExtensionType< SEAMEProxyBase::UltrasonicAttribute> extension_type;
+        typedef _ExtensionType< SEAMEProxyBase::DisAttribute> extension_type;
     
-        static_assert(std::is_base_of<typename CommonAPI::AttributeExtension< SEAMEProxyBase::UltrasonicAttribute>, extension_type>::value,
+        static_assert(std::is_base_of<typename CommonAPI::AttributeExtension< SEAMEProxyBase::DisAttribute>, extension_type>::value,
                       "Not CommonAPI Attribute Extension!");
     
-        UltrasonicAttributeExtension(SEAMEProxyBase& proxy): attributeExtension_(proxy.getUltrasonicAttribute()) {
+        DisAttributeExtension(SEAMEProxyBase& proxy): attributeExtension_(proxy.getDisAttribute()) {
         }
     
-        inline extension_type& getUltrasonicAttributeExtension() {
+        inline extension_type& getDisAttributeExtension() {
             return attributeExtension_;
         }
     
@@ -290,7 +290,7 @@ struct DefaultAttributeProxyHelper< ::v1::commonapi::SEAMEProxy,
             ::v1::commonapi::SEAMEExtensions::RpmAttributeExtension<_AttributeExtension>, 
             ::v1::commonapi::SEAMEExtensions::SpdAttributeExtension<_AttributeExtension>, 
             ::v1::commonapi::SEAMEExtensions::BatAttributeExtension<_AttributeExtension>, 
-            ::v1::commonapi::SEAMEExtensions::UltrasonicAttributeExtension<_AttributeExtension>
+            ::v1::commonapi::SEAMEExtensions::DisAttributeExtension<_AttributeExtension>
     > class_t;
 };
 }

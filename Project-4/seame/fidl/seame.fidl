@@ -8,5 +8,5 @@ interface SEAME {
   attribute UInt16 rpm
   attribute UInt8  spd
   attribute UInt8  bat
-  attribute UInt8  ultrasonic
+  attribute UInt8  dis
 }

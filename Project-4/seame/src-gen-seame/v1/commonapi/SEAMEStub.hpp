@@ -56,8 +56,8 @@ class SEAMEStubAdapter
     virtual void fireSpdAttributeChanged(const uint8_t &spd) = 0;
     ///Notifies all remote listeners about a change of value of the attribute bat.
     virtual void fireBatAttributeChanged(const uint8_t &bat) = 0;
-    ///Notifies all remote listeners about a change of value of the attribute ultrasonic.
-    virtual void fireUltrasonicAttributeChanged(const uint8_t &ultrasonic) = 0;
+    ///Notifies all remote listeners about a change of value of the attribute dis.
+    virtual void fireDisAttributeChanged(const uint8_t &dis) = 0;
 
 
     virtual void deactivateManagedInstances() = 0;
@@ -97,11 +97,11 @@ class SEAMEStubAdapter
             batMutex_.unlock();
         }
     }
-    void lockUltrasonicAttribute(bool _lockAccess) {
+    void lockDisAttribute(bool _lockAccess) {
         if (_lockAccess) {
-            ultrasonicMutex_.lock();
+            disMutex_.lock();
         } else {
-            ultrasonicMutex_.unlock();
+            disMutex_.unlock();
         }
     }
 
@@ -115,7 +115,7 @@ protected:
     std::recursive_mutex rpmMutex_;
     std::recursive_mutex spdMutex_;
     std::recursive_mutex batMutex_;
-    std::recursive_mutex ultrasonicMutex_;
+    std::recursive_mutex disMutex_;
 
 };
 
@@ -156,10 +156,10 @@ public:
     virtual bool onRemoteSetBatAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
     /// Action callback for remote set requests on the attribute bat
     virtual void onRemoteBatAttributeChanged() = 0;
-    /// Verification callback for remote set requests on the attribute ultrasonic
-    virtual bool onRemoteSetUltrasonicAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
-    /// Action callback for remote set requests on the attribute ultrasonic
-    virtual void onRemoteUltrasonicAttributeChanged() = 0;
+    /// Verification callback for remote set requests on the attribute dis
+    virtual bool onRemoteSetDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
+    /// Action callback for remote set requests on the attribute dis
+    virtual void onRemoteDisAttributeChanged() = 0;
 };
 
 /**
@@ -245,18 +245,18 @@ public:
         if (stubAdapter)
             stubAdapter->lockBatAttribute(_lockAccess);
     }
-    /// Provides getter access to the attribute ultrasonic
-    virtual const uint8_t &getUltrasonicAttribute(const std::shared_ptr<CommonAPI::ClientId> _client) = 0;
+    /// Provides getter access to the attribute dis
+    virtual const uint8_t &getDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client) = 0;
     /// sets attribute with the given value and propagates it to the adapter
-    virtual void fireUltrasonicAttributeChanged(uint8_t _value) {
+    virtual void fireDisAttributeChanged(uint8_t _value) {
     auto stubAdapter = CommonAPI::Stub<SEAMEStubAdapter, SEAMEStubRemoteEvent>::stubAdapter_.lock();
     if (stubAdapter)
-        stubAdapter->fireUltrasonicAttributeChanged(_value);
+        stubAdapter->fireDisAttributeChanged(_value);
     }
-    void lockUltrasonicAttribute(bool _lockAccess) {
+    void lockDisAttribute(bool _lockAccess) {
         auto stubAdapter = CommonAPI::Stub<SEAMEStubAdapter, SEAMEStubRemoteEvent>::stubAdapter_.lock();
         if (stubAdapter)
-            stubAdapter->lockUltrasonicAttribute(_lockAccess);
+            stubAdapter->lockDisAttribute(_lockAccess);
     }
 
 

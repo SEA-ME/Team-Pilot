@@ -8,7 +8,7 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.SEAME {
     SomeIpGetterID = 3000
     SomeIpSetterID = 3001
     SomeIpNotifierID = 33010
-    SomeIpNotifierEventGroups = 33010
+    SomeIpEventGroups = { 0 }
 
     SomeIpAttributeReliable = true
   }
@@ -16,7 +16,7 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.SEAME {
     SomeIpGetterID = 3002
     SomeIpSetterID = 3003
     SomeIpNotifierID = 33011
-    SomeIpNotifierEventGroups = 33011 
+    SomeIpEventGroups = { 1 }
 
     SomeIpAttributeReliable = true
   }
@@ -24,7 +24,7 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.SEAME {
     SomeIpGetterID = 3004
     SomeIpSetterID = 3005
     SomeIpNotifierID = 33012
-    SomeIpNotifierEventGroups = 33012
+    SomeIpEventGroups = { 2 }
 
     SomeIpAttributeReliable = true
   }
@@ -32,7 +32,7 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.SEAME {
     SomeIpGetterID = 3006
     SomeIpSetterID = 3007
     SomeIpNotifierID = 33013
-    SomeIpNotifierEventGroups = 33013 
+    SomeIpEventGroups = { 3 }
 
     SomeIpAttributeReliable = true
   }
@@ -40,21 +40,21 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.SEAME {
     SomeIpGetterID = 3008
     SomeIpSetterID = 3009
     SomeIpNotifierID = 33014
-    SomeIpNotifierEventGroups = 33014
+    SomeIpEventGroups = { 4 }
 
     SomeIpAttributeReliable = true
   }
-  attribute ultrasonic {
+  attribute dis {
     SomeIpGetterID = 3010
     SomeIpSetterID = 3011
     SomeIpNotifierID = 33015
-    SomeIpNotifierEventGroups = 33015
+    SomeIpEventGroups = { 5 }
 
     SomeIpAttributeReliable = true
   }
 }
 
-define org.genivi.commonapi.someip.deployment for provider as MoonService {
+define org.genivi.commonapi.someip.deployment for provider MoonService {
   instance commonapi.SEAME {
     InstanceId = "seame"
     SomeIpInstanceID = 22136

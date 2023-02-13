@@ -145,22 +145,22 @@ public:
         (void)_client;
         setBatAttribute(_value);
     }
-    COMMONAPI_EXPORT virtual const uint8_t &getUltrasonicAttribute() {
-        return ultrasonicAttributeValue_;
+    COMMONAPI_EXPORT virtual const uint8_t &getDisAttribute() {
+        return disAttributeValue_;
     }
-    COMMONAPI_EXPORT virtual const uint8_t &getUltrasonicAttribute(const std::shared_ptr<CommonAPI::ClientId> _client) {
+    COMMONAPI_EXPORT virtual const uint8_t &getDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client) {
         (void)_client;
-        return getUltrasonicAttribute();
+        return getDisAttribute();
     }
-    COMMONAPI_EXPORT virtual void setUltrasonicAttribute(uint8_t _value) {
-        const bool valueChanged = trySetUltrasonicAttribute(std::move(_value));
+    COMMONAPI_EXPORT virtual void setDisAttribute(uint8_t _value) {
+        const bool valueChanged = trySetDisAttribute(std::move(_value));
         if (valueChanged) {
-            fireUltrasonicAttributeChanged(ultrasonicAttributeValue_);
+            fireDisAttributeChanged(disAttributeValue_);
         }
     }
-    COMMONAPI_EXPORT virtual void setUltrasonicAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
+    COMMONAPI_EXPORT virtual void setDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
         (void)_client;
-        setUltrasonicAttribute(_value);
+        setDisAttribute(_value);
     }
 
 
@@ -290,29 +290,29 @@ protected:
     COMMONAPI_EXPORT virtual void onRemoteBatAttributeChanged() {
         // No operation in default
     }
-    COMMONAPI_EXPORT virtual bool trySetUltrasonicAttribute(uint8_t _value) {
-        if (!validateUltrasonicAttributeRequestedValue(_value))
+    COMMONAPI_EXPORT virtual bool trySetDisAttribute(uint8_t _value) {
+        if (!validateDisAttributeRequestedValue(_value))
             return false;
 
         bool valueChanged;
         std::shared_ptr<SEAMEStubAdapter> stubAdapter = CommonAPI::Stub<SEAMEStubAdapter, SEAMEStubRemoteEvent>::stubAdapter_.lock();
         if(stubAdapter) {
-            stubAdapter->lockUltrasonicAttribute(true);
-            valueChanged = (ultrasonicAttributeValue_ != _value);
-            ultrasonicAttributeValue_ = std::move(_value);
-            stubAdapter->lockUltrasonicAttribute(false);
+            stubAdapter->lockDisAttribute(true);
+            valueChanged = (disAttributeValue_ != _value);
+            disAttributeValue_ = std::move(_value);
+            stubAdapter->lockDisAttribute(false);
         } else {
-            valueChanged = (ultrasonicAttributeValue_ != _value);
-            ultrasonicAttributeValue_ = std::move(_value);
+            valueChanged = (disAttributeValue_ != _value);
+            disAttributeValue_ = std::move(_value);
         }
 
        return valueChanged;
     }
-    COMMONAPI_EXPORT virtual bool validateUltrasonicAttributeRequestedValue(const uint8_t &_value) {
+    COMMONAPI_EXPORT virtual bool validateDisAttributeRequestedValue(const uint8_t &_value) {
         (void)_value;
         return true;
     }
-    COMMONAPI_EXPORT virtual void onRemoteUltrasonicAttributeChanged() {
+    COMMONAPI_EXPORT virtual void onRemoteDisAttributeChanged() {
         // No operation in default
     }
     class COMMONAPI_EXPORT_CLASS_EXPLICIT RemoteEventHandler: public virtual SEAMEStubRemoteEvent {
@@ -392,19 +392,19 @@ protected:
             (void)_client;
             return onRemoteSetBatAttribute(_value);
         }
-        COMMONAPI_EXPORT virtual void onRemoteUltrasonicAttributeChanged() {
+        COMMONAPI_EXPORT virtual void onRemoteDisAttributeChanged() {
             assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteUltrasonicAttributeChanged();
+            defaultStub_->onRemoteDisAttributeChanged();
         }
 
-        COMMONAPI_EXPORT virtual bool onRemoteSetUltrasonicAttribute(uint8_t _value) {
+        COMMONAPI_EXPORT virtual bool onRemoteSetDisAttribute(uint8_t _value) {
             assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetUltrasonicAttribute(std::move(_value));
+            return defaultStub_->trySetDisAttribute(std::move(_value));
         }
 
-        COMMONAPI_EXPORT virtual bool onRemoteSetUltrasonicAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
+        COMMONAPI_EXPORT virtual bool onRemoteSetDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
             (void)_client;
-            return onRemoteSetUltrasonicAttribute(_value);
+            return onRemoteSetDisAttribute(_value);
         }
 
     private:
@@ -420,7 +420,7 @@ private:
     uint16_t rpmAttributeValue_ {};
     uint8_t spdAttributeValue_ {};
     uint8_t batAttributeValue_ {};
-    uint8_t ultrasonicAttributeValue_ {};
+    uint8_t disAttributeValue_ {};
 
     CommonAPI::Version interfaceVersion_;
 };

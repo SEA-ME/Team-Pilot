@@ -39,7 +39,7 @@ public:
     typedef CommonAPI::ObservableAttribute<uint16_t> RpmAttribute;
     typedef CommonAPI::ObservableAttribute<uint8_t> SpdAttribute;
     typedef CommonAPI::ObservableAttribute<uint8_t> BatAttribute;
-    typedef CommonAPI::ObservableAttribute<uint8_t> UltrasonicAttribute;
+    typedef CommonAPI::ObservableAttribute<uint8_t> DisAttribute;
 
 
     virtual HumAttribute& getHumAttribute() = 0;
@@ -47,7 +47,7 @@ public:
     virtual RpmAttribute& getRpmAttribute() = 0;
     virtual SpdAttribute& getSpdAttribute() = 0;
     virtual BatAttribute& getBatAttribute() = 0;
-    virtual UltrasonicAttribute& getUltrasonicAttribute() = 0;
+    virtual DisAttribute& getDisAttribute() = 0;
 
     virtual std::future<void> getCompletionFuture() = 0;
 };
