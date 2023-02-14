@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/project-can
+CMAKE_SOURCE_DIR = /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/project-can/build
+CMAKE_BINARY_DIR = /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/CANClient.dir/depend.make
@@ -72,76 +72,76 @@ include CMakeFiles/CANClient.dir/flags.make
 CMakeFiles/CANClient.dir/src/CANClient.cpp.o: CMakeFiles/CANClient.dir/flags.make
 CMakeFiles/CANClient.dir/src/CANClient.cpp.o: ../src/CANClient.cpp
 CMakeFiles/CANClient.dir/src/CANClient.cpp.o: CMakeFiles/CANClient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CANClient.dir/src/CANClient.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src/CANClient.cpp.o -MF CMakeFiles/CANClient.dir/src/CANClient.cpp.o.d -o CMakeFiles/CANClient.dir/src/CANClient.cpp.o -c /root/project-can/src/CANClient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CANClient.dir/src/CANClient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src/CANClient.cpp.o -MF CMakeFiles/CANClient.dir/src/CANClient.cpp.o.d -o CMakeFiles/CANClient.dir/src/CANClient.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANClient.cpp
 
 CMakeFiles/CANClient.dir/src/CANClient.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANClient.dir/src/CANClient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src/CANClient.cpp > CMakeFiles/CANClient.dir/src/CANClient.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANClient.cpp > CMakeFiles/CANClient.dir/src/CANClient.cpp.i
 
 CMakeFiles/CANClient.dir/src/CANClient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANClient.dir/src/CANClient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src/CANClient.cpp -o CMakeFiles/CANClient.dir/src/CANClient.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANClient.cpp -o CMakeFiles/CANClient.dir/src/CANClient.cpp.s
 
 CMakeFiles/CANClient.dir/src/ina219.c.o: CMakeFiles/CANClient.dir/flags.make
 CMakeFiles/CANClient.dir/src/ina219.c.o: ../src/ina219.c
 CMakeFiles/CANClient.dir/src/ina219.c.o: CMakeFiles/CANClient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CANClient.dir/src/ina219.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src/ina219.c.o -MF CMakeFiles/CANClient.dir/src/ina219.c.o.d -o CMakeFiles/CANClient.dir/src/ina219.c.o -c /root/project-can/src/ina219.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CANClient.dir/src/ina219.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src/ina219.c.o -MF CMakeFiles/CANClient.dir/src/ina219.c.o.d -o CMakeFiles/CANClient.dir/src/ina219.c.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/ina219.c
 
 CMakeFiles/CANClient.dir/src/ina219.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CANClient.dir/src/ina219.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/project-can/src/ina219.c > CMakeFiles/CANClient.dir/src/ina219.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/ina219.c > CMakeFiles/CANClient.dir/src/ina219.c.i
 
 CMakeFiles/CANClient.dir/src/ina219.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CANClient.dir/src/ina219.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/project-can/src/ina219.c -o CMakeFiles/CANClient.dir/src/ina219.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/ina219.c -o CMakeFiles/CANClient.dir/src/ina219.c.s
 
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o: CMakeFiles/CANClient.dir/flags.make
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o: ../src-gen-can/v1/commonapi/CANSomeIPProxy.cpp
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o: CMakeFiles/CANClient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o -MF CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o.d -o CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o -c /root/project-can/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o: CMakeFiles/CANClient.dir/flags.make
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o: ../src-gen/v1/commonapi/CANSomeIPProxy.cpp
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o: CMakeFiles/CANClient.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o -MF CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o.d -o CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPProxy.cpp
 
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp > CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPProxy.cpp > CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.i
 
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp -o CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPProxy.cpp -o CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.s
 
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANClient.dir/flags.make
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o: ../src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANClient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o -MF CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o.d -o CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o -c /root/project-can/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANClient.dir/flags.make
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o: ../src-gen/v1/commonapi/CANSomeIPDeployment.cpp
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANClient.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o -MF CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o.d -o CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPDeployment.cpp
 
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp > CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPDeployment.cpp > CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i
 
-CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp -o CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s
+CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPDeployment.cpp -o CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s
 
 # Object files for target CANClient
 CANClient_OBJECTS = \
 "CMakeFiles/CANClient.dir/src/CANClient.cpp.o" \
 "CMakeFiles/CANClient.dir/src/ina219.c.o" \
-"CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o" \
-"CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o"
+"CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o" \
+"CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o"
 
 # External object files for target CANClient
 CANClient_EXTERNAL_OBJECTS =
 
 CANClient: CMakeFiles/CANClient.dir/src/CANClient.cpp.o
 CANClient: CMakeFiles/CANClient.dir/src/ina219.c.o
-CANClient: CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o
-CANClient: CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o
+CANClient: CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o
+CANClient: CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o
 CANClient: CMakeFiles/CANClient.dir/build.make
 CANClient: CMakeFiles/CANClient.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable CANClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable CANClient"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CANClient.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -153,6 +153,6 @@ CMakeFiles/CANClient.dir/clean:
 .PHONY : CMakeFiles/CANClient.dir/clean
 
 CMakeFiles/CANClient.dir/depend:
-	cd /root/project-can/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/project-can /root/project-can /root/project-can/build /root/project-can/build /root/project-can/build/CMakeFiles/CANClient.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles/CANClient.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/CANClient.dir/depend
 

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/root/project-can/src-gen-can -I/root/build-commonapi/capicxx-core-runtime/include -I/root/build-commonapi/capicxx-someip-runtime/include -I/root/build-commonapi/vsomeip/interface
+CXX_INCLUDES = -I/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen -I/root/build-commonapi/capicxx-core-runtime/include -I/root/build-commonapi/capicxx-someip-runtime/include -I/root/build-commonapi/vsomeip/interface
 
-CXX_FLAGS =  -pthread -std=c++0x -latomic
+CXX_FLAGS =  -pthread -std=c++0x
 

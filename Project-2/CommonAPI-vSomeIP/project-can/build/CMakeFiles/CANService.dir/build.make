@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/project-can
+CMAKE_SOURCE_DIR = /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/project-can/build
+CMAKE_BINARY_DIR = /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/CANService.dir/depend.make
@@ -69,79 +69,79 @@ include CMakeFiles/CANService.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CANService.dir/flags.make
 
-CMakeFiles/CANService.dir/src/CANService.cpp.o: CMakeFiles/CANService.dir/flags.make
-CMakeFiles/CANService.dir/src/CANService.cpp.o: ../src/CANService.cpp
-CMakeFiles/CANService.dir/src/CANService.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CANService.dir/src/CANService.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src/CANService.cpp.o -MF CMakeFiles/CANService.dir/src/CANService.cpp.o.d -o CMakeFiles/CANService.dir/src/CANService.cpp.o -c /root/project-can/src/CANService.cpp
+CMakeFiles/CANService.dir/src/CANService-main.cpp.o: CMakeFiles/CANService.dir/flags.make
+CMakeFiles/CANService.dir/src/CANService-main.cpp.o: ../src/CANService-main.cpp
+CMakeFiles/CANService.dir/src/CANService-main.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CANService.dir/src/CANService-main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src/CANService-main.cpp.o -MF CMakeFiles/CANService.dir/src/CANService-main.cpp.o.d -o CMakeFiles/CANService.dir/src/CANService-main.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANService-main.cpp
 
-CMakeFiles/CANService.dir/src/CANService.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src/CANService.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src/CANService.cpp > CMakeFiles/CANService.dir/src/CANService.cpp.i
+CMakeFiles/CANService.dir/src/CANService-main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src/CANService-main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANService-main.cpp > CMakeFiles/CANService.dir/src/CANService-main.cpp.i
 
-CMakeFiles/CANService.dir/src/CANService.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src/CANService.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src/CANService.cpp -o CMakeFiles/CANService.dir/src/CANService.cpp.s
+CMakeFiles/CANService.dir/src/CANService-main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src/CANService-main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANService-main.cpp -o CMakeFiles/CANService.dir/src/CANService-main.cpp.s
 
 CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o: CMakeFiles/CANService.dir/flags.make
 CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o: ../src/CANStubImpl.cpp
 CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o -MF CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o.d -o CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o -c /root/project-can/src/CANStubImpl.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o -MF CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o.d -o CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANStubImpl.cpp
 
 CMakeFiles/CANService.dir/src/CANStubImpl.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src/CANStubImpl.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src/CANStubImpl.cpp > CMakeFiles/CANService.dir/src/CANStubImpl.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANStubImpl.cpp > CMakeFiles/CANService.dir/src/CANStubImpl.cpp.i
 
 CMakeFiles/CANService.dir/src/CANStubImpl.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src/CANStubImpl.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src/CANStubImpl.cpp -o CMakeFiles/CANService.dir/src/CANStubImpl.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/CANStubImpl.cpp -o CMakeFiles/CANService.dir/src/CANStubImpl.cpp.s
 
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o: CMakeFiles/CANService.dir/flags.make
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o: ../src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o -MF CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o.d -o CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o -c /root/project-can/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o: CMakeFiles/CANService.dir/flags.make
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o: ../src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o -MF CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o.d -o CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp
 
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp > CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp > CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i
 
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp -o CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp -o CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s
 
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANService.dir/flags.make
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o: ../src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o -MF CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o.d -o CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o -c /root/project-can/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANService.dir/flags.make
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o: ../src-gen/v1/commonapi/CANSomeIPDeployment.cpp
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o: CMakeFiles/CANService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o -MF CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o.d -o CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o -c /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPDeployment.cpp
 
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/project-can/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp > CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPDeployment.cpp > CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i
 
-CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/project-can/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp -o CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s
+CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src-gen/v1/commonapi/CANSomeIPDeployment.cpp -o CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s
 
 # Object files for target CANService
 CANService_OBJECTS = \
-"CMakeFiles/CANService.dir/src/CANService.cpp.o" \
+"CMakeFiles/CANService.dir/src/CANService-main.cpp.o" \
 "CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o" \
-"CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o" \
-"CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o"
+"CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o" \
+"CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o"
 
 # External object files for target CANService
 CANService_EXTERNAL_OBJECTS =
 
-CANService: CMakeFiles/CANService.dir/src/CANService.cpp.o
+CANService: CMakeFiles/CANService.dir/src/CANService-main.cpp.o
 CANService: CMakeFiles/CANService.dir/src/CANStubImpl.cpp.o
-CANService: CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o
-CANService: CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o
+CANService: CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o
+CANService: CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o
 CANService: CMakeFiles/CANService.dir/build.make
 CANService: CMakeFiles/CANService.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable CANService"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable CANService"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CANService.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -153,6 +153,6 @@ CMakeFiles/CANService.dir/clean:
 .PHONY : CMakeFiles/CANService.dir/clean
 
 CMakeFiles/CANService.dir/depend:
-	cd /root/project-can/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/project-can /root/project-can /root/project-can/build /root/project-can/build /root/project-can/build/CMakeFiles/CANService.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles/CANService.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/CANService.dir/depend
 

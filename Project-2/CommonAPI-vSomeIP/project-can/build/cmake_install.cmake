@@ -1,4 +1,4 @@
-# Install script for directory: /root/project-can
+# Install script for directory: /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/root/project-can/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

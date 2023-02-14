@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/project-can
+CMAKE_SOURCE_DIR = /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/project-can/build
+CMAKE_BINARY_DIR = /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/project-can/build/CMakeFiles /root/project-can/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/project-can/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,80 +142,80 @@ CANService/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/build
 .PHONY : CANService/fast
 
-src-gen-can/v1/commonapi/CANSomeIPDeployment.o: src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPDeployment.o
+src-gen/v1/commonapi/CANSomeIPDeployment.o: src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o
+.PHONY : src-gen/v1/commonapi/CANSomeIPDeployment.o
 
 # target to build an object file
-src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.o
+src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o
+.PHONY : src-gen/v1/commonapi/CANSomeIPDeployment.cpp.o
 
-src-gen-can/v1/commonapi/CANSomeIPDeployment.i: src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPDeployment.i
+src-gen/v1/commonapi/CANSomeIPDeployment.i: src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i
+.PHONY : src-gen/v1/commonapi/CANSomeIPDeployment.i
 
 # target to preprocess a source file
-src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.i
+src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i
+.PHONY : src-gen/v1/commonapi/CANSomeIPDeployment.cpp.i
 
-src-gen-can/v1/commonapi/CANSomeIPDeployment.s: src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPDeployment.s
+src-gen/v1/commonapi/CANSomeIPDeployment.s: src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s
+.PHONY : src-gen/v1/commonapi/CANSomeIPDeployment.s
 
 # target to generate assembly for a file
-src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp.s
+src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s
+.PHONY : src-gen/v1/commonapi/CANSomeIPDeployment.cpp.s
 
-src-gen-can/v1/commonapi/CANSomeIPProxy.o: src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPProxy.o
+src-gen/v1/commonapi/CANSomeIPProxy.o: src-gen/v1/commonapi/CANSomeIPProxy.cpp.o
+.PHONY : src-gen/v1/commonapi/CANSomeIPProxy.o
 
 # target to build an object file
-src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.o
+src-gen/v1/commonapi/CANSomeIPProxy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.o
+.PHONY : src-gen/v1/commonapi/CANSomeIPProxy.cpp.o
 
-src-gen-can/v1/commonapi/CANSomeIPProxy.i: src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPProxy.i
+src-gen/v1/commonapi/CANSomeIPProxy.i: src-gen/v1/commonapi/CANSomeIPProxy.cpp.i
+.PHONY : src-gen/v1/commonapi/CANSomeIPProxy.i
 
 # target to preprocess a source file
-src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.i
+src-gen/v1/commonapi/CANSomeIPProxy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.i
+.PHONY : src-gen/v1/commonapi/CANSomeIPProxy.cpp.i
 
-src-gen-can/v1/commonapi/CANSomeIPProxy.s: src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPProxy.s
+src-gen/v1/commonapi/CANSomeIPProxy.s: src-gen/v1/commonapi/CANSomeIPProxy.cpp.s
+.PHONY : src-gen/v1/commonapi/CANSomeIPProxy.s
 
 # target to generate assembly for a file
-src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPProxy.cpp.s
+src-gen/v1/commonapi/CANSomeIPProxy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src-gen/v1/commonapi/CANSomeIPProxy.cpp.s
+.PHONY : src-gen/v1/commonapi/CANSomeIPProxy.cpp.s
 
-src-gen-can/v1/commonapi/CANSomeIPStubAdapter.o: src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPStubAdapter.o
+src-gen/v1/commonapi/CANSomeIPStubAdapter.o: src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o
+.PHONY : src-gen/v1/commonapi/CANSomeIPStubAdapter.o
 
 # target to build an object file
-src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.o
+src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o
+.PHONY : src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.o
 
-src-gen-can/v1/commonapi/CANSomeIPStubAdapter.i: src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPStubAdapter.i
+src-gen/v1/commonapi/CANSomeIPStubAdapter.i: src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i
+.PHONY : src-gen/v1/commonapi/CANSomeIPStubAdapter.i
 
 # target to preprocess a source file
-src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.i
+src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i
+.PHONY : src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.i
 
-src-gen-can/v1/commonapi/CANSomeIPStubAdapter.s: src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPStubAdapter.s
+src-gen/v1/commonapi/CANSomeIPStubAdapter.s: src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s
+.PHONY : src-gen/v1/commonapi/CANSomeIPStubAdapter.s
 
 # target to generate assembly for a file
-src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s
-.PHONY : src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp.s
+src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s
+.PHONY : src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp.s
 
 src/CANClient.o: src/CANClient.cpp.o
 .PHONY : src/CANClient.o
@@ -241,29 +241,29 @@ src/CANClient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANClient.dir/build.make CMakeFiles/CANClient.dir/src/CANClient.cpp.s
 .PHONY : src/CANClient.cpp.s
 
-src/CANService.o: src/CANService.cpp.o
-.PHONY : src/CANService.o
+src/CANService-main.o: src/CANService-main.cpp.o
+.PHONY : src/CANService-main.o
 
 # target to build an object file
-src/CANService.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src/CANService.cpp.o
-.PHONY : src/CANService.cpp.o
+src/CANService-main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src/CANService-main.cpp.o
+.PHONY : src/CANService-main.cpp.o
 
-src/CANService.i: src/CANService.cpp.i
-.PHONY : src/CANService.i
+src/CANService-main.i: src/CANService-main.cpp.i
+.PHONY : src/CANService-main.i
 
 # target to preprocess a source file
-src/CANService.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src/CANService.cpp.i
-.PHONY : src/CANService.cpp.i
+src/CANService-main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src/CANService-main.cpp.i
+.PHONY : src/CANService-main.cpp.i
 
-src/CANService.s: src/CANService.cpp.s
-.PHONY : src/CANService.s
+src/CANService-main.s: src/CANService-main.cpp.s
+.PHONY : src/CANService-main.s
 
 # target to generate assembly for a file
-src/CANService.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src/CANService.cpp.s
-.PHONY : src/CANService.cpp.s
+src/CANService-main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CANService.dir/build.make CMakeFiles/CANService.dir/src/CANService-main.cpp.s
+.PHONY : src/CANService-main.cpp.s
 
 src/CANStubImpl.o: src/CANStubImpl.cpp.o
 .PHONY : src/CANStubImpl.o
@@ -323,21 +323,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CANClient"
 	@echo "... CANService"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPDeployment.o"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPDeployment.i"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPDeployment.s"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPProxy.o"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPProxy.i"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPProxy.s"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPStubAdapter.o"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPStubAdapter.i"
-	@echo "... src-gen-can/v1/commonapi/CANSomeIPStubAdapter.s"
+	@echo "... src-gen/v1/commonapi/CANSomeIPDeployment.o"
+	@echo "... src-gen/v1/commonapi/CANSomeIPDeployment.i"
+	@echo "... src-gen/v1/commonapi/CANSomeIPDeployment.s"
+	@echo "... src-gen/v1/commonapi/CANSomeIPProxy.o"
+	@echo "... src-gen/v1/commonapi/CANSomeIPProxy.i"
+	@echo "... src-gen/v1/commonapi/CANSomeIPProxy.s"
+	@echo "... src-gen/v1/commonapi/CANSomeIPStubAdapter.o"
+	@echo "... src-gen/v1/commonapi/CANSomeIPStubAdapter.i"
+	@echo "... src-gen/v1/commonapi/CANSomeIPStubAdapter.s"
 	@echo "... src/CANClient.o"
 	@echo "... src/CANClient.i"
 	@echo "... src/CANClient.s"
-	@echo "... src/CANService.o"
-	@echo "... src/CANService.i"
-	@echo "... src/CANService.s"
+	@echo "... src/CANService-main.o"
+	@echo "... src/CANService-main.i"
+	@echo "... src/CANService-main.s"
 	@echo "... src/CANStubImpl.o"
 	@echo "... src/CANStubImpl.i"
 	@echo "... src/CANStubImpl.s"

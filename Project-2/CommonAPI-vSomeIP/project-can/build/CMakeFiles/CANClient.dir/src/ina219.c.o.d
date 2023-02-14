@@ -1,4 +1,5 @@
-CMakeFiles/CANClient.dir/src/ina219.c.o: /root/project-can/src/ina219.c \
+CMakeFiles/CANClient.dir/src/ina219.c.o: \
+ /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/ina219.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -87,4 +88,5 @@ CMakeFiles/CANClient.dir/src/ina219.c.o: /root/project-can/src/ina219.c \
  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
  /usr/include/asm-generic/posix_types.h /usr/include/linux/i2c-dev.h \
- /root/project-can/src/defs.h /root/project-can/src/ina219.h
+ /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/defs.h \
+ /root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-can/src/ina219.h
