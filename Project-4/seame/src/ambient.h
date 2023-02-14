@@ -5,7 +5,7 @@
 #include <iostream>
 #include <signal.h>
 #include <softPwm.h>
-#include "wiringPi.h"
+#include <wiringPi.h>
 
 #define RED   0
 #define GREEN 1

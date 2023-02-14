@@ -16,7 +16,8 @@ int main(int argc, char *argv[])
     QObject *childObj = item->findChild<QObject *>("headunitObj");
 
     CANClient canClient;
-//    canClient.initVsomeipClient();
+    canClient.initVsomeipClient();
+    canClient.startCommunication();
     Beep beep;
     Ambient ambient;
 

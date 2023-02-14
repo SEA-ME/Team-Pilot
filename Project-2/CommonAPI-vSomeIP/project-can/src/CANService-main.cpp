@@ -19,6 +19,7 @@
 #include <sys/time.h>
 #include "defs.h" 
 #include "ina219.h" 
+#include "CANStubImpl.hpp"
 
 // Ina219 definition
 #define I2C_ADDR 0x42

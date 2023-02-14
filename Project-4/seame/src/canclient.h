@@ -28,14 +28,14 @@ public:
     void getRPM();
     void getSpeed();
     void getBattery();
-    void getUltraSonic();
+    void getDistance();
 
     void setHumidity();
     void setTemperature();
     void setRPM();
     void setSpeed();
     void setBattery();
-    void setUltraSonic();
+    void setDistance();
 
 private:
     std::shared_ptr<CommonAPI::Runtime> _runtime;
@@ -47,7 +47,7 @@ private:
     uint16_t _rpmValue;
     uint8_t  _spdValue;
     uint8_t  _batValue;
-    uint8_t  _ultrasonicValue;
+    uint8_t  _disValue;
 };
 
 #endif // CANCLIENT_H

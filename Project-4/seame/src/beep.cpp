@@ -19,7 +19,7 @@ void Beep::ultrasonicBeepSlot(int msg) {
 
 void Beep::_beep(unsigned int note, unsigned int duration) {
     long beepDelay = (long)(1000000 / note);
-    long time = (long) ((duration*1000) / (beepDelay * 2));
+    long time = (long) ((duration * 1000) / (beepDelay * 2));
     for (int i=0; i < time; i++) {
         digitalWrite(BeepPin, LOW);
         delayMicroseconds(beepDelay);

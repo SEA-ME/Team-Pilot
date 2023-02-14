@@ -23,7 +23,7 @@ add_executable(CANClient
 )
 target_link_libraries(CANClient CommonAPI CommonAPI-SomeIP vsomeip3)
 add_executable(CANService
-	src/CANService.cpp
+	src/CANService-main.cpp
 	src/CANStubImpl.cpp
 	src-gen-can/v1/commonapi/CANSomeIPStubAdapter.cpp
 	src-gen-can/v1/commonapi/CANSomeIPDeployment.cpp

@@ -10,7 +10,7 @@
 #endif
 
 #include <CommonAPI/CommonAPI.hpp>
-//#include <CommonAPI/AttributeCacheExtension.hpp>
+#include <CommonAPI/AttributeCacheExtension.hpp>
 #include <v1/commonapi/examples/E02AttributesProxy.hpp>
 #include <thread>
 
@@ -89,14 +89,14 @@ int main() {
     std::function<void(const CommonAPI::CallStatus&, CommonTypes::a1Struct)> fcb_s = recv_cb_s;
     myProxy->getA1Attribute().setValueAsync(valueStruct, fcb_s, &info);
 
-//    while (true) {
-//        int32_t errorValue = -1;
-//        int32_t valueCached = *myProxy->getXAttributeExtension().getCachedValue(errorValue);
-//        if (valueCached != errorValue) {
-//            std::cout << "Got cached attribute value[" << (int)valueCached << "]: " << valueCached << std::endl;
-//        } else {
-//            std::cout << "Got cached attribute error value[" << (int)valueCached << "]: " << valueCached << std::endl;
-//        }
-//        std::this_thread::sleep_for(std::chrono::microseconds(1000000));
-//    }
+    while (true) {
+        int32_t errorValue = -1;
+        int32_t valueCached = *myProxy->getXAttributeExtension().getCachedValue(errorValue);
+        if (valueCached != errorValue) {
+            std::cout << "Got cached attribute value[" << (int)valueCached << "]: " << valueCached << std::endl;
+        } else {
+            std::cout << "Got cached attribute error value[" << (int)valueCached << "]: " << valueCached << std::endl;
+        }
+        std::this_thread::sleep_for(std::chrono::microseconds(1000000));
+    }
 }
