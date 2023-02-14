@@ -46,7 +46,7 @@
 #pragma once
 
 //struct INA219;
-typedef struct _INA219 INA219;
+typedef struct INA219 INA219;
 
 // The percentage of the maximum voltage above which we will assume
 //  the batteries to be fully charged.

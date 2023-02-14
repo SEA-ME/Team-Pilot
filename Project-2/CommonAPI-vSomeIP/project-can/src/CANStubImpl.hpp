@@ -7,12 +7,12 @@
 class CANStubImpl: public v1::commonapi::CANStubDefault {
 public:
   CANStubImpl();
-   ~CANStubImpl();
-  void humPublisher(uint8_t  canHum);
-  void tmpPublisher(int8_t   canTmp);
-  void rpmPublisher(uint16_t canRpm);
-  void spdPublisher(uint8_t  canSpd);
-  void batPublisher(uint8_t  canBat);
+  virtual ~CANStubImpl();
+  virtual void humPublisher(uint8_t  canHum);
+  virtual void tmpPublisher(int8_t   canTmp);
+  virtual void rpmPublisher(uint16_t canRpm);
+  virtual void spdPublisher(uint8_t  canSpd);
+  virtual void batPublisher(uint8_t  canBat);
 
 private:
   uint8_t  _hum;
