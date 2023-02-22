@@ -321,4 +321,3 @@ BOOL ina219_get_status (const INA219 *self, INA219ChargeStatus *charge_status,
   return ret;
   }
 
-

@@ -32,7 +32,7 @@
 #define SHUNT_MILLIOHMS 100
 
 // CAN definition
-# define CAN_FRAME_MAX_LEN 8
+#define CAN_FRAME_MAX_LEN 7
 
 // CommonAPI definition
 using namespace v1::commonapi;
@@ -106,31 +106,31 @@ int main(){
 		else if (frame.can_dlc > CAN_MAX_DLEN)
       std::cout << "Invalid dlc" << std::endl;
 
-    std::cout << "0x" << frame.can_id << "[" << frame.can_dlc << "]" << std::endl;
+    //std::cout << "0x" << frame.can_id << "[" << frame.can_dlc << "]" << std::endl;
 
 		// Battery
 		if (ina_status){
 			if (ina219_get_status (ina219, &charge_status, &mV, &percent_charged, &battery_current_mA, &minutes, &error)){
 				switch (charge_status){
 					case INA219_FULLY_CHARGED:
-            std::cout << "Fully charged" << std::endl;
+            //std::cout << "Fully charged" << std::endl;
 						break;
 					case INA219_CHARGING:
-            std::cout << "Charging, "<< minutes << " minutes until fully charged" << std::endl; 
+            //std::cout << "Charging, "<< minutes << " minutes until fully charged" << std::endl; 
 						break;
 					case INA219_DISCHARGING:
-            std::cout << "Discharging " << minutes << " minutes left" << std::endl;
+            //std::cout << "Discharging " << minutes << " minutes left" << std::endl;
 						break;
 				}
-				printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
-    	  		printf ("Battery current: %d mA\n", battery_current_mA); 
-    	  		printf ("Battery charge: %.d %%\n", percent_charged);
-				frame.data[5] = percent_charged;
+				//printf ("Battery voltage: %.2f V\n", mV / 1000.0); // Convert to V
+    	  		//printf ("Battery current: %d mA\n", battery_current_mA); 
+    	  		//printf ("Battery charge: %.d %%\n", percent_charged);
+				frame.data[6] = percent_charged;
 			}
 		}
 		
 		// print frame data
-		for (int i = 0; i < frame.can_dlc; i++)
+		for (int i = 0; i <= frame.can_dlc; i++)
 			printf("%02X ",frame.data[i]);
 		printf("\n");
 
@@ -142,8 +142,9 @@ int main(){
     moonService->tmpPublisher(frame.data[1]);
     moonService->rpmPublisher(rpm_combine);
     moonService->spdPublisher(frame.data[4]);
-    std::cout << "Waiting for calls... (Abort with CTRL+C)" << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    moonService->batPublisher(frame.data[6]);
+    //std::cout << "Waiting for calls... (Abort with CTRL+C)" << std::endl;
+    //std::this_thread::sleep_for(std::chrono::seconds(2));
     //	usleep(1000);
 	}
 

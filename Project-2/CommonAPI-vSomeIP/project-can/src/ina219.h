@@ -110,4 +110,3 @@ BOOL     ina219_get_status (const INA219 *self,
            int *battery_current_mA, int *minutes, char **error);
 
 END_DECLS
-

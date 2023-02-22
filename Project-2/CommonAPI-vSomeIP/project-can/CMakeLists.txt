@@ -17,7 +17,6 @@ link_directories(
 )
 add_executable(CANClient
 	src/CANClient.cpp
-	src/ina219.c
 	src-gen/v1/commonapi/CANSomeIPProxy.cpp
 	src-gen/v1/commonapi/CANSomeIPDeployment.cpp
 )
@@ -25,6 +24,7 @@ target_link_libraries(CANClient CommonAPI CommonAPI-SomeIP vsomeip3)
 add_executable(CANService
 	src/CANService-main.cpp
 	src/CANStubImpl.cpp
+	src/ina219.c
 	src-gen/v1/commonapi/CANSomeIPStubAdapter.cpp
 	src-gen/v1/commonapi/CANSomeIPDeployment.cpp
 )

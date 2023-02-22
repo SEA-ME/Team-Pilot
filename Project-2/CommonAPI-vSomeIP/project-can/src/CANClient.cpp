@@ -26,10 +26,10 @@ void CANClient::startSubscribeHumidity() {
 	moonProxy->getHumAttribute().getValue(callStatus, _humValue);
 	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
   } else {
-		std::cout << "Got attribute humidity value: " << _humValue << std::endl;
+		std::cout << "Got attribute humidity value: " << int(_humValue) << std::endl;
 
 		moonProxy->getHumAttribute().getChangedEvent().subscribe([&](const uint8_t& humVal) {
-			std::cout << "Received change humidity message: " << humVal << std::endl;
+			std::cout << "Received change humidity message: " << int(humVal) << std::endl;
 		});
 	}
 }
@@ -38,10 +38,10 @@ void CANClient::startSubscribeTemperature() {
 	moonProxy->getTmpAttribute().getValue(callStatus, _tmpValue);
 	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
   } else {
-		std::cout << "Got attribute temperature value: " << _tmpValue << std::endl;
+		std::cout << "Got attribute temperature value: " << int(_tmpValue) << std::endl;
 
 		moonProxy->getTmpAttribute().getChangedEvent().subscribe([&](const uint8_t& tmpVal) {
-			std::cout << "Received change temperature message: " << tmpVal << std::endl;
+			std::cout << "Received change temperature message: " << int(tmpVal) << std::endl;
 		});
 	}
 }
@@ -50,10 +50,10 @@ void CANClient::startSubscribeRPM() {
 	moonProxy->getRpmAttribute().getValue(callStatus, _rpmValue);
 	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
   } else {
-		std::cout << "Got attribute RPM value: " << _rpmValue << std::endl;
+		std::cout << "Got attribute RPM value: " << int(_rpmValue) << std::endl;
 
 		moonProxy->getRpmAttribute().getChangedEvent().subscribe([&](const uint8_t& rpmVal) {
-			std::cout << "Received change RPM message: " << rpmVal << std::endl;
+			std::cout << "Received change RPM message: " << int(rpmVal) << std::endl;
 		});
 	}
 }
@@ -75,10 +75,10 @@ void CANClient::startSubscribeBattery() {
 	if (callStatus != CommonAPI::CallStatus::SUCCESS) {
     std::cout << "Remote call A failed!" << std::endl;
   } else {
-		std::cout << "Got attribute battery value: " << _batValue << std::endl;
+		std::cout << "Got attribute battery value: " << int(_batValue) << std::endl;
 
 		moonProxy->getBatAttribute().getChangedEvent().subscribe([&](const uint8_t& batVal) {
-			std::cout << "Received change battery message: " << batVal << std::endl;
+			std::cout << "Received change battery message: " << int(batVal) << std::endl;
 		});
 	}
 }
