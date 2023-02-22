@@ -34,12 +34,12 @@ namespace commonapi {
 class SEAMEProxyBase
     : virtual public CommonAPI::Proxy {
 public:
-    typedef CommonAPI::ObservableAttribute<uint8_t> HumAttribute;
-    typedef CommonAPI::ObservableAttribute<int8_t> TmpAttribute;
-    typedef CommonAPI::ObservableAttribute<uint16_t> RpmAttribute;
-    typedef CommonAPI::ObservableAttribute<uint8_t> SpdAttribute;
-    typedef CommonAPI::ObservableAttribute<uint8_t> BatAttribute;
-    typedef CommonAPI::ObservableAttribute<uint8_t> DisAttribute;
+    typedef CommonAPI::ObservableReadonlyAttribute<uint8_t> HumAttribute;
+    typedef CommonAPI::ObservableReadonlyAttribute<int8_t> TmpAttribute;
+    typedef CommonAPI::ObservableReadonlyAttribute<uint16_t> RpmAttribute;
+    typedef CommonAPI::ObservableReadonlyAttribute<uint8_t> SpdAttribute;
+    typedef CommonAPI::ObservableReadonlyAttribute<uint8_t> BatAttribute;
+    typedef CommonAPI::ObservableReadonlyAttribute<uint8_t> DisAttribute;
 
 
     virtual HumAttribute& getHumAttribute() = 0;

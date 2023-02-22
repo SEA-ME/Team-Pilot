@@ -73,10 +73,6 @@ public:
             fireHumAttributeChanged(humAttributeValue_);
         }
     }
-    COMMONAPI_EXPORT virtual void setHumAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-        (void)_client;
-        setHumAttribute(_value);
-    }
     COMMONAPI_EXPORT virtual const int8_t &getTmpAttribute() {
         return tmpAttributeValue_;
     }
@@ -89,10 +85,6 @@ public:
         if (valueChanged) {
             fireTmpAttributeChanged(tmpAttributeValue_);
         }
-    }
-    COMMONAPI_EXPORT virtual void setTmpAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int8_t _value) {
-        (void)_client;
-        setTmpAttribute(_value);
     }
     COMMONAPI_EXPORT virtual const uint16_t &getRpmAttribute() {
         return rpmAttributeValue_;
@@ -107,10 +99,6 @@ public:
             fireRpmAttributeChanged(rpmAttributeValue_);
         }
     }
-    COMMONAPI_EXPORT virtual void setRpmAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _value) {
-        (void)_client;
-        setRpmAttribute(_value);
-    }
     COMMONAPI_EXPORT virtual const uint8_t &getSpdAttribute() {
         return spdAttributeValue_;
     }
@@ -123,10 +111,6 @@ public:
         if (valueChanged) {
             fireSpdAttributeChanged(spdAttributeValue_);
         }
-    }
-    COMMONAPI_EXPORT virtual void setSpdAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-        (void)_client;
-        setSpdAttribute(_value);
     }
     COMMONAPI_EXPORT virtual const uint8_t &getBatAttribute() {
         return batAttributeValue_;
@@ -141,10 +125,6 @@ public:
             fireBatAttributeChanged(batAttributeValue_);
         }
     }
-    COMMONAPI_EXPORT virtual void setBatAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-        (void)_client;
-        setBatAttribute(_value);
-    }
     COMMONAPI_EXPORT virtual const uint8_t &getDisAttribute() {
         return disAttributeValue_;
     }
@@ -157,10 +137,6 @@ public:
         if (valueChanged) {
             fireDisAttributeChanged(disAttributeValue_);
         }
-    }
-    COMMONAPI_EXPORT virtual void setDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-        (void)_client;
-        setDisAttribute(_value);
     }
 
 
@@ -187,9 +163,6 @@ protected:
         (void)_value;
         return true;
     }
-    COMMONAPI_EXPORT virtual void onRemoteHumAttributeChanged() {
-        // No operation in default
-    }
     COMMONAPI_EXPORT virtual bool trySetTmpAttribute(int8_t _value) {
         if (!validateTmpAttributeRequestedValue(_value))
             return false;
@@ -211,9 +184,6 @@ protected:
     COMMONAPI_EXPORT virtual bool validateTmpAttributeRequestedValue(const int8_t &_value) {
         (void)_value;
         return true;
-    }
-    COMMONAPI_EXPORT virtual void onRemoteTmpAttributeChanged() {
-        // No operation in default
     }
     COMMONAPI_EXPORT virtual bool trySetRpmAttribute(uint16_t _value) {
         if (!validateRpmAttributeRequestedValue(_value))
@@ -237,9 +207,6 @@ protected:
         (void)_value;
         return true;
     }
-    COMMONAPI_EXPORT virtual void onRemoteRpmAttributeChanged() {
-        // No operation in default
-    }
     COMMONAPI_EXPORT virtual bool trySetSpdAttribute(uint8_t _value) {
         if (!validateSpdAttributeRequestedValue(_value))
             return false;
@@ -261,9 +228,6 @@ protected:
     COMMONAPI_EXPORT virtual bool validateSpdAttributeRequestedValue(const uint8_t &_value) {
         (void)_value;
         return true;
-    }
-    COMMONAPI_EXPORT virtual void onRemoteSpdAttributeChanged() {
-        // No operation in default
     }
     COMMONAPI_EXPORT virtual bool trySetBatAttribute(uint8_t _value) {
         if (!validateBatAttributeRequestedValue(_value))
@@ -287,9 +251,6 @@ protected:
         (void)_value;
         return true;
     }
-    COMMONAPI_EXPORT virtual void onRemoteBatAttributeChanged() {
-        // No operation in default
-    }
     COMMONAPI_EXPORT virtual bool trySetDisAttribute(uint8_t _value) {
         if (!validateDisAttributeRequestedValue(_value))
             return false;
@@ -312,9 +273,6 @@ protected:
         (void)_value;
         return true;
     }
-    COMMONAPI_EXPORT virtual void onRemoteDisAttributeChanged() {
-        // No operation in default
-    }
     class COMMONAPI_EXPORT_CLASS_EXPLICIT RemoteEventHandler: public virtual SEAMEStubRemoteEvent {
     public:
         COMMONAPI_EXPORT RemoteEventHandler(SEAMEStubDefault *_defaultStub)
@@ -322,90 +280,6 @@ protected:
               defaultStub_(_defaultStub) {
         }
 
-        COMMONAPI_EXPORT virtual void onRemoteHumAttributeChanged() {
-            assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteHumAttributeChanged();
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetHumAttribute(uint8_t _value) {
-            assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetHumAttribute(std::move(_value));
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetHumAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-            (void)_client;
-            return onRemoteSetHumAttribute(_value);
-        }
-        COMMONAPI_EXPORT virtual void onRemoteTmpAttributeChanged() {
-            assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteTmpAttributeChanged();
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetTmpAttribute(int8_t _value) {
-            assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetTmpAttribute(std::move(_value));
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetTmpAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int8_t _value) {
-            (void)_client;
-            return onRemoteSetTmpAttribute(_value);
-        }
-        COMMONAPI_EXPORT virtual void onRemoteRpmAttributeChanged() {
-            assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteRpmAttributeChanged();
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetRpmAttribute(uint16_t _value) {
-            assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetRpmAttribute(std::move(_value));
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetRpmAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _value) {
-            (void)_client;
-            return onRemoteSetRpmAttribute(_value);
-        }
-        COMMONAPI_EXPORT virtual void onRemoteSpdAttributeChanged() {
-            assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteSpdAttributeChanged();
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetSpdAttribute(uint8_t _value) {
-            assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetSpdAttribute(std::move(_value));
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetSpdAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-            (void)_client;
-            return onRemoteSetSpdAttribute(_value);
-        }
-        COMMONAPI_EXPORT virtual void onRemoteBatAttributeChanged() {
-            assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteBatAttributeChanged();
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetBatAttribute(uint8_t _value) {
-            assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetBatAttribute(std::move(_value));
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetBatAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-            (void)_client;
-            return onRemoteSetBatAttribute(_value);
-        }
-        COMMONAPI_EXPORT virtual void onRemoteDisAttributeChanged() {
-            assert(defaultStub_ !=NULL);
-            defaultStub_->onRemoteDisAttributeChanged();
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetDisAttribute(uint8_t _value) {
-            assert(defaultStub_ !=NULL);
-            return defaultStub_->trySetDisAttribute(std::move(_value));
-        }
-
-        COMMONAPI_EXPORT virtual bool onRemoteSetDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) {
-            (void)_client;
-            return onRemoteSetDisAttribute(_value);
-        }
 
     private:
         SEAMEStubDefault *defaultStub_;

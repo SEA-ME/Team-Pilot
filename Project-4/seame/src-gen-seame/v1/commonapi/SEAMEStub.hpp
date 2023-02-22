@@ -136,30 +136,6 @@ class SEAMEStubRemoteEvent
 public:
     virtual ~SEAMEStubRemoteEvent() { }
 
-    /// Verification callback for remote set requests on the attribute hum
-    virtual bool onRemoteSetHumAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
-    /// Action callback for remote set requests on the attribute hum
-    virtual void onRemoteHumAttributeChanged() = 0;
-    /// Verification callback for remote set requests on the attribute tmp
-    virtual bool onRemoteSetTmpAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, int8_t _value) = 0;
-    /// Action callback for remote set requests on the attribute tmp
-    virtual void onRemoteTmpAttributeChanged() = 0;
-    /// Verification callback for remote set requests on the attribute rpm
-    virtual bool onRemoteSetRpmAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _value) = 0;
-    /// Action callback for remote set requests on the attribute rpm
-    virtual void onRemoteRpmAttributeChanged() = 0;
-    /// Verification callback for remote set requests on the attribute spd
-    virtual bool onRemoteSetSpdAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
-    /// Action callback for remote set requests on the attribute spd
-    virtual void onRemoteSpdAttributeChanged() = 0;
-    /// Verification callback for remote set requests on the attribute bat
-    virtual bool onRemoteSetBatAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
-    /// Action callback for remote set requests on the attribute bat
-    virtual void onRemoteBatAttributeChanged() = 0;
-    /// Verification callback for remote set requests on the attribute dis
-    virtual bool onRemoteSetDisAttribute(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _value) = 0;
-    /// Action callback for remote set requests on the attribute dis
-    virtual void onRemoteDisAttributeChanged() = 0;
 };
 
 /**

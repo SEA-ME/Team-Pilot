@@ -3,10 +3,10 @@ package commonapi
 interface SEAME {
   version {major 1 minor 0}
   
-  attribute UInt8  hum
-  attribute Int8   tmp
-  attribute UInt16 rpm
-  attribute UInt8  spd
-  attribute UInt8  bat
-  attribute UInt8  dis
+  attribute UInt8  hum readonly 
+  attribute Int8   tmp readonly 
+  attribute UInt16 rpm readonly
+  attribute UInt8  spd readonly
+  attribute UInt8  bat readonly
+  attribute UInt8  dis readonly
 }
