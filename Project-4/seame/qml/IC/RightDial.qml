@@ -54,7 +54,7 @@ Item {
         anchors.bottomMargin: 0.05 * root.height
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.horizontalCenterOffset: -20
-        value: 0.5
+        value: canData.battery * 0.01
     }
 
     Text {

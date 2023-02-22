@@ -36,25 +36,24 @@ WaylandOutput {
                 id : leftDial
                 anchors.left : parent.left
                 anchors.leftMargin: 0.1 * width
-                value : 20
-
+                value : canData.speed
             }
 
             RightDial {
                 id : rightDial
                 anchors.right: parent.right
                 anchors.rightMargin: 0.1 * width
-                value : 50
+                value : canData.rpm
             }
 
             Top {
                 id : topbar
                 y : 7
                 anchors.horizontalCenter: parent.horizontalCenter
-                temperature: 5
-                humidity : 25
-
+                temperature: canData.temperature
+                humidity : canData.humidity
             }
+
             ICPrnd {
                 id: prnd
                 anchors.horizontalCenter: parent.horizontalCenter

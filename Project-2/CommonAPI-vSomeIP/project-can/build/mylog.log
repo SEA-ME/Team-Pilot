@@ -102,3 +102,27 @@
 [CAPI][DEBUG] Loading library for local:commonapi.CAN:v1_0:can proxy.
 [CAPI][DEBUG] Loading interface library "liblocal__commonapi_CAN:v1_0__can.so" failed (liblocal__commonapi_CAN:v1_0__can.so: cannot open shared object file: No such file or directory)
 [CAPI][VERBOSE] Creating proxy for "local:commonapi.CAN:v1_0:can"
+[CAPI][INFO] Loading configuration file '/etc/commonapi.ini'
+[CAPI][INFO] Using default binding 'someip'
+[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
+[CAPI][DEBUG] Added address mapping: local:commonapi.CAN:v1_0:can <--> [1234.5678(1.0)]
+[CAPI][INFO] Registering function for creating "commonapi.CAN:v1_0" stub adapter.
+[CAPI][DEBUG] Loading library for local:commonapi.CAN:v1_0:can stub.
+[CAPI][DEBUG] Loading interface library "liblocal__commonapi_CAN:v1_0__can.so" failed (liblocal__commonapi_CAN:v1_0__can.so: cannot open shared object file: No such file or directory)
+[CAPI][INFO] Registering stub for "local:commonapi.CAN:v1_0:can"
+[CAPI][INFO] Loading configuration file '/etc/commonapi.ini'
+[CAPI][INFO] Using default binding 'someip'
+[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
+[CAPI][DEBUG] Added address mapping: local:commonapi.CAN:v1_0:can <--> [1234.5678(1.0)]
+[CAPI][INFO] Registering function for creating "commonapi.CAN:v1_0" stub adapter.
+[CAPI][DEBUG] Loading library for local:commonapi.CAN:v1_0:can stub.
+[CAPI][DEBUG] Loading interface library "liblocal__commonapi_CAN:v1_0__can.so" failed (liblocal__commonapi_CAN:v1_0__can.so: cannot open shared object file: No such file or directory)
+[CAPI][INFO] Registering stub for "local:commonapi.CAN:v1_0:can"
+[CAPI][INFO] Loading configuration file '/etc/commonapi.ini'
+[CAPI][INFO] Using default binding 'someip'
+[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
+[CAPI][DEBUG] Added address mapping: local:commonapi.CAN:v1_0:can <--> [1234.5678(1.0)]
+[CAPI][INFO] Registering function for creating "commonapi.CAN:v1_0" stub adapter.
+[CAPI][DEBUG] Loading library for local:commonapi.CAN:v1_0:can stub.
+[CAPI][DEBUG] Loading interface library "liblocal__commonapi_CAN:v1_0__can.so" failed (liblocal__commonapi_CAN:v1_0__can.so: cannot open shared object file: No such file or directory)
+[CAPI][INFO] Registering stub for "local:commonapi.CAN:v1_0:can"

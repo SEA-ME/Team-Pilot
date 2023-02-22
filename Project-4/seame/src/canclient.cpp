@@ -2,142 +2,168 @@
 
 CANClient::CANClient(QObject *parent)
     : QObject(parent),
-    _humValue(0), _tmpValue(0), _rpmValue(0),
-    _spdValue(0), _batValue(0), _disValue(0)
+    m_humValue(0), m_tmpValue(0), m_rpmValue(0),
+    m_spdValue(0), m_batValue(0), m_disValue(0)
 {
     std::cout << "can client initialize" << std::endl;
+    qRegisterMetaType<uint8_t>("uint8_t");
+    qRegisterMetaType<int8_t>("int8_t");
+    qRegisterMetaType<uint16_t>("uint16_t");
 }
 
-CANClient::~CANClient() {
+CANClient::~CANClient()
+{
     std::cout << "can client end" << std::endl;
 }
 
-void CANClient::initVsomeipClient() {
-    _runtime = CommonAPI::Runtime::get();
+void CANClient::initVsomeipClient()
+{
+    m_runtime = CommonAPI::Runtime::get();
 
     std::string domain = "local";
     std::string instance = "seame";
 
-    _moonProxy = _runtime->buildProxy<SEAMEProxy>(domain, instance);
+    m_moonProxy = m_runtime->buildProxy<SEAMEProxy>(domain, instance);
     std::cout << "Checking availability!" << std::endl;
-    while (!_moonProxy->isAvailable()) {
+    while (!m_moonProxy->isAvailable()) {
         std::cout << "moonProxy is not available" << std::endl;
-        std::this_thread::sleep_for(std::chrono::microseconds(10));
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 }
 
-void CANClient::initGetValue() {
+void CANClient::initGetValue()
+{
     std::cout << "start initialize values" << std::endl;
-    getHumidity();
-    getTemperature();
-    getRPM();
-    getSpeed();
-    getBattery();
-    getDistance();
+    if (m_callStatus != CommonAPI::CallStatus::SUCCESS) {
+        std::cerr << "Remote call A failed!" << std::endl;
+    } else {
+        getHumidity();
+        getTemperature();
+        getRPM();
+        getSpeed();
+        getBattery();
+        getDistance();
+    }
 }
 
-void CANClient::subscribeValue() {
+void CANClient::subscribeValue()
+{
     // subscribe service
     std::cout << "subscirbe hum value" << std::endl;
-    _moonProxy->getHumAttribute().getChangedEvent().subscribe([&](const int32_t& val) {
-        std::cout << "Received change hum message: " << val << std::endl;
-        _humValue = val;
+    m_moonProxy->getHumAttribute().getChangedEvent().subscribe([&](const uint8_t& humVal) {
+        std::cout << "Received change hum message: " << int(humVal) << std::endl;
+        m_humValue = humVal;
+        emit humidityChanged();
     });
 
     std::cout << "subscirbe tmp value" << std::endl;
-    _moonProxy->getTmpAttribute().getChangedEvent().subscribe([&](const int32_t& val) {
-        std::cout << "Received change tmp message: " << val << std::endl;
-        _tmpValue = val;
+    m_moonProxy->getTmpAttribute().getChangedEvent().subscribe([&](const uint8_t& tmpVal) {
+        std::cout << "Received change tmp message: " << int(tmpVal) << std::endl;
+        m_tmpValue = tmpVal;
+        emit temperatureChanged();
     });
 
     std::cout << "subscirbe rpm value" << std::endl;
-    _moonProxy->getRpmAttribute().getChangedEvent().subscribe([&](const int32_t& val) {
-        std::cout << "Received change rpm message: " << val << std::endl;
-        _rpmValue = val;
+    m_moonProxy->getRpmAttribute().getChangedEvent().subscribe([&](const uint8_t& rpmVal) {
+        std::cout << "Received change rpm message: " << int(rpmVal) << std::endl;
+        m_rpmValue = rpmVal;
+        emit rpmChanged();
     });
 
     std::cout << "subscirbe spd value" << std::endl;
-    _moonProxy->getSpdAttribute().getChangedEvent().subscribe([&](const int32_t& val) {
-        std::cout << "Received change spd message: " << val << std::endl;
-        _spdValue = val;
+    m_moonProxy->getSpdAttribute().getChangedEvent().subscribe([&](const uint8_t& spdVal) {
+        std::cout << "Received change spd message: " << int(spdVal) << std::endl;
+        m_spdValue = spdVal;
+        emit speedChanged();
     });
 
     std::cout << "subscirbe bat value" << std::endl;
-    _moonProxy->getBatAttribute().getChangedEvent().subscribe([&](const int32_t& val) {
-        std::cout << "Received change bat message: " << val << std::endl;
-        _batValue = val;
+    m_moonProxy->getBatAttribute().getChangedEvent().subscribe([&](const uint8_t& batVal) {
+        std::cout << "Received change bat message: " << int(batVal) << std::endl;
+        m_batValue = batVal;
+        emit batteryChanged();
     });
 
     std::cout << "subscirbe ultrasonic value" << std::endl;
-    _moonProxy->getDisAttribute().getChangedEvent().subscribe([&](const int32_t& val) {
-        std::cout << "Received change ultrasonic message: " << val << std::endl;
-        _disValue= val;
+    m_moonProxy->getDisAttribute().getChangedEvent().subscribe([&](const uint& disVal) {
+        std::cout << "Received change ultrasonic message: " << int(disVal) << std::endl;
+        m_disValue = disVal;
+        emit distanceChanged();
     });
 }
 
-void CANClient::startCommunication() {
+void CANClient::startCommunication()
+{
     initGetValue();
     subscribeValue();
 }
 
-void CANClient::getHumidity() {
+void CANClient::getHumidity()
+{
     // get value from service in _humValue
-    _moonProxy->getHumAttribute().getValue(_callStatus, _humValue);
-
-    if (_callStatus != CommonAPI::CallStatus::SUCCESS) {
-        std::cerr << "Remote call A failed!" << std::endl;
-    } else {
-        std::cout << "get humidity value from service: " << _humValue << std::endl;
-    }
+    m_moonProxy->getHumAttribute().getValue(m_callStatus, m_humValue);
+    std::cout << "get humidity value from service: " << int(m_humValue) << std::endl;
 }
 
-void CANClient::getTemperature() {
-    // get value from service in _humValue
-    _moonProxy->getTmpAttribute().getValue(_callStatus, _tmpValue);
+void CANClient::getTemperature()
+{
+    m_moonProxy->getTmpAttribute().getValue(m_callStatus, m_tmpValue);
+    std::cout << "get temperature value from service: " << int(m_tmpValue) << std::endl;
 
-    if (_callStatus != CommonAPI::CallStatus::SUCCESS) {
-        std::cerr << "Remote call A failed!" << std::endl;
-    } else {
-        std::cout << "get temperature value from service: " << _tmpValue << std::endl;
-    }
 }
 
-void CANClient::getRPM() {
-    // get value from service in _humValue
-    _moonProxy->getRpmAttribute().getValue(_callStatus, _rpmValue);
-
-    if (_callStatus != CommonAPI::CallStatus::SUCCESS) {
-        std::cerr << "Remote call A failed!" << std::endl;
-    } else {
-        std::cout << "get RPM value from service: " << _rpmValue << std::endl;
-    }
+void CANClient::getRPM()
+{
+    m_moonProxy->getRpmAttribute().getValue(m_callStatus, m_rpmValue);
+    std::cout << "get RPM value from service: " << int(m_rpmValue) << std::endl;
 }
 
-void CANClient::getSpeed() {
-  _moonProxy->getSpdAttribute().getValue(_callStatus, _spdValue);
-  if (_callStatus != CommonAPI::CallStatus::SUCCESS) {
-      std::cerr << "Remote call A failed!" << std::endl;
-  } else {
-    std::cout << "get speed value from service: " << _spdValue << std::endl;
-  }
+void CANClient::getSpeed()
+{
+    m_moonProxy->getSpdAttribute().getValue(m_callStatus, m_spdValue);
+    std::cout << "get speed value from service: " << int(m_spdValue) << std::endl;
+
 }
 
-void CANClient::getBattery() {
-  _moonProxy->getBatAttribute().getValue(_callStatus, _batValue);
-  if (_callStatus != CommonAPI::CallStatus::SUCCESS) {
-    std::cerr << "Remote call A failed!" << std::endl;
-  } else {
-    std::cout << "get battery value from service: " << _batValue << std::endl;
-  }
+void CANClient::getBattery()
+{
+    m_moonProxy->getBatAttribute().getValue(m_callStatus, m_batValue);
+    std::cout << "get battery value from service: " << int(m_batValue) << std::endl;
 }
 
-void CANClient::getDistance() {
-  _moonProxy->getDisAttribute().getValue(_callStatus, _disValue);
-  if (_callStatus != CommonAPI::CallStatus::SUCCESS) {
-    std::cerr << "Remote call A failed!" << std::endl;
-  } else {
-    std::cout << "get ultrasonic value from service: " << _disValue << std::endl;
-  }
+void CANClient::getDistance()
+{
+    m_moonProxy->getDisAttribute().getValue(m_callStatus, m_disValue);
+    std::cout << "get ultrasonic value from service: " << int(m_disValue) << std::endl;
 }
 
+uint8_t CANClient::humidity() const
+{
+    return m_humValue;
+}
+
+int8_t CANClient::temperature() const
+{
+    return m_tmpValue;
+}
+
+uint16_t CANClient::rpm() const
+{
+    return m_rpmValue;
+}
+
+uint8_t CANClient::speed() const
+{
+    return m_spdValue;
+}
+
+uint8_t CANClient::battery() const
+{
+    return m_batValue;
+}
+
+uint8_t CANClient::distance() const
+{
+    return m_disValue;
+}
 
