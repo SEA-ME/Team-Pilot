@@ -51,28 +51,28 @@ void CANClient::subscribeValue()
     // subscribe service
     std::cout << "subscirbe hum value" << std::endl;
     m_moonProxy->getHumAttribute().getChangedEvent().subscribe([&](const uint8_t& humVal) {
-        std::cout << "Received change hum message: " << int(humVal) << std::endl;
+//        std::cout << "Received change hum message: " << int(humVal) << std::endl;
         m_humValue = humVal;
         emit humidityChanged();
     });
 
     std::cout << "subscirbe tmp value" << std::endl;
     m_moonProxy->getTmpAttribute().getChangedEvent().subscribe([&](const uint8_t& tmpVal) {
-        std::cout << "Received change tmp message: " << int(tmpVal) << std::endl;
+//        std::cout << "Received change tmp message: " << int(tmpVal) << std::endl;
         m_tmpValue = tmpVal;
         emit temperatureChanged();
     });
 
     std::cout << "subscirbe rpm value" << std::endl;
     m_moonProxy->getRpmAttribute().getChangedEvent().subscribe([&](const uint8_t& rpmVal) {
-        std::cout << "Received change rpm message: " << int(rpmVal) << std::endl;
+//        std::cout << "Received change rpm message: " << int(rpmVal) << std::endl;
         m_rpmValue = rpmVal;
         emit rpmChanged();
     });
 
     std::cout << "subscirbe spd value" << std::endl;
     m_moonProxy->getSpdAttribute().getChangedEvent().subscribe([&](const uint8_t& spdVal) {
-        std::cout << "Received change spd message: " << int(spdVal) << std::endl;
+//        std::cout << "Received change spd message: " << int(spdVal) << std::endl;
         m_spdValue = spdVal;
         emit speedChanged();
     });
@@ -86,7 +86,7 @@ void CANClient::subscribeValue()
 
     std::cout << "subscirbe ultrasonic value" << std::endl;
     m_moonProxy->getDisAttribute().getChangedEvent().subscribe([&](const uint& disVal) {
-        std::cout << "Received change ultrasonic message: " << int(disVal) << std::endl;
+//        std::cout << "Received change ultrasonic message: " << int(disVal) << std::endl;
         m_disValue = disVal;
         emit distanceChanged();
     });
