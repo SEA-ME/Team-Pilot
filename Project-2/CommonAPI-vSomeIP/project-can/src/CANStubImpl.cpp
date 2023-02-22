@@ -1,31 +1,52 @@
 // CANStubImpl.cpp
 #include "CANStubImpl.hpp"
 
-CANStubImpl::CANStubImpl() { }
-CANStubImpl::~CANStubImpl() { }
+CANStubImpl::CANStubImpl() { 
+  _hum = 0;
+  _tmp = 0;
+  _rpm = 0;
+  _spd = 0;
+  _bat = 0;
+}
 
-void CANStubImpl::GetHUM(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::HUM _hum, v1::commonapi::CANStub::GetHUMReply_t _reply){
-    std::cout << "HUM: " << unsigned(_hum) << " ";
-    v1::commonapi::CAN::HUM returnData = _hum;
-    _reply(returnData);   
-};
-void CANStubImpl::GetTMP(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::TMP _tmp, v1::commonapi::CANStub::GetTMPReply_t _reply){
-    std::cout << "TMP: " << signed(_tmp) << " ";
-    v1::commonapi::CAN::TMP returnData = _tmp;
-    _reply(returnData);   
-};
-void CANStubImpl::GetRPM(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::RPM _rpm, v1::commonapi::CANStub::GetRPMReply_t _reply){
-    std::cout << "RPM: " << _rpm << " ";
-    v1::commonapi::CAN::RPM returnData = _rpm;
-    _reply(returnData);   
-};
-void CANStubImpl::GetSPD(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::SPD _spd, v1::commonapi::CANStub::GetSPDReply_t _reply){
-    std::cout << "SPD: " << unsigned(_spd) << " ";
-    v1::commonapi::CAN::SPD returnData = _spd;
-    _reply(returnData);   
-};
-void CANStubImpl::GetBAT(const std::shared_ptr<CommonAPI::ClientId> _client, v1::commonapi::CAN::BAT _bat, v1::commonapi::CANStub::GetBATReply_t _reply){
-    std::cout << "BAT: " << int(_bat) << " " << std::endl;
-    v1::commonapi::CAN::BAT returnData = _bat;
-    _reply(returnData);   
-};
+CANStubImpl::~CANStubImpl() {}
+
+void CANStubImpl::humPublisher(const uint8_t  canHum) {
+  if (_hum != canHum) {
+    _hum = canHum;
+    setHumAttribute(_hum);
+    std::cout <<  "New CAN Humadity Data = " << int(_hum) << "!" << std::endl;
+  }
+}
+
+void CANStubImpl::tmpPublisher(const int8_t   canTmp) {
+  if (_tmp != canTmp) {
+    _tmp = canTmp;
+    setTmpAttribute(_tmp);
+    std::cout <<  "New CAN Temperature Data = " << int(_tmp) << "!" << std::endl;
+  }
+}
+
+void CANStubImpl::rpmPublisher(const uint16_t canRpm) {
+  if (_rpm != canRpm) {
+    _rpm = canRpm;
+    setRpmAttribute(_rpm);
+    std::cout <<  "New CAN RPM Data = " << int(_rpm) << "!" << std::endl;
+  }
+}
+
+void CANStubImpl::spdPublisher(const uint8_t  canSpd) {
+  if (_spd != canSpd) {
+    _spd = canSpd;
+    setSpdAttribute(_spd);
+    std::cout <<  "New CAN Speed Data = " << int(_spd) << "!" << std::endl;
+  }
+}
+
+void CANStubImpl::batPublisher(const uint8_t  canBat) {
+  if (_bat != canBat) {
+    _bat = canBat;
+    setBatAttribute(_bat);
+    std::cout <<  "New CAN Battery Data  = " << int(_bat) << "!" << std::endl;
+  }
+}

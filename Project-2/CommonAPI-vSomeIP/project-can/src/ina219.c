@@ -35,7 +35,7 @@
 
 // INA219 structure -- stores all internal data related to this
 //  INA219 instance
-struct _INA219
+struct INA219
   {
   char *i2c_dev; // E.g., /dev/i2c-1
   int i2c_addr;  // E.g., 0x43
@@ -320,5 +320,4 @@ BOOL ina219_get_status (const INA219 *self, INA219ChargeStatus *charge_status,
 
   return ret;
   }
-
 

@@ -46,7 +46,7 @@
 #pragma once
 
 //struct INA219;
-typedef struct _INA219 INA219;
+typedef struct INA219 INA219;
 
 // The percentage of the maximum voltage above which we will assume
 //  the batteries to be fully charged.
@@ -110,4 +110,3 @@ BOOL     ina219_get_status (const INA219 *self,
            int *battery_current_mA, int *minutes, char **error);
 
 END_DECLS
-

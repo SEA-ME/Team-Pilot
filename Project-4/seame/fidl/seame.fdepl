@@ -1,0 +1,56 @@
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-4-SOMEIP_deployment_spec.fdepl"
+import "seame.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface commonapi.SEAME {
+  SomeIpServiceID = 4660
+
+  attribute hum {
+    SomeIpGetterID = 3000
+    SomeIpNotifierID = 33010
+    SomeIpNotifierEventGroups = { 0 }
+
+    SomeIpAttributeReliable = true
+  }
+  attribute tmp {
+    SomeIpGetterID = 3002
+    SomeIpNotifierID = 33011
+    SomeIpNotifierEventGroups = { 1 }
+
+    SomeIpAttributeReliable = true
+  }
+  attribute rpm {
+    SomeIpGetterID = 3004
+    SomeIpNotifierID = 33012
+    SomeIpNotifierEventGroups = { 2 }
+
+    SomeIpAttributeReliable = true
+  }
+  attribute spd {
+    SomeIpGetterID = 3006
+    SomeIpNotifierID = 33013
+    SomeIpNotifierEventGroups = { 3 }
+
+    SomeIpAttributeReliable = true
+  }
+  attribute bat {
+    SomeIpGetterID = 3008
+    SomeIpNotifierID = 33014
+    SomeIpNotifierEventGroups = { 4 }
+
+    SomeIpAttributeReliable = true
+  }
+  attribute dis {
+    SomeIpGetterID = 3010
+    SomeIpNotifierID = 33015
+    SomeIpNotifierEventGroups = { 5 }
+
+    SomeIpAttributeReliable = true
+  }
+}
+
+define org.genivi.commonapi.someip.deployment for provider as MoonService {
+  instance commonapi.SEAME {
+    InstanceId = "seame"
+    SomeIpInstanceID = 22136
+  }
+}
