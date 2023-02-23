@@ -18,7 +18,7 @@
 - [CommonAPI SomeIP in 10-minutes](https://github.com/COVESA/capicxx-someip-tools/wiki/CommonAPI-C---SomeIP-in-10-minutes)
 - [How to Install Java on Raspberry Pi](https://phoenixnap.com/kb/install-java-raspberry-pi#ftoc-heading-4)
 - [How to install latest Boost library on Raspberry Pi](http://osdevlab.blogspot.com/2016/02/how-to-install-latest-boost-library-on.html)
-- [CommonAPI C++ User Guide](https://usermanual.wiki/Document/CommonAPICppUserGuide.113855339.pdf)
+- [CommonAPI C++ User Guide (most helpful)](https://usermanual.wiki/Document/CommonAPICppUserGuide.113855339.pdf)
 ---
 
 <br/>
@@ -110,11 +110,12 @@ Before download SOME/IP Runtime library, you should download vsomeip. Because Co
 ```bash
 git clone https://github.com/COVESA/vsomeip.git
 cd vsomeip
-git checkout 3.1.20.1
+git checkout 3.1.20.3
 mkdir build
 cd build
 cmake -DENABLE_SIGNAL_HANDLING=1 -DDIAGNOSIS_ADDRESS=0x10 ..
 make -j8
+sudo make install
 ```
 
 ![Untitled (2)](https://user-images.githubusercontent.com/111988634/197358973-be132356-d7e0-4d26-b97d-a6d14c48c0a6.png)
@@ -142,7 +143,7 @@ make -j8
 ## Step 6: Write the Franca file and generate code
 
 Unfortunately, code generator [doesn’t support arm architecture.]((https://github.com/COVESA/capicxx-core-tools/issues/19)) So if you want to use this generator, I recommend that you use the code generator on your laptop and then download the generated code via Git.
-
+The code generator automatically generates codes according to fidl and fdepl files. In the case of vsomeip, you have to run it twice with core-generator and some-generator to complete it.
 <br/>
 
 `PC`
@@ -151,36 +152,36 @@ Create commonapi project directory and open Franca IDL
 
 ```bash
 cd ~
-mkdir project
-cd project
+mkdir project-hello
+cd project-hello
 mkdir fidl
 cd fidl
 ```
 
 A service which instantiates the interface `HelloWorld` provides the function `sayHello` which can be called. Write fidl and fdepl file in fidl directory.
 
-- ### [HelloWorld.fidl](project/fidl/HelloWorld.fidl)
+- ### [HelloWorld.fidl](project-hello/fidl/HelloWorld.fidl)
 
-- ### [HelloWorld.fdepl](project/fidl/HelloWorld.fdepl)
+- ### [HelloWorld.fdepl](project-hello/fidl/HelloWorld.fdepl)
 
 Download code generator 3.2.0.1
 
 ```bash
-cd ~/project
-mkdir cgen && cd cgen
+cd ~
+mkdir generator && cd generator
 ```
 
 ```bash
 wget https://github.com/COVESA/capicxx-core-tools/releases/download/3.2.0.1/commonapi_core_generator.zip
 unzip commonapi_core_generator.zip -d core-generator
 cd core-generator
-chmod +x commonapi-generator-linux-x86_64
+chmod +x commonapi-core-generator-linux-x86_64
 ```
 
 Download someip code generator 3.2.0.1
 
 ```bash
-cd ~/project/cgen
+cd ~/generator
 wget https://github.com/COVESA/capicxx-someip-tools/releases/download/3.2.0.1/commonapi_someip_generator.zip
 unzip commonapi_someip_generator.zip -d someip-generator
 cd someip-generator
@@ -190,22 +191,22 @@ chmod +x commonapi-someip-generator-linux-x86_64
 Run generator
 
 ```bash
-cd ~/project
-./cgen/core-generator/commonapi-generator-linux-x86_64 -sk ./fidl/HelloWorld.fidl
-./cgen/someip-generator/commonapi-someip-generator-linux-x86_64 ./fidl/HelloWorld.fdepl
+cd ~/project-hello
+../generator/core-generator/commonapi-core-generator-linux-x86_64 -sk ./fidl/HelloWorld.fidl -d ./src-gen-hello
+../generator/someip-generator/commonapi-someip-generator-linux-x86_64 ./fidl/HelloWorld.fdepl -d ./src-gen-hello
 ```
 
 Now, send the generated code to Raspberry pi using rsync command line
 
 ```bash
-cd ~/project
+cd ~/project-hello
 rsync -avz src-gen <user-name>@<IP-address>:<project-directory>
 ```
 
 In my case
 
 ```bash
-rsync -avz src-gen moon@192.168.0.105:/home/build-commonapi/project
+rsync -avz src-gen-hello moon@192.168.0.105:/home/moon/project-hello
 ```
 
 <br/>
@@ -217,19 +218,19 @@ rsync -avz src-gen moon@192.168.0.105:/home/build-commonapi/project
 `Raspberry Pi`
 
 ```bash
-cd ~/build-commonapi/project
+cd ~/project-hello
 mkdir src && cd src
 ```
 
 Make 4 files in src directory
 
-- ### [HelloWorldClient.cpp](project/src/HelloWorldClient.cpp)
+- ### [HelloWorldClient.cpp](project-hello/src/HelloWorldClient.cpp)
 
-- ### [HelloWorldService.cpp](project/src/HelloWorldService.cpp)
+- ### [HelloWorldService.cpp](project-hello/src/HelloWorldService.cpp)
 
-- ### [HelloWorldStubImpl.hpp](project/src/HelloWorldStubImpl.hpp)
+- ### [HelloWorldStubImpl.hpp](project-hello/src/HelloWorldStubImpl.hpp)
     
-- ### [HelloWorldStubImpl.cpp](project/src/HelloWorldStubImpl.cpp)
+- ### [HelloWorldStubImpl.cpp](project-hello/src/HelloWorldStubImpl.cpp)
 
     
 <br/>
@@ -237,11 +238,11 @@ Make 4 files in src directory
 ## Step 8: Build and run
 
 ```bash
-cd ~/build-commonapi/project
+cd ~/project-hello
 ```
 Write CMakeLists.txt on proejct directory
 
- - ### [CMakeLists.txt](project/CMakeLists.txt)
+ - ### [CMakeLists.txt](project-hello/CMakeLists.txt)
  
 Build and run
 
@@ -253,6 +254,149 @@ make
 ```
 
 ```bash
-./HelloWorldService
+nano commonapi.ini
+```
+
+```
+[logging]
+console=true
+file=./mylog.log
+dlt=true
+level=verbose
+
+[default]
+binding=someip
+```
+
+```bash
+./HelloWorldService &
 ./HelloWorldClient
+```
+
+https://github.com/COVESA/vsomeip/issues/235
+
+<br/>
+
+## Step 9: Client Service Architecture
+
+Now, let's write the code to send and receive CAN data through IPC using the example below. Since CAN must be used, it is cumbersome to use in the host pc. Therefore, only the generator was created on the host PC and then moved to the Raspberry Pi for use.
+
+This code will be used later in the Qt application as it is.
+
+Because of the Client-Service structure, there should be only one Service, and several Qt applications become clients. This is a structure in which one C++ service provides the same data to multiple Qt clients whenever there is a request.
+
+[**commonapi user guide**](https://usermanual.wiki/Document/CommonAPICppUserGuide.113855339.pdf) If you do not know something, it is recommended to find it here first.
+
+If you've ever developed an app, you should definitely apply asynchronous programming here. If you use the attribute example given by the user guide above, it creates asynchronous communication functions on its own.
+
+Create project directory
+```bash
+cd ~
+mkdir project-can
+cd project-can
+```
+
+Create CommonAPI Configuration file `commonapi.ini`. The file location can be anywhere in the three places. I put in /etc The reason is that you have to type 1 or 2 each time you create a project. /etc is recommended because it is global and will find it for you.
+
+1. build directory with executables (highest priority)
+2. COMMONAPI_CONFIG environment variable
+3. /etc
+
+```bash
+mkdir build
+cd build
+code /etc/commonapi.ini
+```
+
+```bash
+[logging]
+console=true
+file=./mylog.log
+dlt=true
+level=verbose
+
+[default]
+binding=someip
+```
+
+Now write the fidl file. It was created by referring to the second example of the CommonAPI user guide, attribute. Based on this file, the generator creates files.
+
+```bash
+cd ~/project-can
+mkdir fidl
+cd fidl
+```
+
+- [CAN.fidl](project-can/fidl/CAN.fidl)
+- [CAN-SomeIP.fdepl](project-can/fidl/CAN-SomeIP.fdepl)
+
+make codes by generator
+```bash
+cd ~/project-can
+../generator/core-generator/commonapi-core-generator-linux-x86_64 -sk ./fidl/CAN.fidl -d ./src-gen-can
+../generator/someip-generator/commonapi-someip-generator-linux-x86_64 ./fidl/CAN-SomeIP.fdepl -d ./src-gen-can
+```
+
+Now you can write the C++ code as you like. After running the example, you'll immediately see what I mean. Now, since there is only one client, there seems to be no difference between the attribute example and the helloworld example. However, if there are multiple clients and the value is changed in the client, asynchronous communication must be used as in the attribute example.
+
+```bash
+cd ~/project-can
+mkdir src
+cd src
+```
+
+- [CANClient.cpp](project-can/src/CANClient.cpp)
+- [CANClient.hpp](project-can/src/CANClient.hpp)
+- [CANService.cpp](project-can/src/CANService.cpp)
+- [CANService.hpp](project-can/src/CANService.hpp)
+- [CANStubImpl.cpp](project-can/src/CANStubImpl.cpp)
+- [CANStubImpl.hpp](project-can/src/CANStubImpl.hpp)
+- [defs.h](project-can/src/defs.h)
+- [ina219.c](project-can/src/ina219.c)
+- [ina219.h](project-can/src/ina219.h)
+
+When finished, you should see a tree like this: The build dir is omitted.
+```bash
+├── fidl
+│   ├── CAN.fidl
+│   └── CAN-SomeIP.fdepl
+├── src
+│   ├── defs.h
+│   ├── ina219.c
+│   ├── ina219.h
+│   ├── CANClient.cpp
+│   ├── CANClient.hpp
+│   ├── CANService.cpp
+│   ├── CANService.hpp
+│   ├── CANStubImpl.cpp
+│   └── CANStubImpl.hpp
+└── src-gen-can
+    └── v1
+        └── commonapi
+            ├── CAN.hpp
+            ├── CANProxyBase.hpp
+            ├── CANProxy.hpp
+            ├── CANSomeIPDeployment.cpp
+            ├── CANSomeIPDeployment.hpp
+            ├── CANSomeIPProxy.cpp
+            ├── CANSomeIPProxy.hpp
+            ├── CANSomeIPStubAdapter.cpp
+            ├── CANSomeIPStubAdapter.hpp
+            ├── CANStubDefault.hpp
+            └── CANStub.hpp
+```
+
+write CMakeLists.txt
+```bash
+code ~/project-can/CMakeLists.txt
+```
+- [CMakeLists.txt](project-can/CMakeLists.txt)
+
+build && run
+```bash
+cd ~/project-can/build
+cmake ..
+make -j8
+./CANService &
+./CANClient
 ```
