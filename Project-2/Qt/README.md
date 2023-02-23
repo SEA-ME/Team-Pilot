@@ -7,7 +7,21 @@
 
 ---
 
-In this Page, I will describe how to make qt project in Raspberry Pi. I wanted to develop qt projects in my Ubuntu labtop, but when I cross compile my project to raspberry pi, It didn’t work properly because of commonapi vsomeip library (maybe). So I moved to raspberry pi my qt creator environment. If you have a solution how to cross compile commonapi vsomeip to raspberry pi, using ubuntu labtop is more proper environment.
+Now it is time to create a qt application using the project created by commonapi vsomeip. First, you need to download an IDE to develop qt, so you can work easily. Since the application we use uses CAN, it is often cumbersome to work on the host PC, so we installed it on the RPi and proceeded.
+
+After working on the Host PC, there is a way to cross-compile with Raspberry Pi and send only the executable file, but I couldn't. Also, since debugging is not possible because there is no CAN, it is a convenient way to just open qt creator from RPi.
+
+The download method followed [**Link**](https://s-engineer.tistory.com/265).
+
+In Qt, the build method is divided into cmake and qmake. It is recommended to use cmake from qt6.
+
+However, since qt5.15 is used more universally, it is written with qmake in this project.
+
+Instrument Cluster receives CAN data from the current service and displays the values.
+
+Qt is divided into front-end and back-end. In terms of the web, the front-end is QML and the back-end is C++.
+
+Since vsomeip has made all the backend stages, this project is over if you only touch the front side and write qmake according to Qt.
 
 ---
 
