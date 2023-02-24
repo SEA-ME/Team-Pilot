@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../qml/main.qml</file>
+        <file>../qml/IC/images/+--.png</file>
+        <file>../qml/IC/images/car.png</file>
+        <file>../qml/IC/images/dial_cursor.png</file>
+        <file>../qml/IC/images/dial_cursor_right.png</file>
+        <file>../qml/IC/images/dial_fill_color.png</file>
+        <file>../qml/IC/images/dial_fill_color_left.png</file>
+        <file>../qml/IC/images/dial_pattern.png</file>
+        <file>../qml/IC/images/fuel.png</file>
+        <file>../qml/IC/images/fuel_level.png</file>
+        <file>../qml/IC/images/fuelsymbol_orange.png</file>
+        <file>../qml/IC/images/images.qrc</file>
+        <file>../qml/IC/images/left_dial.png</file>
+        <file>../qml/IC/images/mask_overlay.png</file>
+        <file>../qml/IC/images/middle-bkg.png</file>
+        <file>../qml/IC/images/middle-circle.png</file>
+        <file>../qml/IC/images/nosensor.png</file>
+        <file>../qml/IC/images/P-R-N-D.png</file>
+        <file>../qml/IC/images/Prnd.qml</file>
+        <file>../qml/IC/images/right_dial.png</file>
+        <file>../qml/IC/images/sensor.png</file>
+        <file>../qml/IC/images/top_bar.png</file>
+        <file>../qml/IC/Background.qml</file>
+        <file>../qml/IC/Dial.qml</file>
+        <file>../qml/IC/Fuel.qml</file>
+        <file>../qml/IC/ICPrnd.qml</file>
+        <file>../qml/IC/Label.qml</file>
+        <file>../qml/IC/LeftDial.qml</file>
+        <file>../qml/IC/RightDial.qml</file>
+        <file>../qml/IC/Top.qml</file>
+    </qresource>
+</RCC>
