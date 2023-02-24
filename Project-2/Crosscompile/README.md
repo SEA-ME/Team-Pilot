@@ -346,5 +346,3 @@ rsync -avz --rsync-path="sudo rsync" --delete moon@<IP-address>:/usr/local/lib/ 
 ```
 
 And then start again Step 10 to Step 14.
-
-I tried to cross compiling my Qt projects which include commonapi vsomeip, but I failed to initialize ‘registerService’ function…
