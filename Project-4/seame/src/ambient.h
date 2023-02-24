@@ -23,7 +23,7 @@ public slots:
     void ambientSlot(const int &msg);
 
 private:
-    void _ledColorSet(uchar r_val, uchar g_val, uchar b_val);
+    void m_ledColorSet(uchar r_val, uchar g_val, uchar b_val);
 };
 
 #endif // AMBIENT_H

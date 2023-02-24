@@ -29,14 +29,14 @@ Ambient::~Ambient() {
 }
 
 void Ambient::ambientSlot(const int &msg) {
-    if (msg == 0)      _ledColorSet(0x00,0x00,0xff);   //blue P
-    else if (msg == 1) _ledColorSet(0xff,0x00,0x00);   //red R
-    else if (msg == 2) _ledColorSet(0xff,0xa5,0x00);   //orange N
-    else if (msg == 3) _ledColorSet(0x00,0xff,0x00);   //green D
-    else               _ledColorSet(0,0,0);
+    if (msg == 0)      m_ledColorSet(0x00,0x00,0xff);   //blue P
+    else if (msg == 1) m_ledColorSet(0xff,0x00,0x00);   //red R
+    else if (msg == 2) m_ledColorSet(0xff,0xa5,0x00);   //orange N
+    else if (msg == 3) m_ledColorSet(0x00,0xff,0x00);   //green D
+    else               m_ledColorSet(0,0,0);
 }
 
-void Ambient::_ledColorSet(uchar r_val, uchar g_val, uchar b_val) {
+void Ambient::m_ledColorSet(uchar r_val, uchar g_val, uchar b_val) {
     softPwmWrite(RED,   r_val);
     softPwmWrite(GREEN, g_val);
     softPwmWrite(BLUE,  b_val);

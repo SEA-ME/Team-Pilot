@@ -167,7 +167,7 @@ Window {
                             font.bold: true
                             color : "white"
 
-                            text: "55 %"
+                            text: canData.battery
                         }
 
                     }
