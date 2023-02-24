@@ -9,6 +9,7 @@
 - [Step 6: Write the Franca file and generate code](#step-6-write-the-franca-file-and-generate-code)
 - [Step 7: Write the client and the service application](#step-7-write-the-client-and-the-service-application)
 - [Step 8: Build and run](#step-8-build-and-run)
+- [Step 9: Client Service Architecture](#step-9-client-service-architecture)
 
 ---
 
@@ -160,9 +161,8 @@ cd fidl
 
 A service which instantiates the interface `HelloWorld` provides the function `sayHello` which can be called. Write fidl and fdepl file in fidl directory.
 
-- ### [HelloWorld.fidl](project-hello/fidl/HelloWorld.fidl)
-
-- ### [HelloWorld.fdepl](project-hello/fidl/HelloWorld.fdepl)
+- [HelloWorld.fidl](project-hello/fidl/HelloWorld.fidl)
+- [HelloWorld.fdepl](project-hello/fidl/HelloWorld.fdepl)
 
 Download code generator 3.2.0.1
 
@@ -224,13 +224,10 @@ mkdir src && cd src
 
 Make 4 files in src directory
 
-- ### [HelloWorldClient.cpp](project-hello/src/HelloWorldClient.cpp)
-
-- ### [HelloWorldService.cpp](project-hello/src/HelloWorldService.cpp)
-
-- ### [HelloWorldStubImpl.hpp](project-hello/src/HelloWorldStubImpl.hpp)
-    
-- ### [HelloWorldStubImpl.cpp](project-hello/src/HelloWorldStubImpl.cpp)
+- [HelloWorldClient.cpp](project-hello/src/HelloWorldClient.cpp)
+- [HelloWorldService.cpp](project-hello/src/HelloWorldService.cpp)
+- [HelloWorldStubImpl.hpp](project-hello/src/HelloWorldStubImpl.hpp)
+- [HelloWorldStubImpl.cpp](project-hello/src/HelloWorldStubImpl.cpp)
 
     
 <br/>
@@ -242,7 +239,7 @@ cd ~/project-hello
 ```
 Write CMakeLists.txt on proejct directory
 
- - ### [CMakeLists.txt](project-hello/CMakeLists.txt)
+ - [CMakeLists.txt](project-hello/CMakeLists.txt)
  
 Build and run
 
@@ -355,37 +352,6 @@ cd src
 - [ina219.c](project-can/src/ina219.c)
 - [ina219.h](project-can/src/ina219.h)
 
-When finished, you should see a tree like this: The build dir is omitted.
-```bash
-├── fidl
-│   ├── CAN.fidl
-│   └── CAN-SomeIP.fdepl
-├── src
-│   ├── defs.h
-│   ├── ina219.c
-│   ├── ina219.h
-│   ├── CANClient.cpp
-│   ├── CANClient.hpp
-│   ├── CANService.cpp
-│   ├── CANService.hpp
-│   ├── CANStubImpl.cpp
-│   └── CANStubImpl.hpp
-└── src-gen-can
-    └── v1
-        └── commonapi
-            ├── CAN.hpp
-            ├── CANProxyBase.hpp
-            ├── CANProxy.hpp
-            ├── CANSomeIPDeployment.cpp
-            ├── CANSomeIPDeployment.hpp
-            ├── CANSomeIPProxy.cpp
-            ├── CANSomeIPProxy.hpp
-            ├── CANSomeIPStubAdapter.cpp
-            ├── CANSomeIPStubAdapter.hpp
-            ├── CANStubDefault.hpp
-            └── CANStub.hpp
-```
-
 write CMakeLists.txt
 ```bash
 code ~/project-can/CMakeLists.txt
@@ -394,6 +360,7 @@ code ~/project-can/CMakeLists.txt
 
 build && run
 ```bash
+mkdir ~/project-can/build
 cd ~/project-can/build
 cmake ..
 make -j8

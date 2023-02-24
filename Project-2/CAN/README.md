@@ -52,7 +52,8 @@ First, try a simple speed sensor. RPM is also calculated through this sensor.
 | A0  | A0 |
 
 Add arduino file to Uno
-- ### [spd_example.ino](src/spd_example.ino)
+- [spd_example.ino](src/spd_example.ino)
+
 If you want to calculate PiRacer speed and RPM, please see [Calculate PiRacer RPM](../RPM/)
 
 ---
@@ -106,8 +107,8 @@ dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
 dtoverlay=spi-bcm2835-overlay
 ```
 
-- ## [uno_receiver.ino ( Uno )](src/uno_receiver.ino)
-- ## [nano_transmitter.ino ( Nano )](src/nano_transmitter.ino)
+- [uno_receiver.ino ( Uno )](src/uno_receiver.ino)
+- [nano_transmitter.ino ( Nano )](src/nano_transmitter.ino)
     
 ---
 
@@ -252,8 +253,8 @@ and can1 appear in the list of ifconfig results
     nano can_recv.py
     ```
 
-- ### [uno_canshield.ino](src/uno_canshield.ino)
-- ### [can_recv.py](src/can_recv.py)
+- [uno_canshield.ino](src/uno_canshield.ino)
+- [can_recv.py](src/can_recv.py)
         
     
     ```bash
@@ -275,7 +276,7 @@ and can1 appear in the list of ifconfig results
     nano can_recv.cpp
     ```
 
-- ### [can_recv.cpp](src/can_recv.cpp)
+- [can_recv.cpp](src/can_recv.cpp)
 
     ```bash
     g++ can_recv.cpp
