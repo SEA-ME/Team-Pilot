@@ -16,7 +16,6 @@ Rectangle {
         left: parent.left
         right: parent.right
         bottomMargin: 0
-
     }
 
     RowLayout {
@@ -42,8 +41,6 @@ Rectangle {
                 anchors.fill: topBar1
                 onClicked: Qt.quit();
             }
-
-
         }
         Rectangle {
             id : topBar2
@@ -60,8 +57,6 @@ Rectangle {
                 width: parent.height*0.5
                 height : parent.height*0.5
             }
-
-
         }
         Rectangle {
             id : topBar3
@@ -78,8 +73,6 @@ Rectangle {
                 width: parent.height*0.5
                 height : parent.height*0.5
             }
-
-
         }
         Rectangle {
             id : topBar4
@@ -110,7 +103,6 @@ Rectangle {
                     }
                 }
             }
-
         }
         Rectangle {
             id : topBar5
@@ -128,9 +120,7 @@ Rectangle {
                 color : "white"
 
                 text: new Date().toLocaleDateString(Qt.locale("en"), 'ddd. MMM dd')
-
             }
-
         }
         Rectangle {
             id : test6
@@ -148,7 +138,6 @@ Rectangle {
                 anchors.leftMargin: parent.width * 0.3
                 width: parent.height*0.7
                 height : parent.height*0.7
-
             }
 
             Label {
@@ -160,11 +149,8 @@ Rectangle {
                 font.bold: true
                 color : "white"
 
-                text: "55 %"
+                text: canData.battery + "%"
             }
-
         }
-
     }
-
 }

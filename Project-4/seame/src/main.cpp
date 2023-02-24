@@ -32,6 +32,5 @@ int main(int argc, char *argv[])
         std::cout << "cannot read qml object" << std::endl;
     }
 
-
     return app.exec();
 }

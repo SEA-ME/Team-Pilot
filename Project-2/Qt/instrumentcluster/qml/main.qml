@@ -14,13 +14,13 @@ Window {
         id : leftDial
         anchors.left : parent.left
         anchors.leftMargin: 0.1 * width
-        value : canData.speed
+        value : canData.speed * 17
     }
     RightDial {
         id : rightDial
         anchors.right: parent.right
         anchors.rightMargin: 0.1 * width
-        value : canData.rpm
+        value : canData.rpm / 3
     }
     Top {
         id : topbar

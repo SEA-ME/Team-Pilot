@@ -34,8 +34,6 @@ Rectangle {
                 width : parent.width*2
                 height :parent.height * 0.3
             }
-
-
         }
         Rectangle {
 
@@ -49,7 +47,6 @@ Rectangle {
                 id: p
                 text: "P"
                 color: isClicked ? "blue" : "white"
-//                        onClicked: restBtnClicked(0)
                 onClicked: {
                     stack.pop()
                     prndSignal(0)
@@ -64,7 +61,6 @@ Rectangle {
                 anchors.top : p.bottom
                 text: "R"
                 color: isClicked ? "red" : "white"
-//                        onClicked: rBtnClicked(1)
                 onClicked: {
                     stack.push(cameraPage)
                     prndSignal(1)
@@ -73,7 +69,6 @@ Rectangle {
                     n.isClicked = false
                     d.isClicked = false
                 }
-
             }
             MyButton {
                 id: n
@@ -103,8 +98,6 @@ Rectangle {
                     n.isClicked = false
                 }
             }
-
-
         }
         Rectangle{
             id: blackBar
@@ -112,7 +105,6 @@ Rectangle {
             Layout.preferredHeight : parent.height
             Layout.preferredWidth: parent.width *0.003
             color: "#151515"
-
         }
         Rectangle {
             id: rightScreen
@@ -162,7 +154,6 @@ Rectangle {
 
             Rectangle {
                 id: mapPage
-                //anchors.fill: parent
                 Image {
 
                     id: mapImage
@@ -172,8 +163,7 @@ Rectangle {
             }
             Rectangle {
                 id: cameraPage
-
-                //anchors.fill: parent
+                rotation: 180
                 Camera {
                     id: camera
                 }
@@ -199,7 +189,6 @@ Rectangle {
                     color: "black"
 
                     Image {
-
                         id: mapIconImage
                         source: "images/homeMap.PNG"
                         anchors.verticalCenter: parent.verticalCenter
@@ -228,7 +217,6 @@ Rectangle {
                     color: "black"
 
                     Image {
-
                         id: musicIconImage
                         source: "images/homeMUsic.PNG"
                         anchors.verticalCenter: parent.verticalCenter
@@ -257,7 +245,6 @@ Rectangle {
                     color: "black"
 
                     Image {
-
                         id: lightIconImage
                         source: "images/homeLight.PNG"
                         anchors.verticalCenter: parent.verticalCenter
@@ -281,7 +268,6 @@ Rectangle {
                     color: "black"
 
                     Image {
-
                         id: settingIconImage
                         source: "images/homeSetting.PNG"
                         anchors.verticalCenter: parent.verticalCenter

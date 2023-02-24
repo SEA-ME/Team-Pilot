@@ -16,7 +16,6 @@
         <file>../qml/HU/Background.qml</file>
         <file>../qml/HU/HeadUnit.qml</file>
         <file>../qml/HU/Label.qml</file>
-        <file>../qml/HU/mainHu.qml</file>
         <file>../qml/HU/MiddleBar.qml</file>
         <file>../qml/HU/MyButton.qml</file>
         <file>../qml/HU/TopBar.qml</file>

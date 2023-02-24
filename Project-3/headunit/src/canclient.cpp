@@ -78,7 +78,7 @@ void CANClient::subscribeValue()
 
     std::cout << "subscirbe bat value" << std::endl;
     m_moonProxy->getBatAttribute().getChangedEvent().subscribe([&](const uint8_t& batVal) {
-        std::cout << "Received change bat message: " << int(batVal) << std::endl;
+//        std::cout << "Received change bat message: " << int(batVal) << std::endl;
         m_batValue = batVal;
         emit batteryChanged();
     });
