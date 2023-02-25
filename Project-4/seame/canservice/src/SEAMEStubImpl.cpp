@@ -7,6 +7,7 @@ SEAMEStubImpl::SEAMEStubImpl() {
   m_rpm = 0;
   m_spd = 0;
   m_bat = 0;
+  m_dis = 0;
 }
 
 SEAMEStubImpl::~SEAMEStubImpl() {}
