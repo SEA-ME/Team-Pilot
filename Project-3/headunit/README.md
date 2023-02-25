@@ -1,9 +1,9 @@
 # HeadUnit using Qt
 
 ## Contents
-- [Step 1: Qtwayland download]()
-- [Step 2: Ambient Light Setting]()
-- [Step 3: Make your App!]()
+- [Step 1: Qtwayland download](#step-1-qtwayland-download)
+- [Step 2: Ambient Light Setting](#step-2-ambient-light-setting)
+- [Step 3: Make your App!](#step-3-make-your-app)
 
 ---
 
@@ -43,6 +43,8 @@ sudo apt-get install -y qml-module-qtwayland-compositor
 Download the library to use Raspberry Pi's GPIO.
 ```bash
 git clone git://git.drogon.net/wiringPi
+cd wiringPi
+./build
 ```
 LED connection method
 
