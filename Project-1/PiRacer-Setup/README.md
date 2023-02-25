@@ -5,6 +5,15 @@
 - [Step 2: Web Control](#step-2-web-control)  
 - [Step 3: Calibrate DonkeyCar](#step-3-calibrate-donkeycar)  
 - [Step 4: Teleoperation ( Shanwan gamepad )](#step-4-teleoperation--shanwan-gamepad)
+- [Step 5: piracer_py](#step-5-piracer_py)
+
+---
+
+<br/>
+
+## Reference
+- [Donkey Car Wiki](https://docs.donkeycar.com/guide/robot_sbc/setup_raspberry_pi/)
+- [piracer_py](https://github.com/SEA-ME/piracer_py)
 
 ---
 
@@ -16,7 +25,7 @@
 
    ```bash
    ping <your hostname>.local
-   ssh bugatti@<your pi ip address>
+   ssh <username>@<your pi ip address>
    donkey createcar --path ~/mycar
    ```
 
@@ -135,3 +144,44 @@ In mapping steps of steering and throttle, you should set in opposite direction
     # JOYSTICK_DEVICE_FIL = "/dev/input/js0"
     # CONTROLLER_TYPE = 'custom'
     ```
+
+<br/>
+
+## Step 5: piracer_py
+
+https://github.com/SEA-ME/piracer_py
+
+This is a pip package created by the SEA:ME fellow. The settings made above can be customized, but there are too many functions, so if you want to simply use the desired function, you can use the following package.
+
+The installation method is well explained in the above Github.
+
+Since we simply need the steering function, we use the following code. Its name is rc_example.py
+
+```python
+from piracer.vehicles import PiRacerPro
+from piracer.gamepads import ShanWanGamepad
+
+if __name__ == '__main__':
+
+    shanwan_gamepad = ShanWanGamepad()
+    piracer = PiRacerPro()
+    # piracer = PiRacerStandard()
+
+    while True:
+        gamepad_input = shanwan_gamepad.read_data()
+
+        throttle = gamepad_input.analog_stick_right.y * 0.5
+        steering = -gamepad_input.analog_stick_left.x
+
+        print(f'throttle={throttle}, steering={steering}')
+
+        piracer.set_throttle_percent(throttle)
+        piracer.set_steering_percent(steering)
+```
+
+Run it
+```
+python rc_example.py
+```
+
+When launched, it can be controlled with a gamepad.

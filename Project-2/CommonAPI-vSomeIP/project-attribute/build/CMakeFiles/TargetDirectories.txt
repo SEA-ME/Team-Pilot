@@ -1,4 +1,0 @@
-/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-attribute/build/CMakeFiles/E02AttributesClient.dir
-/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-attribute/build/CMakeFiles/E02AttributesService.dir
-/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-attribute/build/CMakeFiles/edit_cache.dir
-/root/Team-Pilot/Project-2/CommonAPI-vSomeIP/project-attribute/build/CMakeFiles/rebuild_cache.dir

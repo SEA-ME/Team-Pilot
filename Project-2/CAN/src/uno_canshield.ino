@@ -82,7 +82,7 @@ void loop() {
     sensor[1] = t;  // Temperature
     sensor[2] = lo; // RPM1
     sensor[3] = hi; // RPM2
-    sensor[4] = spd;
+    sensor[4] = spd;// Speed
 
     CAN.sendMsgBuf(0x00, 0, CANBUS_LEN, sensor);
     delay(100); // send data per 100ms

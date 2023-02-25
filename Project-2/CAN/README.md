@@ -12,7 +12,7 @@
 
 ## Arduino Setting
 Donwload Arduino IDE
-    
+
 ```bash
 sudo snap install arduino
 arduino
@@ -28,12 +28,20 @@ sudo reboot
 ```
 </details>
 
+If you want to do documentation after drawing a circuit diagram, you can use a tool called fritzing.
+
+```bash
+sudo apt-get update
+sudo apt-get -y install fritzing
+```
+If you don't have the parts you want, you can google it and download the fritzing library file (.fzpz) and add it.
+
 --- 
 
 <br/>
 
 ## MH-Sensor-Series ( Speed and RPM )
-
+First, try a simple speed sensor. RPM is also calculated through this sensor.
 <img src="https://user-images.githubusercontent.com/111988634/190005206-37e48b0b-eba8-4a11-9f84-69b67825110b.jpg"  width="500" height="400"/>  
 
 | MH-Sensor-Series | Uno |
@@ -44,7 +52,8 @@ sudo reboot
 | A0  | A0 |
 
 Add arduino file to Uno
-- ### [spd_example.ino](src/spd_example.ino)
+- [spd_example.ino](src/spd_example.ino)
+
 If you want to calculate PiRacer speed and RPM, please see [Calculate PiRacer RPM](../RPM/)
 
 ---
@@ -53,7 +62,7 @@ If you want to calculate PiRacer speed and RPM, please see [Calculate PiRacer RP
 
 
 ## DHT11 Sensor ( Temperature and Humidity )
-
+This time, I tried sending and receiving the temperature & humidity sensor by connecting it a little more complicatedly. You don't have to do it if it's annoying, but I hope you know how to use the mcp2515 can transmitter. Used in project 3.
 <img src="https://user-images.githubusercontent.com/111988634/190004955-ea62c788-894f-4662-ad9f-57140d833e26.png"  width="500" height="300"/>  
     
 <img src="https://user-images.githubusercontent.com/111988634/190005137-51d631fb-e49a-4db0-86e8-eb0733afeda0.jpg"  width="600" height="300"/>  
@@ -87,8 +96,19 @@ If you want to calculate PiRacer speed and RPM, please see [Calculate PiRacer RP
 | DATA | A0 |
 | VCC | 5V |
 
-- ## [uno_receiver.ino ( Uno )](src/uno_receiver.ino)
-- ## [nano_transmitter.ino ( Nano )](src/nano_transmitter.ino)
+Settings
+
+```bash
+sudo nano /boot/config.txt
+```
+
+```bash
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=spi-bcm2835-overlay
+```
+
+- [uno_receiver.ino ( Uno )](src/uno_receiver.ino)
+- [nano_transmitter.ino ( Nano )](src/nano_transmitter.ino)
     
 ---
 
@@ -202,7 +222,10 @@ and can1 appear in the list of ifconfig results
     ```bash
     alias cl='sudo ip link set can0 up type can bitrate 500000'
     ```
-    
+    Download ‘can-utils’ to check whether the candump command works well. For reference, the core-contributor of can-utils came to SEA:ME and gave a lecture.
+    ```bash
+    sudo apt-get install can-utils
+    ```
     receive
     ```bash
     (env) moon@moon:~ $ candump can0
@@ -230,8 +253,8 @@ and can1 appear in the list of ifconfig results
     nano can_recv.py
     ```
 
-- ### [uno_canshield.ino](src/uno_canshield.ino)
-- ### [can_recv.py](src/can_recv.py)
+- [uno_canshield.ino](src/uno_canshield.ino)
+- [can_recv.py](src/can_recv.py)
         
     
     ```bash
@@ -253,7 +276,7 @@ and can1 appear in the list of ifconfig results
     nano can_recv.cpp
     ```
 
-- ### [can_recv.cpp](src/can_recv.cpp)
+- [can_recv.cpp](src/can_recv.cpp)
 
     ```bash
     g++ can_recv.cpp
