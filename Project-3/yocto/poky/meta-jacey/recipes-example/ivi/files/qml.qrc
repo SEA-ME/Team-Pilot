@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Background.qml</file>
+        <file>InstrumentCluster.qml</file>
+        <file>PRND.qml</file>
+    </qresource>
+</RCC>

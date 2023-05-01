@@ -1,64 +1,52 @@
 # Sensor
 
-- ## Reference site
+### **Table of Contents**
+- [Temperature Sensor](#temperature-sensor)  
+- [Speed sensor](#speed-sensor)
+### **Reference**
+- [speed sensor reference](https://www.brainy-bits.com/post/how-to-use-a-speed-sensor-with-arduino)
 
-[speed sensor reference](https://www.brainy-bits.com/post/how-to-use-a-speed-sensor-with-arduino)
-- - - 
-
-- ## Contents
-
-[Temperature Sensor](#temperature-sensor)  
-[Speed sensor](#speed-sensor)
-- - -
 
 ## Temperature Sensor
 
-### 1. Connect Arduino with sensor
-
-<img src="https://user-images.githubusercontent.com/81483791/194761365-2cd16084-32f0-406c-b24c-ecf8dd629de6.png"  width="300" height="200"/> 
-
-- Guide line
-
-| Sensor | Arduino |
+| Arduino UNO | DHT11 Temp seonsor |
 | --- | --- |
-| GND | GND |
-| VCC | 5V |
-| DOUT | 3 |
+| <img src="https://user-images.githubusercontent.com/81483791/235361477-c871f074-bb50-4fcd-8795-f06b8526da11.png"  width="376" height="267"/> |  <img src="https://user-images.githubusercontent.com/81483791/235361461-a98f4808-4a3c-41fd-8d59-0c7c8a83d38c.png"  width="250" height="123"/> |
+- How to connect?    
+
+    | Arduino | Sensor |
+    | --- | --- |
+    | GND | GND |
+    | 5V | VCC |
+    | 3 | DOUT |
 
 If you connect `D0`  ↔  `3` 
 
 `#define DHTPIN 3` 
 
-### 2. Execute Arduino
-
-[temperature.ino](src/temperature.ino)
-
 - - - 
 
 ## Speed Sensor
 
-### 1. Connect Arduino with sensor
-<img src="https://user-images.githubusercontent.com/81483791/194761783-a0a16582-f8dd-4791-96e8-d529690843ed.png"  width="300" height="200"/> 
-
-- Guide line
-
-| Sensor | Arduino |
+| Arduino UNO | Speed seonsor |
 | --- | --- |
-| GND | GND |
-| VCC | 5V |
-| D0 | 2 |
+| <img src="https://user-images.githubusercontent.com/81483791/235361477-c871f074-bb50-4fcd-8795-f06b8526da11.png"  width="376" height="267"/> |  <img src="https://user-images.githubusercontent.com/81483791/235361849-e224bc23-accc-46f7-a4a4-0e652f5c1ad6.png"  width="292" height="151"/> |
+- How to connect?  
+    | Arduino | Sensor |
+    | --- | --- |
+    | GND | GND |
+    | 5V | VCC |
+    | 2 | D0 |  
+
 
 If you connect `D0`  ↔  `2` 
 
-`pinMode(2, INPUT)`     
-<img src="https://user-images.githubusercontent.com/81483791/198118393-e78e8c23-9a13-460b-b102-7782f0af9bb8.jpg"  width="200" height="220"/>     
-**Engine : Axis : Wheel = 5 : 2 : 1**
+`pinMode(2, INPUT)`    
 
-Wheel diameter = 47 mm
+I connected the speed sensor as shown in the picture.    
 
-### 2. Execute Arduino
+<img src="https://user-images.githubusercontent.com/81483791/235363202-7657cc80-8dc5-435f-a187-77649221ef19.png"  width="573" height="289"/> 
 
+If you connected sensors correctly, then execute this file.  
 [sensor.ino](src/temperature.ino)
 
-You can check with OLED    
-<img src="https://user-images.githubusercontent.com/81483791/194762080-f6a60c57-7489-4bf4-838c-c0456fbc0455.png"  width="300" height="150"/> 

@@ -1,55 +1,53 @@
 # PiRacer Control
 
-- ## Reference site
-[PiRacer Pro AI Kit](https://www.waveshare.com/wiki/PiRacer_Pro_AI_Kit)   
-- - -
-- ## Contents
-[Calibrate Donkey car](#calibrate-donkey-car)   
-[Web Control](#web-control)   
-[Teleoperation](#teleoperation)
+### **Table of Contents**
+- [Calibrate Donkey car](#calibrate-donkey-car)   
+- [Web Control](#web-control)   
+- [Teleoperation](#teleoperation)
+### **Reference**
+- [PiRacer Pro AI Kit](https://www.waveshare.com/wiki/PiRacer_Pro_AI_Kit)   
 
-- - -
+
 ## Calibrate Donkey car
-### 1. Calibrate
+1. Calibrate
 
-```jsx
-cd ~/mycar
-donkey calibrate --channel 0 --bus=1
-```
+    ```jsx
+    cd ~/mycar
+    donkey calibrate --channel 0 --bus=1
+    ```
 
-Check middle : 360
+    Check middle : 360
 
-            right : 260
+        right : 260
 
-            left : 460
+        left : 460
 
-OUTPUT:
+    OUTPUT:
 
-```jsx
-Enter a PWM setting to test ('q' for quit) (0-1500): 360
-Enter a PWM setting to test ('q' for quit) (0-1500): 260
-Enter a PWM setting to test ('q' for quit) (0-1500): 460
-```
+    ```jsx
+    Enter a PWM setting to test ('q' for quit) (0-1500): 360
+    Enter a PWM setting to test ('q' for quit) (0-1500): 260
+    Enter a PWM setting to test ('q' for quit) (0-1500): 460
+    ```
 
-### 2. Edit [config.py](http://config.py) file
+2. Edit [config.py](http://config.py) file
 
-```jsx
-cd ~/mycar
-vim config.py
-```
+    ```jsx
+    cd ~/mycar
+    vim config.py
+    ```
 
-Change `STEERING_LEFT_PWM` , `STEERING_RIGHT_PWM` 
+    Change `STEERING_LEFT_PWM` , `STEERING_RIGHT_PWM` 
 
-```jsx
-STEERING_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
-STEERING_LEFT_PWM = 460         #pwm value for full left steering
-STEERING_RIGHT_PWM = 260        #pwm value for full right steering
-THROTTLE_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
-THROTTLE_FORWARD_PWM = 500      #pwm value for max forward throttle
-THROTTLE_STOPPED_PWM = 370      #pwm value for no movement
-THROTTLE_REVERSE_PWM = 220      #pwm value for max reverse throttle
-```
-- - -
+    ```jsx
+    STEERING_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
+    STEERING_LEFT_PWM = 460         #pwm value for full left steering
+    STEERING_RIGHT_PWM = 260        #pwm value for full right steering
+    THROTTLE_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
+    THROTTLE_FORWARD_PWM = 500      #pwm value for max forward throttle
+    THROTTLE_STOPPED_PWM = 370      #pwm value for no movement
+    THROTTLE_REVERSE_PWM = 220      #pwm value for max reverse throttle
+    ```
 
 ## Web Control
 
@@ -63,10 +61,11 @@ Open the Chrome in host pc and go to http://<raspberrypi_ip_address>:8887
 
 [`http://10.12.248.219:8887`](http://10.12.248.219:8887/drive)
 
-<img src="https://user-images.githubusercontent.com/81483791/194764670-3f6d9f52-9b9a-4c10-9f14-919ac2dd5d1b.png"  width="500" height="300"/> 
 
+<p align="center">
+  <img width="476" height="241" src="https://user-images.githubusercontent.com/81483791/194764670-3f6d9f52-9b9a-4c10-9f14-919ac2dd5d1b.png">
+</p> 
 
-- - - 
 ## Teleoperation
 
 
@@ -100,34 +99,39 @@ So, we can change this control key.
 
  ---
 
-### 1. Connect joystick with Piracer     
+1. Connect joystick with Piracer     
            
 
-### 2. Create joystick creator wizard
+2. Create joystick creator wizard
 
-```jsx
-cd ~/mycar
-donkey createjs
-```
+    ```jsx
+    cd ~/mycar
+    donkey createjs
+    ```
 
-### 3. Map button, axis, control
-- Button Map    
-Set joystick button name.    
-<img src="https://user-images.githubusercontent.com/81483791/197397574-a809ec35-74ec-46b6-9389-e5c08760d17d.png"  width="500" height="250"/> 
+3. Map button, axis, control
+    - Button Map    
+    Set joystick button name.    
 
--  Axis Map    
-Set joystick axis. We have 4 axis here.
-<img src="https://user-images.githubusercontent.com/81483791/197397585-26a99d37-c0c7-442b-9899-47e81c402dc8.png"  width="500" height="350"/> 
-- Control Map
-<img src="https://user-images.githubusercontent.com/81483791/197397592-38d44e51-e921-4523-9093-bfd740f104bc.png"  width="500" height="400"/> 
-<img src="https://user-images.githubusercontent.com/81483791/197397450-465a2782-8411-4bfa-9662-f58d1ebc32bb.png"  width="300" height="220"/> 
+      <img width="486" height="259" src="https://user-images.githubusercontent.com/81483791/197397574-a809ec35-74ec-46b6-9389-e5c08760d17d.png">
 
-OUTPUT:    
+    -  Axis Map    
+      Set joystick axis. We have 4 axis here.   
+        <img width="486" height="348" src="https://user-images.githubusercontent.com/81483791/197397585-26a99d37-c0c7-442b-9899-47e81c402dc8.png">
 
-<img src="https://user-images.githubusercontent.com/81483791/194764792-723a088f-4cf3-48fc-b8f2-7d7ec72b433e.png"  width="500" height="250"/> 
+    - Control Map
 
-### 4. Edit [config.py](http://config.py) file
+      <img width="472" height="442" src="https://user-images.githubusercontent.com/81483791/197397592-38d44e51-e921-4523-9093-bfd740f104bc.png">
 
-```jsx
-CONTROLLER_TYPE = 'custom' 
-```
+      <img width="255" height="193" src="https://user-images.githubusercontent.com/81483791/197397450-465a2782-8411-4bfa-9662-f58d1ebc32bb.png">
+
+    OUTPUT:    
+
+    
+      <img width="429" height="180" src="https://user-images.githubusercontent.com/81483791/194764792-723a088f-4cf3-48fc-b8f2-7d7ec72b433e.png">
+
+4. Edit [config.py](http://config.py) file
+
+    ```jsx
+    CONTROLLER_TYPE = 'custom' 
+    ```

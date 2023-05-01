@@ -1,29 +1,26 @@
 # IPC - commonapi-Dbus
 
+### **Table of Contents**
+- [How to use Commonapi - Dbus](#how-to-use-commonapi-dbus)   
+    Step 1.[ Build the CommonAPI Runtime Library](#1-build-the-commonapi-runtime-library)    
+    Step 2. [ Build the CommonAPI D-Bus Runtime Library](#2-build-the-commonapi-d-bus-runtime-library)   
+    Step 3. [ Download code generator](#3-download-code-generator)    
+    Step 4. [ Install JAVA 8 ](#4-install-java-8httpswwworaclecomjavatechnologiesdownloadsjava8)   
+    Step 5. [ Generate Code](#5-generate-code)   
+    Step 6. [ Write the client and the service application](#6-write-the-client-and-the-service-application)   
+    Step 7. [ Make CMakeList file](#7-make-cmakelist)   
+    Step 8. [ Build and run](#8-build-and-run)   
+    
+- [How to send CAN data , Battery data using IPC](#how-to-send-can-data--battery-data-using-ipc)
+### **Reference**
+- [CommonAPI  D Bus in 10 minutes](https://github.com/COVESA/capicxx-dbus-tools/wiki/CommonAPI-C---D-Bus-in-10-minutes#step5)   
+- [commonapi-dbus downlaod](https://jayden-ji.tistory.com/84)   
+- [JAVA 8 downlaod](https://amosground.blogspot.com/2018/01/linux-xubuntu-commonapi-cc.html)
+---
 
-<img src="https://user-images.githubusercontent.com/81483791/194726738-c873e16d-6515-4c54-baf3-dd75bb0d0c17.png"  width="400" height="200"/>   
+## How to use Commonapi-Dbus
 
-- ## Reference site
-
-[CommonAPI  D Bus in 10 minutes](https://github.com/COVESA/capicxx-dbus-tools/wiki/CommonAPI-C---D-Bus-in-10-minutes#step5)   
-[commonapi-dbus downlaod](https://jayden-ji.tistory.com/84)   
-[JAVA 8 downlaod](https://amosground.blogspot.com/2018/01/linux-xubuntu-commonapi-cc.html)
-- - - 
-
-- ## Contents
-
-[Step 1. Build the CommonAPI Runtime Library](#1-build-the-commonapi-runtime-library)    
-[Step 2. Build the CommonAPI D-Bus Runtime Library](#2-build-the-commonapi-d-bus-runtime-library)   
-[Step 3. Download code generator](#3-download-code-generator)    
-[Step 4. Install JAVA 8 ](#4-install-java-8httpswwworaclecomjavatechnologiesdownloadsjava8)   
-[Step 5. Generate Code](#5-generate-code)   
-[Step 6. Write the client and the service application](#6-write-the-client-and-the-service-application)   
-[Step 7. Make CMakeList file](#7-make-cmakelist)   
-[Step 8. Build and run](#8-build-and-run)   
-[How to send CAN data , Battery data using IPC](#how-to-send-can-data--battery-data-using-ipc)
-- - -
-
-### 1. **Build the CommonAPI Runtime Library**
+1. Build the CommonAPI Runtime Library
 
 ```jsx
 mkdir commonapi
@@ -40,7 +37,7 @@ cmake ..
 make
 ```
 
-### 2. **Build the CommonAPI D-Bus Runtime Library**
+2. Build the CommonAPI D-Bus Runtime Library
 
 ```jsx
 cd commonapi/
@@ -60,25 +57,6 @@ cd dbus-1.10.10/
 patch -p1 <../capicxx-dbus-runtime/src/dbus-patches/capi-dbus-add-send-with-reply-set-notify.patch
 patch -p1 <../capicxx-dbus-runtime/src/dbus-patches/capi-dbus-add-support-for-custom-marshalling.patch
 ```
-
-- OUTPUT:
-    - capi-dbus-add-send-with-reply-set-notify
-    
-    patching file dbus/dbus-connection.c
-    Hunk #1 succeeded at 3500 (offset 18 lines).
-    patching file dbus/dbus-connection.h
-    
-    - capi-dbus-add-support-for-custom-marshalling
-    
-    patching file dbus/dbus-message.c
-    Hunk #1 succeeded at 3595 (offset -151 lines).
-    Hunk #2 succeeded at 4824 (offset -230 lines).
-    patching file dbus/dbus-message.h
-    Hunk #1 succeeded at 138 (offset -32 lines).
-    Hunk #2 succeeded at 268 with fuzz 1 (offset -34 lines).
-    patching file dbus/dbus-string.c
-    patching file dbus/dbus-string.h
-    
 
 ```jsx
 ./configure
@@ -116,7 +94,7 @@ cmake -D USE_INSTALLED_COMMONAPI=OFF -D USE_INSTALLED_DBUS=OFF ..
 make
 ```
 
-### 3. **Download code generator**
+3. Download code generator
 
 ```jsx
 ~/$  mkdir project-fidl-gen-test
@@ -160,7 +138,7 @@ wget https://github.com/COVESA/capicxx-dbus-tools/releases/download/3.1.12.2/com
 ~/project-fidl-gen-test/cgen/commonapi_dbus_generator$ chmod +x commonapi-dbus-generator-linux-x86
 ```
 
-### 4. Install [JAVA 8](https://www.oracle.com/java/technologies/downloads/#java8)
+4. Install [JAVA 8](https://www.oracle.com/java/technologies/downloads/#java8)
 
 
 
@@ -189,7 +167,7 @@ CLASS_PATH=.:$JAVA_HOME/jre/lib/ext:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME PATH CLASS_PATH
 ```
 
-### 5. **Generate Code**
+5. Generate Code
 
 ```jsx
 cd project-fidl-gen-test/
@@ -228,7 +206,7 @@ wget https://github.com/jacey-h/Team-Pilot/raw/main/Project-2/Commonapi-Dbus/Hel
 unzip src-gen.zip
 ```
 
-### 6. **Write the client and the service application**
+6. Write the client and the service application
 
 ```jsx
 cd project-fidl-gen-test/
@@ -248,7 +226,7 @@ Make this  4 files in src directory
 
 
 
-### 7. Make CMakeList
+7. Make CMakeList
 
 ```jsx
 cd project-fidl-gen-test/
@@ -306,7 +284,7 @@ set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")
 
 
 
-### 8. Build and run
+8. Build and run
 
 ```jsx
 cd project-fidl-gen-test/
@@ -337,20 +315,20 @@ OUTPUT:
 
 ### In Raspberry Pi
 
-### 1. Make Franca file (.fidl)
+1. Make Franca file (.fidl)
 
 ```jsx
 mkdir project
 cd ~/project/fidl
-vim DbusData.fidl
+vim Ipc.fidl
 ```
-#### [DbusData.fidl](DbusData-example/project/fidl/DbusData.fidl)
+#### [Ipc.fidl](IPC-example/project/fidl/Ipc.fidl)
     
 
-### 2. Generate Code
+2. Generate Code
 
 ```jsx
-cd ~/project/
+cd ~/project
 ```
 
 ```jsx
@@ -358,37 +336,37 @@ source /etc/profile
 ```
 
 ```jsx
-cd ~/project-fidl-gen-test
-./cgen/commonapi-generator/commonapi-generator-linux-x86 -sk ./fidl/DbusData.fidl
-cd ~/project-fidl-gen-test
-./cgen/commonapi_dbus_generator/commonapi-dbus-generator-linux-x86 ./fidl/DbusData.fidl
+cd ~/project
+./cgen/commonapi-generator/commonapi-generator-linux-x86 -sk ./fidl/Ipc.fidl
+cd ~/project
+./cgen/commonapi_dbus_generator/commonapi-dbus-generator-linux-x86 ./fidl/Ipc.fidl
 ```
 ```jsx
-cd project-fidl-gen-test/
-wget https://github.com/jacey-h/Team-Pilot/raw/main/Project-2/Commonapi-Dbus/DbusData-example/project/src-gen.zip
+cd ~/project
+wget https://github.com/jacey-h/Team-Pilot/raw/main/Project-2/Commonapi-Dbus/IPC-example/project/src-gen.zip
 unzip src-gen.zip
 ```
-### 3. **Write the client and the service application**
+3. Write the client and the service application
 
 ```jsx
 cd ~/project/src
 ```
-#### [DbusDataClient.cpp](DbusData-example/project/src/DbusDataClient.cpp)
-#### [DbusDataService.cpp](DbusData-example/project/src/DbusDataService.cpp)
-#### [DbusDataStubImpl.hpp](DbusData-example/project/src/DbusDataStubImpl.hpp)
-#### [DbusDataStubImpl.cpp](DbusData-example/project/src/DbusDataStubImpl.cpp)
+#### [IpcClient.cpp](IPC-example/project/src/IpcClient.cpp)
+#### [IpcService.cpp](IPC-example/project/src/IpcService.cpp)
+#### [IpcStubImpl.hpp](IPC-example/project/src/IpcStubImpl.hpp)
+#### [IpcStubImpl.cpp](IPC-example/project/src/IpcStubImpl.cpp)
 
 
-### 4. Make CMakeList.txt
+4. Make CMakeList.txt
 
 ```jsx
 cd ~/project/
 vim CMakeLists.txt
 ```
-### [CMakeLists.txt](DbusData-example/project/CMakeLists.txt)
+### [CMakeLists.txt](IPC-example/project/CMakeLists.txt)
 
 
-### 5. Build and run
+5. Build and run
 
 ```jsx
 cd ~/project/

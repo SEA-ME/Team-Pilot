@@ -1,18 +1,18 @@
 # Battery level
 
-- Contents
-    
-    [How to Calculate battery level](#how-to-calculate-battery-level)
-    
-    [ina219 Using C](#1-ina219-using-c)
-    
-    [na219 using Python](#2-ina219-using-python)
 
-- - -
+
+### **Table of Contents**
+- [How to Calculate battery level](#how-to-calculate-battery-level)
+
+- [ina219 Using C](#1-ina219-using-c)
+
+- [ina219 using Python](#2-ina219-using-python)
+
 
 ## How to Calculate battery level
 
-<img src="https://user-images.githubusercontent.com/81483791/194762686-8d460809-6a58-4587-b921-dea96e5f7d65.png"  width="400" height="300"/>       
+<img src="https://user-images.githubusercontent.com/81483791/194762686-8d460809-6a58-4587-b921-dea96e5f7d65.png"  width="463" height="289"/>       
 
 8.4V, 18650 battery × 4
 
@@ -23,17 +23,17 @@
 
 One battery has 4.2V | two in series -> total = 8.4V
 
-4.2V = full charge
+    4.2V = full charge
 
-3V = discharge
+    3V = discharge
 
 nominal voltage 3.6~3.7V
 
 ### battery level = ( voltage - 6 ) /2.4 *100
 
-If voltage is 8.4V, battery level is 100% 
+    If voltage is 8.4V, battery level is 100% 
 
-If voltage is 6V, battery level is 0% 
+    If voltage is 6V, battery level is 0% 
 - - -
 
 ## 1. ina219 Using C
@@ -53,9 +53,8 @@ gcc -o test main.o ina219.o
 
 OUTPUT:
 
-<img src="https://user-images.githubusercontent.com/81483791/198119436-f2e6cc87-d877-4cdd-a20c-01345ecbea8a.png"  width="500" height="120"/>    
+<img src="https://user-images.githubusercontent.com/81483791/198119436-f2e6cc87-d877-4cdd-a20c-01345ecbea8a.png"  width="464" height="108"/>    
 
-- - -   
 
 ## 2. ina219 using Python
 

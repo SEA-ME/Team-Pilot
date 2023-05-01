@@ -1,0 +1,24 @@
+package commonapi
+  
+interface Ipc {
+  version {major 1 minor 0}
+ 
+  struct IpcStruct {
+      Int32 TMP     
+      Int32 HUM      
+      Int32 RPM      
+      Int32 SPD      
+      Int32 BAT      
+
+  }
+
+ method structInMethod{
+    in {
+      IpcStruct structParameter
+    }
+    out {
+      Int32 output
+    }
+  }
+
+}

@@ -1,27 +1,14 @@
 # OLED
 
-- ## Reference site
-
-[pi-display](https://github.com/waveshare/pi-display)
-
-[How to Auto execute program reference](https://m.blog.naver.com/emperonics/221770579539)
-
-[Process systemd reference](https://bkjeon1614.tistory.com/658)
-- - - 
-- ## Study More
-
-[Diferent of SDA and SCL](https://blog.naver.com/dokkosam/221377927944)
-
-[ARduino - OLED reference](https://rasino.tistory.com/303)
-- - -
-
-- ## Contents
-
-[Solution 1. OLED display with donkeycar](#solution-1-oled-display-with-donkeycar)  
-[Solution 2. OLED display with pi-display](#solution-2-oled-display-with-pi-display)   
-[How to change display_server.py file](#how-to-change-display_serverpy-file)    
-[How to Calculate battery level](#how-to-calculate-battery-level)
-- - -
+### **Table of Contents**
+- [Solution 1. OLED display with donkeycar](#solution-1-oled-display-with-donkeycar)  
+- [Solution 2. OLED display with pi-display](#solution-2-oled-display-with-pi-display)   
+- [How to change display_server.py file](#how-to-change-display_serverpy-file)    
+- [How to Calculate battery level](#how-to-calculate-battery-level)
+### **Reference**
+- [pi-display](https://github.com/waveshare/pi-display)  
+- [How to Auto execute program reference](https://m.blog.naver.com/emperonics/221770579539)  
+- [Process systemd reference](https://bkjeon1614.tistory.com/658)
 
 
 
@@ -47,7 +34,7 @@ SSD1306_RESOLUTION = 1 # 1 = 128x32; 2 = 128x64
 It is different from the first solution.   
 If you want second solution,  `Please USE_SSD1306_128_32 = False`
 
-### 1. Open terminal and commend following
+1. Open terminal and commend following
 
 ```jsx
 cd ~
@@ -56,7 +43,7 @@ cd pi-display
 sudo ./install.sh
 ```
 
-### 2. Install
+2. Install
 
 ```jsx
 sudo pip3 install flask
@@ -71,7 +58,7 @@ sudo raspi-config
 # -> activate 'Interface Options' -> 'I2C'
 ```
 
-### 3. Execute python code
+3. Execute python code
 
 
 ```jsx
@@ -128,19 +115,19 @@ it makes auto execute
 
 SO
 
-### 1. Open terminal commend following
+1. Open terminal commend following
 
 ```jsx
 sudo -S systemctl stop picard_display
 ```
 
-### 2. Check status
+2. Check status
 
 ```jsx
 sudo -S systemctl status picard_display
 ```
 
-### 3. Execute Modified python file
+3. Execute Modified python file
 
 ```jsx
 python display_server.py
